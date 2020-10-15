@@ -1,0 +1,163 @@
+.workshop{
+  position: relative;
+  z-index: 1;
+  background-color: rgba($w, .95);
+  margin-top: 50px;
+  // height: 70vh;
+  width: 100%;
+  background: $w;
+  padding: 50px;
+  @include media("<tab"){ 
+    padding: 0; 
+    padding-top: 10px; 
+    margin-top: 0px; 
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  h1{ font-size: 50px; }
+  p{ 
+    font-family: $os-b; 
+    font-size: 20px; 
+  }
+  .ctn-calendar{
+    $br-cal: 1px solid #ddd;
+    width: 90%; 
+    margin: 0 auto;
+    @include media("<tab"){ 
+      width: 100%; 
+      border-radius: 10px;
+    }
+    .calendar{
+      margin-top: 50px;
+      height: 60vh;
+      @include media("<tab"){ 
+        margin-top: 0px;
+      }
+      
+      // Custom styles for the FC Component
+      .fc-button-primary{ 
+        background: $w; 
+        color: $acc;
+        border: 1px solid rgba($acc, .3);
+        @include media("<tab"){ 
+          padding: 5px; 
+          font-size: 12px;
+        }
+        &:focus{ 
+          // box-shadow: none !important; 
+          box-shadow: 0 2px 6px 2px rgba($acc, .3);
+        }
+      }
+      .fc-header-toolbar{ 
+        @include media("<tab"){ padding: 10px; }
+      }
+      .fc-toolbar-title{ 
+        color: $acc; 
+        // @include media("<tab"){ font-size: 14px; }
+        @include media("<tab"){ font-size: 20px; }
+      }
+      // .fc-scrollgrid{
+      //   border-top-right-radius: 12px;
+      //   border-top-left-radius: 12px;
+      // }
+      .fc-timegrid-axis-frame{ 
+        justify-content: center;
+        @include media("<tab"){ font-size: 14px; }        
+        a{ 
+          color: $acc; 
+          &:hover{ text-decoration: none; }              
+        }
+      }
+      .fc-col-header, .fc-timegrid-slots, .fc-timegrid-cols{
+        col{ 
+          width: 115px!important; 
+          @include media("<tab"){ width: 55px!important; }
+        }
+      }
+      a.fc-col-header-cell-cushion{
+        color: $txt-pr; 
+        padding: 20px;
+        &:hover{ text-decoration: none; }
+        @include media("<tab"){ 
+          padding: 10px; 
+          // padding: 5px;
+          font-size: 14px;
+        }
+      }
+      .fc-timegrid-slot-label-cushion{
+        @include media("<tab"){ 
+          font-size: 12px;
+          white-space: normal;
+          text-align: left;
+          padding-left: 10px;
+        }
+      }
+      .fc-scroller{ overflow: hidden!important; }
+      .fc-day-today{ background: transparent; }
+      .fc-daygrid-day{ cursor: pointer; }
+      .fc-daygrid-event.blank{ display: none; }
+      a.fc-daygrid-day-number{ 
+        color: $acc; 
+        text-decoration: none;
+      }
+      .fc-timegrid-slot-label-frame{ text-align: center; }
+      .fc-timegrid-col{
+        .fc-timegrid-col-events{ margin: 0; }
+        // .fc-timegrid-event-harness{ bottom: -88px!important; }
+        .fc-timegrid-event{
+          border-radius: 0;
+          border: none;
+          bottom: -1px;
+          padding: 5px;     
+          &.event{
+            border: 1px solid #ddd;
+            background: rgba($acc, .7);
+            .fc-event-main{ color: $b; }
+          }
+          &.blank{
+            @extend %j-c;
+            cursor: pointer;
+            background: rgba($acc, .2);
+            .fc-event-main{
+              @include media("<tab"){ transform: scale(0.7); }
+              height: 50px;
+              width: 50px;
+              background: $acc;
+              border-radius: 50%;
+              box-shadow: none;
+              .fc-event-main-frame{ opacity: 0; }
+              &::after{
+                @include pa(0, 0);
+                // @include media("<tab"){ top: 2px; }
+                @extend %j-c;
+                content: "+";
+                height: 50px;
+                width: 50px;                    
+                font-size: 30px;
+                text-align: center;
+              }
+            }
+          }
+        }
+      }
+
+    }
+    .gutter{
+      height: 20px;
+      background: rgba(31, 68, 84, 0.05);
+      border-left: $br-cal;
+      border-right: $br-cal;
+    }
+    .cal-bottom{
+      border: $br-cal;
+      padding: 10px;
+      border-bottom-right-radius: 12px;
+      border-bottom-left-radius: 12px;
+      h4{ font-size: 20px; margin-bottom: 0; }
+    }
+    .ctn-btns{
+      margin-top: 20px;
+      @include media(">=tab"){ text-align: right; }
+    }
+  }
+}

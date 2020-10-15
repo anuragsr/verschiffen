@@ -1,0 +1,284 @@
+.modal-outer{
+  position: relative;
+  transition: all .3s;
+  opacity: 0;
+  z-index: -1;
+  &.show{
+    opacity: 1;
+    z-index: 1031;
+  }
+  &.sec.show{
+    z-index: 1032;
+  }
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+  opacity: .95;
+}
+
+.modal-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1050;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: 0;
+  .logo{
+    font-family: $ex-b;
+    font-size: 24px;
+    margin: 25px;
+  }
+  .modal-inner {
+    font-family: $ex-sb;
+    z-index: 100;
+    background: white;
+    position: relative;
+    margin: 0 auto;
+    border-radius: 3px;
+    width: 60vw;
+    @include media("<tab"){
+      width: 100%;
+    }
+    // height: 70vh;
+    padding: 3vh 5vw;
+    // border: solid 1px rgba(31, 68, 84, 0.2);
+    .modal-header {
+      // display: flex;
+      justify-content: flex-end;
+      // align-items: center;
+      border: none;
+      padding: 0;
+      .logo{ 
+        margin: 0; 
+        @include pa(30, 0);
+        @extend %fw;
+        z-index: -1;
+        text-align: center;
+        @include media(">=tab"){
+          visibility: hidden;
+        }
+      }
+    }
+    .close-button {
+      font-size: 24px;
+      width: 40px;
+      height: 40px;
+      border-radius: 40px;
+      box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.05);
+      background-color: $w;
+      cursor: pointer;
+      border: none;
+      &:focus{ outline: none!important;}
+    }
+    .step{
+      h4{
+        position: relative;
+        display: inline-block;
+        margin: 25px auto;
+        font-size: 27px;
+        @include media("<tab"){
+          font-size: 24px;
+        }
+        img{
+          @include pa(-10, "", "", -20);
+          cursor: pointer;
+        }
+      }
+      .ctn-btn{
+        @include media("<tab"){
+          text-align: center;
+        }
+      }
+      &.step1{
+        .main{ height: 90px; }
+        h5{ 
+          font-size: 16px;
+          margin-bottom: 15px;
+        }
+        .ctn-box{ 
+          margin: 20px 0;
+          .box{
+            @extend %j-c;
+            cursor: pointer;
+            display: inline-flex;
+            vertical-align: top;
+            flex-direction: column;
+            position: relative;
+            // height: 150px;
+            // width: 200px;
+            height: 120px;
+            width: 175px;
+            border-radius: 2px;
+            border: solid 1px #22b7e7;          
+            margin-right: 10px;
+            margin-bottom: 10px;
+            img{ height: 40px; margin-bottom: 10px; }
+            span{ font-size: 15px; }
+            opacity: .5;
+            @include media("<tab"){
+              width: 46%;
+              margin: 5px;
+            }
+            &:hover{
+              @include media(">=tab"){
+                opacity: 1;
+                background-color: rgba(34, 183, 231, 0.1);
+                .check-ind{
+                  .check-ind-inner{ opacity: 1; }
+                }
+                // .check-ind::after{
+                //   opacity: 1;
+                // }
+              }
+            }
+            &.selected{
+              opacity: 1;
+              background-color: rgba(34, 183, 231, 0.1);
+              .check-ind{
+                .check-ind-inner{ opacity: 1; }
+              }
+              // .check-ind::after{
+              //   opacity: 1;
+              // }
+            }
+            .check-ind{
+              @include pa(10, "", "", 10);            
+              border: 2px solid $acc;
+              border-radius: 50%;
+              width: 20px;
+              height: 20px;
+              padding: 2px;
+              // @include media("<tab"){
+              //   width: 20px;
+              //   height: 20px;
+              // }
+              .check-ind-inner{
+                opacity: 0;
+                width: 100%;
+                height: 100%;
+                background: $acc;
+                border-radius: 50%;
+              }
+              // &::after{
+              //   @include pa(0, 0);            
+              //   content: "";
+              //   opacity: 0;
+              //   width: 100%;
+              //   height: 100%;
+              //   background: $acc;
+              //   transform: scale(.7);
+              //   transform-origin: 50% 50%;
+              //   border-radius: 50%;
+              // }
+            }
+          }
+        }
+      }
+      &.step2{
+        h4{ 
+          font-family: $os-b; 
+          font-size: 40px;
+          @include media("<tab"){
+            font-size: 24px;
+          }
+        }
+        p{ font-family: $ex-r; }     
+        form{ 
+          width: 20vw; 
+          margin: 50px auto; 
+          @include media("<tab"){
+            width: 100%;
+          }
+          .form-group{
+            margin-bottom: 25px;
+          }
+          .form-control{
+            height: 40px;
+            font-family: $ex-r;
+            color: rgba(37, 58, 65, 0.4);
+            border-radius: 4px;
+            box-shadow: inset 0 4px 4px 0 rgba(0, 0, 0, 0.05);
+            border: solid 1px rgba(34, 183, 231, 0.2);
+          }
+        }   
+      }
+      &.step3{
+        padding-bottom: 5vh;
+        .message{ 
+          margin: 50px auto; 
+          font-family: $os-b; 
+          font-size: 25px;
+          h1{ 
+            font-size: 40px;
+          }
+        }
+        button{ 
+          // display: flex;
+          // padding-left: 50px;
+          font-family: $ex-r;
+          margin: 0 auto;
+          width: 20vw; 
+          position: relative;
+          color: rgba(37, 58, 65, 0.4);
+          height: 45px;
+          &>.row{ align-items: center; }
+          &.btn-outlook{
+            color: $w;
+            background-color: #4469b0;
+          }
+          img{
+            // position: relative;
+            // top: -2px;
+            // margin-right: 17px;
+            height: 25px;
+          }
+          @include media("<=ld"){
+            font-size: 14px;
+            width: 30vw; 
+          }
+          @include media("<tab"){
+            width: 100%; 
+          }
+        }
+      }
+    }
+  }
+}
+
+.sec .modal-inner{
+  margin: 0;
+  margin-left: auto;
+  width: 30vw;
+  height: 100%;
+  padding: 35px;
+  @include media("<tab"){
+    width: 100%;
+  }
+  h4{ 
+    margin-bottom: 50px; 
+    @include media("<tab"){
+      margin-top: 50px; 
+    }
+  }
+  p{ font-family: $ex-r; }
+  span{ font-family: $ex-b; }
+  ul{
+    font-family: $ex-r; 
+    padding-left: 50px;
+    li{
+      padding-bottom: 25px;
+    }
+  }
+}
+
+
+

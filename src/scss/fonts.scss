@@ -1,0 +1,41 @@
+$os-r: 'os-r';
+@font-face {
+  font-family: $os-r;
+  src: url(../fonts/OpenSans-Regular.ttf) format('truetype');
+  font-display: swap;
+}
+
+$os-b: 'os-b';
+@font-face {
+  font-family: $os-b;
+  src: url(../fonts/OpenSans-Bold.ttf) format('truetype');
+  font-display: swap;
+}
+
+$os-sb: 'os-sb';
+@font-face {
+  font-family: $os-sb;
+  src: url(../fonts/OpenSans-SemiBold.ttf) format('truetype');
+  font-display: swap;
+}
+
+$ex-r: 'ex-r';
+@font-face {
+  font-family: $ex-r;
+  src: url(../fonts/Exo2-Regular.otf) format('opentype');
+  font-display: swap;
+}
+
+$ex-b: 'ex-b';
+@font-face {
+  font-family: $ex-b;
+  src: url(../fonts/Exo2-Bold.otf) format('opentype');
+  font-display: swap;
+}
+
+$ex-sb: 'ex-sb';
+@font-face {
+  font-family: $ex-sb;
+  src: url(../fonts/Exo2-SemiBold.otf) format('opentype');
+  font-display: swap;
+}

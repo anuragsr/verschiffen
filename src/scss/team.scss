@@ -1,0 +1,455 @@
+@import './common';
+
+main.team{
+  font-family: $os-b;  
+  color: $sc;
+  section{
+    overflow-x: hidden;
+    position: relative;
+    padding: 5vh 0;
+    h1{ 
+      font-size: 40px; 
+      &.mobile-only{ font-size: 35px; } 
+    }
+    h2.acc.mobile-only{ font-size: 25px; }
+    &.section0{
+      @extend %j-c;
+      height: 65vh;
+      background: url(../img/bg2.jpg) no-repeat center;
+      background-size: cover;
+      color: $w;
+      @include media("<tab"){
+        padding-top: 15vh;
+        height: 75vh;      
+        overflow: hidden;
+      }
+      h1{ 
+        font-size: 50px; 
+        &.mobile-only{ 
+          font-size: 35px; 
+          margin: 20px 0;
+        }
+      }
+      h4{ 
+        font-family: $os-sb; 
+        margin-top: 25px;
+        line-height: 40px;
+        &.mobile-only{ font-size: 20px; }
+      }
+      button{ 
+        @include media(">=tab"){
+          position: relative;
+          top: 40px;
+          margin-top: 0; 
+        }
+      }
+      .mobile-only{
+        .subtitle{ font-size: 15px; }
+        button {
+          margin-top: 80px; 
+        }
+      }
+    }
+
+    &.section1{
+      h2{ font-size: 25px; }
+      .points{
+        @extend %j-c;
+        @include media("<tab"){
+          flex-direction: column;
+          align-items: center;
+        }
+        padding: 0 2vw;
+        margin-top: 50px;
+        h4{ 
+          font-family: $ex-r; 
+          font-size: 20px; 
+          line-height: 1.92;
+        }
+      }
+      .rating{
+        @extend %j-c;
+        margin-top: 50px;
+        @include media("<tab"){
+          flex-direction: column;          
+        }
+        img{ height: 27px; margin-right: 5px; }
+        span{
+          font-family: $ex-b;
+          font-size: 38px;
+          margin-left: 15px;
+          @include media("<tab"){
+            font-size: 30px;
+            margin-left: 0;
+            margin-top: 10px;
+          }
+        }
+      }
+      .sub{
+        text-align: center;
+        font-family: $ex-r;
+        font-weight: bold;
+        font-size: 34px;
+        color: rgba($b, .3);
+      }
+    }
+
+    &.section2{
+      background: url(../img/bg3.jpg) no-repeat center;
+      background-size: cover;
+      height: 85vh;
+      @include media("<tab"){
+        background-position: 95%;
+      }
+    }
+
+    &.section3{
+      .container{
+        @media (min-width: 1200px){ max-width: 1280px!important; }
+      }
+      p{ font-family: $os-r; }
+      .points{
+        @extend %j-s-b;
+        align-items: flex-start;
+        @include media("<tab"){
+          flex-direction: column;
+          align-items: center;
+        }
+        margin-top: 75px;
+        .ctn-point{ 
+          margin: 0 35px;
+          @include media("<tab"){
+            width: 70%; 
+            margin-bottom: 30px;
+          }
+          h4{ 
+            margin-top: 25px; 
+            margin-bottom: 35px; 
+            font-family: $ex-b;
+            font-size: 31px;
+          }
+          p{ 
+            font-family: $ex-r;
+            font-size: 20px;
+            line-height: 1.56;
+            text-align: justify;
+            margin-bottom: 50px;
+            @include media("<tab"){
+              margin-bottom: 15px;
+            }
+          }
+          span{
+            font-family: $ex-r;
+            font-size: 18px;
+            color: rgba($b, .3);
+          }
+        }
+      }
+      p.see-more{ 
+        font-size: 15px; 
+      }
+    }
+
+    &.section4{
+      .ctn-unter{
+        margin-top: 50px;
+        .row{ 
+          margin-bottom: 50px; 
+          @include media("<tab"){
+            margin-bottom: 30px; 
+          }
+        }
+        img{ 
+          height: 100px; 
+          filter: grayscale(1);
+          opacity: .5;
+          transition: all .3s;          
+          @include media("<tab"){
+            height: 70px; 
+            margin-bottom: 25px; 
+          }
+          &:hover{
+            filter: grayscale(0);
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    &.section5{
+      .row{
+        margin: 0 auto;
+        @include media(">=tab"){
+          margin-top: 100px;
+        }
+        &:first-of-type{
+          margin-top: 50px;
+          width: 95%;
+        }
+        .box{
+          @extend %j-s-b;
+          padding: 25px;
+          flex-direction: column;
+          height: 220px;
+          border-radius: 10px;
+          box-shadow: 0 4px 4px 0 rgba(31, 68, 84, 0.1);
+          border: solid 2px rgba(31, 68, 84, 0.05);
+          transition: border .3s, transform .3s;
+          @include media("<tab"){
+            margin-bottom: 50px;
+            padding: 25px;
+            height: auto;
+          }
+          &:hover{
+            // box-shadow: inset 0 4px 4px 0 rgba(31, 68, 84, 0.1);
+            border: solid 2px rgba($acc, 1);
+            transform: translateY(-10px);
+          }
+          img{ 
+            height: 60px; 
+            margin-bottom: 15px;
+          }
+          span{ font-size: 17px; }
+          p{ 
+            font-family: $os-r; 
+            // width: 80%;
+            font-size: 25px;
+            @include media("<tab"){
+              margin-bottom: 0;
+            }
+          }
+        }
+      }
+      .lernen{
+        border-radius: 5px;
+        background-color: #e9ecee;
+        padding: 25px;
+        text-align: left;
+        h2{ font-size: 45px; }
+        h4{ 
+          font-family: $os-r;
+          font-size: 12px;
+          font-weight: normal;
+          margin-bottom: 50px;
+        }
+        p:first-of-type{
+          font-family: $os-b;
+          font-size: 20px;
+        }        
+        p:last-of-type{
+          margin-top: 15px;
+          font-family: $os-r;
+          font-size: 17px;
+        }
+        button{ margin: 50px 0; }
+      }
+    }
+
+    &.section6{
+      @include media(">=tab"){          
+        background-color: rgba(19, 69, 85, .1);
+      }
+      .ctn-blog-posts{
+        margin-top: 50px;
+        .ctn-blog-single{
+          border: 2px solid rgba($b, .05);
+          padding-bottom: 35px;
+          cursor: pointer;
+          border-radius: 0px;
+          overflow: hidden;
+          transition: border .3s, border-radius .3s;          
+          // transform: scale(.9);
+          &:hover{
+            border-radius: 7px;
+            border: 2px solid rgba($acc, 1);
+          }
+        }
+        .ctn-cover{
+          height: 205px;
+          background-color: $sc;
+        }
+        div:nth-of-type(1) .ctn-cover{
+          background-image: url(../img/blog1.png);
+          background-size: cover;
+        }
+        div:nth-of-type(2) .ctn-cover{
+          background-image: url(../img/blog2.png);
+          background-size: cover;
+        }
+        div:nth-of-type(3) .ctn-cover{
+          background-image: url(../img/blog3.png);
+          background-size: cover;
+        }
+        h2{ 
+          padding: 0 15px;
+          text-align: left;
+          font-family: $os-r;
+          font-size: 30px;
+          margin-top: 25px;
+          height: 100px;
+        }
+        .review{
+          padding: 0 15px;
+          display: flex;
+          align-items: center;
+          img.user{ height: 70px; }
+          .post-info{
+            margin: 0 10px;
+            text-align: left;
+            font-family: $os-r;
+            font-size: 15px;
+            h4{ font-family: $ex-b; font-size: 20px; }
+          }
+          .reaction{
+            img{ height: 22px; }
+            span{ 
+              background: rgba($b, .3); 
+              height: 25px;
+              width: 1px;
+              display: inline-block;
+              vertical-align: middle;
+              margin: 0 5px;
+            }
+          }
+        }
+      }
+      .ctn-int{
+        margin-top: 150px;
+        &>div{
+          height: 200px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+        .left{
+          text-align: left;
+          h1{
+            font-family: $ex-b; font-size: 40px;
+          }
+          img{ 
+            height: 15px; width: 85%; 
+          }
+        }        
+        .right{
+          text-align: left;
+          font-family: $os-r;
+          font-size: 20px;
+          button{ width: 250px; height: 50px; }
+        }
+      }
+      .mobile-only{
+        .carousel{
+          .carousel-viewport{ overflow: visible; }
+          .carousel-slide{ 
+            position: relative;
+            top: 0;
+            vertical-align: top;
+            transition: opacity .5s ease-in-out, top .5s;
+          }
+          .carousel-slide-selected{ top: 50px; }
+          .carousel-arrow{
+            bottom: 125px;
+            border: none!important;
+            color: rgba(37, 58, 65, 0.5);
+            box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+            background-color: #fcfcfc;
+          }
+          .ctn-blog-single{
+            padding-bottom: 20px;
+            width: 65vw;
+            background: $w;
+            border-radius: 5px;
+            box-shadow: 0 4px 4px 0 rgba(31, 68, 84, 0.1);
+            border: solid 1px rgba(31, 68, 84, 0.2);
+            .ctn-cover{
+              height: 150px;
+            }            
+            h2{ 
+              font-size: 25px;
+              margin-top: 10px;
+              margin-bottom: 30px;
+              height: auto;   
+            }
+            .review{
+              .post-info{
+                span:last-of-type{
+                  display: none;
+                }
+              }
+              .reaction{
+                span, img:last-of-type{
+                  display: none;
+                }
+              }
+            }
+          }
+        }        
+        button.btn{
+          margin-top: 125px;
+        }
+      }
+    }
+
+    &.section7{
+      .row{
+        margin: 0 auto;
+        @include media(">=tab"){
+          margin-top: 100px;
+        }
+        &:first-of-type{
+          margin-top: 50px;
+          width: 95%;
+        }
+        .act{
+          padding: 30px;
+          box-shadow: 0 4px 4px 0 rgba(37, 58, 65, 0.05);
+          border: solid 1px rgba(34, 183, 231, 0.1);
+          span{
+            font-size: 17px;
+            font-family: $os-r;
+          }
+          p{ font-size: 25px; }
+          &.act1{
+            background: url(../img/action1.png) no-repeat;
+            background-size: 50% 70%;
+            background-position: 100% 100%;
+          }
+          &.act2{
+            background: url(../img/action2.png) no-repeat;            
+            background-size: 40% 70%;
+            background-position: 100% 100%;
+          }
+        }
+        &.info{
+          flex-direction: column;
+          .ctn-img img{ 
+            width: 60px; margin: 10px; 
+            @include media("<tab"){ width: 48px; }
+          }
+          p{ 
+            margin: 25px 0; 
+            @include media("<tab"){ font-size: 17px; }
+          }
+          p:not(:nth-of-type(2)){ font-family: $os-r; }
+        }
+      }
+    }
+
+    &.section8{
+      color: $w;
+      background: url(../img/mesh.png);
+      background-size: cover;
+      p{ 
+        margin-bottom: 30px;
+        font-family: $os-sb;
+        font-size: 30px;
+        @include media("<tab"){
+          font-size: 18px;
+        }
+      }
+      button.btn-sec{ 
+        margin-left: 15px;
+      }
+    }
+  }
+}

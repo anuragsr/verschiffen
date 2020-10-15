@@ -1,0 +1,102 @@
+@import './common';
+
+main.imp{
+  font-family: $os-b;  
+  color: $sc;
+  section{
+    overflow-x: hidden;
+    position: relative;
+    padding: 5vh 0;
+    h1{ 
+      font-size: 40px; 
+      &.mobile-only{ font-size: 35px; } 
+    }
+    h2.acc.mobile-only{ font-size: 25px; }
+    &.section0{
+      @extend %j-f-s;
+      height: 55vh;
+      background-color: #e3f8ff;
+      @include media("<tab"){
+        padding-top: 15vh;
+        height: 75vh;      
+        overflow: hidden;
+      }
+      .container{ 
+        @include media("<tab"){
+          text-align: center;           
+        }
+      }
+      h1{ 
+        font-size: 50px; 
+        &.mobile-only{ 
+          font-size: 35px; 
+          margin: 20px 0;
+        }
+      }
+      h4{ 
+        font-size: 20px;
+        font-family: $os-b; 
+        margin-top: 45px;
+        width: 70%;
+        &.mobile-only{ 
+          font-size: 35px; 
+          width: 100%;
+        }
+      }
+      button{ 
+        &.mobile-only{ 
+          margin: 35px 0;
+        }
+      }
+      h5{ 
+        &.mobile-only{ 
+          font-size: 15px; 
+        }
+      }
+    }
+
+    &.section1{
+      .container{ 
+        @include media("<tab"){
+          padding: 0 35px;
+        }
+        @include media(">=tab"){
+          max-width: 52vw; 
+        }
+      }
+      p{ 
+        color: $txt-pr; 
+        font-family: $os-r;         
+        font-size: 20px;
+        @include media("<tab"){
+          font-size: 16px;
+          text-align: justify;
+        }
+      }
+      .heading{ 
+        font-size: 25px; 
+        padding: 30px 0; 
+        @include media("<tab"){
+          font-size: 20px;
+        }
+      }
+    }
+
+    &.section2{
+      color: $w;
+      background: url(../img/mesh.png);
+      background-size: cover;
+      p{ 
+        margin-bottom: 30px;
+        font-family: $os-sb;
+        font-size: 30px;
+        @include media("<tab"){
+          font-size: 18px;
+        }
+      }
+      button.btn-sec{ 
+        margin-left: 15px;
+      }
+    }
+  }
+}

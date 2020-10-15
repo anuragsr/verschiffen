@@ -1,0 +1,82 @@
+.prefooter{
+  @include media("<tab"){ display: none; }
+  background: $txt-pr;
+  font-family: $os-r;
+  color: $w;      
+  hr{ 
+    border-top: 1px solid rgba(45, 85, 103, .5); 
+    margin-top: 25px;
+  }
+}
+footer{
+  background: $txt-pr;
+  font-family: $os-r;
+  color: $w;
+  padding-bottom: 50px;
+  .ctn-footer{
+    margin-top: 0px;
+    margin-bottom: 50px;
+    .col-left{
+      position: relative;
+      left: -50px;
+    }
+    h4{
+      font-family: $os-sb;
+      font-size: 25px;
+      margin-bottom: 35px;
+    }
+    p{
+      font-size: 14px;
+      width: 60%;
+      margin-bottom: 35px;
+    }
+  }
+  .ctn-icons{
+    a{ margin-right: 5px; }
+    img{ height: 30px; }
+  }
+  .links{
+    a{ 
+      display: block; 
+      margin-bottom: 25px;
+      text-decoration: none;
+      color: $w; 
+      &:hover{ 
+        color: $acc; 
+        font-weight: bold; 
+      }
+    }
+    .bald{ 
+      height: 20px; 
+      position: relative;
+      top: -2px; left: 5px;
+    }
+  } 
+
+  
+  .mobile-only{
+    padding-top: 50px;
+    padding-left: 35px;
+    padding-right: 35px;
+    font-family: $ex-r;
+    h4, a{
+      font-family: $ex-r;
+    }
+    h4{ font-size: 20px; margin-bottom: 35px; }
+    a{ margin-bottom: 25px; }
+    .logo{ 
+      font-family: $ex-sb; 
+      font-size: 24px; 
+      margin-top: 25px; 
+      a{ 
+        color: $w; 
+        &:focus{ text-decoration: none; }
+      }
+    }
+    .ctn-icons{
+      margin: 50px 0;
+      a{ margin: 0px 8px; }
+      img{ height: 30px; }
+    }
+  }
+}

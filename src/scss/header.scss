@@ -1,0 +1,71 @@
+nav.navbar{
+  padding-top: 20px;
+  transition: all .3s;
+  &.nav-light{
+    .navbar-brand{
+      color: $txt-pr;
+    }
+    .navbar-toggler-icon div{ 
+      background: $txt-pr;
+    }
+    li.nav-item a{
+      color: rgba(31, 68, 84, 0.7);
+      transition: color .5s;
+    }
+  }
+  &.scrolled{
+    padding-top: 10px;
+    .navbar-brand, li.nav-item a{    
+      color: $w;
+    }
+    .navbar-toggler-icon div{ 
+      background: $w;
+    }
+    background: rgba($sc, 1);
+  }
+  a{ cursor: pointer; }
+  .navbar-toggler-icon{
+    padding-top: 5px;
+    div{ 
+      background: $w;
+      height: 2px;
+      width: 100%;
+      margin-bottom: 8px;
+      border-radius: 5px;
+    }
+  }
+  ul.navbar-nav{
+    @include media(">=tab"){ 
+      position: relative;
+      left: 100px;
+    }
+  }
+  .navbar-brand{
+    font-size: 25px;
+    font-family: $os-b;
+    color: $w;
+    transition: color .5s;
+  }
+  li.nav-item{
+    font-family: $os-sb;
+    margin: 0 20px;
+    &:first-of-type{
+      @extend %j-s-b;
+    }
+    &.ph{
+      font-family: $os-b;
+      margin: 0;
+      a{
+        color: rgba($acc, 1);
+      }
+    }
+    a{
+      color: rgba($w, .7);
+      &:hover{ color: rgba($w, 1); }
+    }
+    button{
+      background: $tr;
+      border: 1px solid rgba($w, .2);
+    }
+  }
+}
