@@ -14,6 +14,8 @@ main.home{
       &.mobile-only{ font-size: 35px; } 
     }
     h2.acc.mobile-only{ font-size: 25px; }
+
+    // Page Sections
     &.section0{
       @extend %j-c;
       height: 75vh;
@@ -97,52 +99,41 @@ main.home{
     }
 
     &.section1{
-      p{ font-family: $os-r; }
       .points{
         margin-top: 100px;
         .ctn-point{ 
+          margin-bottom: 80px;
           @include media("<tab"){ width: 100%; }          
           // img{ height: 60px; }
           .num{ 
             line-height: 1;
-            font-size: 36px; 
+            font-size: 50px; 
             font-family: $os-r;
             &.dashed:after{
-              transform: translate(-50%, -10%);
               content: "";
-              height: 65%;
+              transform: translate(-50%, 50px) scaleX(5);
+              height: 120px;
               width: 1px;
               position: absolute;
               bottom: 0;
               left: 50%;
               background-image: 
-                linear-gradient(to right, rgba(56, 87, 111, .45) 50%, transparent 50%), 
-                linear-gradient(to right, rgba(56, 87, 111, .45) 50%, transparent 50%), 
-                linear-gradient(to bottom, rgba(56, 87, 111, .45) 50%, transparent 50%), 
-                linear-gradient(to bottom, rgba(56, 87, 111, .45) 50%, transparent 50%);
+                linear-gradient(to right, rgba(56, 87, 111, .15) 50%, transparent 50%), 
+                linear-gradient(to right, rgba(56, 87, 111, .15) 50%, transparent 50%), 
+                linear-gradient(to bottom, rgba(56, 87, 111, .15) 50%, transparent 50%), 
+                linear-gradient(to bottom, rgba(56, 87, 111, .15) 50%, transparent 50%);
               background-position: left top, left bottom, left top, right top;
               background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
               background-size: 20px 3px, 20px 0px, 3px 20px, 3px 20px;
             }
           }
-          p{ 
-            width: 100%; 
-            font-size: 14px; 
-            margin-bottom: 85px;
+          h4{
+            font-size: 30px;
           }
-          // h4{ 
-          //   margin-top: 25px; 
-          //   margin-bottom: 35px; 
-          //   font-size: 25px;
-          //   @include media("<tab"){
-          //     font-size: 20px;
-          //     margin: 0;
-          //   }
-          // }
-          // p{ width: 16vw; margin: 0 auto; }
-          // .mobile-only{
-            
-          // }
+          p{ 
+            font-family: $ex-r;
+            font-size: 20px; 
+          }
         }
       }
       p.tnc{ 
@@ -151,79 +142,160 @@ main.home{
       }
     }
 
-    &.section1-1{
-      h2{ font-size: 25px; }
-      .points{
-        @extend %j-s-b;
-        align-items: flex-start;
-        @include media("<tab"){
+    &.section2{
+      .ctn-boxes{ 
+        &:first-of-type{ margin-top: 50px; }
+        margin: 100px 0; 
+        .box{ 
+          @extend %j-s-b;
+          display: inline-flex;
           flex-direction: column;
-          align-items: center;
-        }
-        padding: 0 2vw;
-        margin-top: 50px;
-        .ctn-point{
+          margin: 10px;
+          padding: 10px;
+          width: 250px;
+          height: 165px;
           @include media("<tab"){
-            padding: 25px;
-            border-radius: 4px;
-            box-shadow: 0 4px 14px 0 rgba(33, 14, 74, 0.08);
-            margin-bottom: 28px;
+            margin: 5px;
+            padding: 10px;
+            width: 165px;
+            height: 120px;
+            justify-content: center;
+            vertical-align: top;
           }
-          h1{ 
-            font-size: 50px; 
-            @include media("<tab"){ font-size: 40px; }
+          // &:hover{
+          //   // box-shadow: inset 0 4px 4px 0 rgba(31, 68, 84, 0.1);
+          //   border: solid 2px rgba($acc, 1);
+          // }
+          img{ 
+            height: 50px; 
+            margin-bottom: 25px;
           }
-          .line{
-            margin: 50px auto;
-            @include media("<tab"){ margin: 25px auto; }
-            width: 80px;
-            height: 1px;
-            object-fit: contain;
-            opacity: .5;
-            background-color: rgba(31, 68, 84, .5);
+          span{
+            font-size: 25px; 
+            @include media("<tab"){ font-size: 14px; }
           }
           p{ 
-            color: $txt-pr;
-            font-family: $os-r; 
+            margin-top: 20px;
             font-size: 17px;
-            width: 15vw; 
-            margin: 0 auto;
-            @include media("<tab"){ 
-              width: 80%; 
+            font-family: $ex-r; 
+            line-height: 1.25; 
+            // @include media("<tab"){ display: none; }
+          }
+        }
+      }
+      .info-box{
+        width: calc(100% + 70px);
+        transform: translateX(-35px);
+        text-align: left;
+        color: $w;
+        background: $sc;
+        padding: 70px;
+        padding-right: 40px;
+        border-radius: 10px;
+        h4{ font-size: 30px; }
+        p{ font-family: $ex-r; font-size: 20px; margin: 40px 0; }
+        .ctn-cargo{
+          @extend %j-c;
+          background: #2a5b71;
+          border-radius: 5px;
+          height: 66px;
+          margin-bottom: 20px;
+          img{ height: 25px; }
+        }
+      }
+    }
+
+    &.section3{
+      .ctn-bm-outer{
+        position: relative;
+        height: 475px;
+        margin-top: 50px;
+        .ctn-layer0{
+          @include pa(0, 0);
+          z-index: -1;
+          @extend %fh;
+          width: 75%;          
+          border-radius: 5px;
+          background-color: rgba(196, 196, 196, 0.2);
+          transform: translateX(15%);
+          padding: 35px;
+          .row{
+            padding: 15px 0;
+            >div>div{ background: rgba($w, .5); padding: 10px;}
+          }
+          hr{ width: 75%; margin: 20px auto; }
+        }
+        .ctn-layer1{
+          @extend %j-s-b;
+          position: relative;
+          top: 95px;
+          padding: 30px 40px;
+          border-radius: 5px;
+          border: solid 1px rgba(31, 68, 84, 0.2);
+          background: $w;
+          &::after{
+            @include pa(0, 0);
+            height: 150%;
+            width: 90%;
+            z-index: -1;
+            content: "";
+            background: inherit;
+            border: inherit;
+            border-radius: inherit;
+            transform: translate(5%, -15%);
+          }
+          .bm{
+            @include pa(0, 0);
+            background: $acc;
+            padding: 5px 30px;
+            color: $w;
+            font-family: $ex-r;
+            border-top-left-radius: 5px;
+          }
+          img{ height: 27px; }
+          .ctn-ship-info{
+            @extend %j-s-b;
+            >div:first-of-type{ text-align: right; }
+            >div:last-of-type{ text-align: left; }
+            .date{
+              font-family: $ex-r;
+              font-size: 15px;
+            }
+            .stadt{
+              font-family: $ex-r;
+              font-size: 15px;
+              color: rgba($txt-pr, .5);
+            }
+            .ctn-ship-graphic{
+              width: 450px;
+              margin: 0 25px;
+              >div:first-of-type{
+                @extend %j-s-b; 
+                padding: 0 25px;
+                img{ height: 30px; }
+              }
+              .bar{ 
+                margin-top: 5px;
+                height: 20px; 
+                background: #c4c4c4; 
+                border-radius: 10px;
+                position: relative;
+                &::after{
+                  @include pa(0, 0);
+                  @extend %fh;
+                  width: 60%;
+                  content: "";
+                  background: $acc;
+                  transform: translateX(35%);
+                }
+              }
             }
           }
         }
       }
     }
 
-    &.section2{
-      @include media(">=tab"){
-        padding-top: 12vh;
-        padding-bottom: 10vh;
-      }
-      background-color: $sc;
-      .cloud{ 
-        position: absolute; 
-        &.cloud1{ left: -1vw; top: 14vh; }
-        &.cloud2{ right: 7vw; top: 14vh; }
-        &.cloud3{ right: -.5vw; top: 12vh; }
-        &.cloud4{ left: -1.5vw; bottom: 42vh; }
-        &.cloud5{ right: 12vw; bottom: 37vh; }
-      }
-      // color: $w;
-      // height: 100vh;
-    }
-
     &.section4{
-      padding-bottom: 100px;
-      p{ 
-        margin: 60px auto; 
-        font-family: $os-r; 
-        width: 90%;
-      }
-    }
-
-    &.section5{
       .ctn-boxes{ 
         margin-top: 40px; 
         .box{ 

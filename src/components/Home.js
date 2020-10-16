@@ -129,110 +129,187 @@ export default function Main({
             <h1 className="mobile-only">So funktioniert es</h1>
             <div className="points">
               <div className="ctn-point row">
-                <div className="col-4">
+                <div className="col-3">
                   <img src="assets/func1.jpg" alt=""/>
                 </div>
-                <div className="col-2 num dashed">1</div>
-                <div className="col-6 text-left">
-                  <h4>Finden Sie ein Termin</h4>
+                <div className="col-1 num dashed">1</div>
+                <div className="col-8 text-left">
+                  <h4>Erstellen Sie einen Projektauftrag</h4>
                   <p>
-                    Reservieren Sie einen Termin, um mit unseren Experten über ihr Anliegen zu sprechen.
+                    Einfaches Einfügen nur von Schlüsselinformationen. Fordern Sie Angebote 
+                    für Sendungen aller Größen an - von 1 kg bis zu 10 Tonnen
                   </p>
                 </div>
               </div>
               <div className="ctn-point row">
-                <div className="col-4">
+                <div className="col-3">
                   <img src="assets/func2.jpg" alt=""/>
                 </div>
-                <div className="col-2 num dashed">2</div>
-                <div className="col-6 text-left">
-                  <h4>Wir melden uns bei Ihnen</h4>
+                <div className="col-1 num dashed">2</div>
+                <div className="col-8 text-left">
+                  <h4>Echtzeit-Kurse vergleichen</h4>
                   <p>
-                    Ein Experte von Cloudbasiert wird sich in weniger als 24 Stunden mit Ihnen in Verbindung setzen
+                    Erhalten Sie einen Überblick über alle buchbaren Kapazitäten mehrerer 
+                    Frachtgesellschaften (inkl. Hauptdeck und Frachter) Echtzeit-Preise direkt 
+                    von der Fluggesellschaft erhalten, wie am Telefon.
                   </p>
                 </div>
               </div>
               <div className="ctn-point row">
-                <div className="col-4">
+                <div className="col-3">
                   <img src="assets/func3.jpg" alt=""/>
                 </div>
-                <div className="col-2 num">3</div>
-                <div className="col-6 text-left">
-                  <h4>Kostenfreier Workshop</h4>
+                <div className="col-1 num">3</div>
+                <div className="col-8 text-left">
+                  <h4>Direkt über die Plattform buchen</h4>
                   <p>
-                    Ein Experte von Cloudbasiert führt für ihr Unternehmen einen Workshop durch
+                    Alle Angebote mit nur zwei Klicks buchen. Nutzen Sie Ihren vorhandenen 
+                    AWB-Bestand und wickeln Sie Zahlungen wie gewohnt über CASS ab
                   </p>
                 </div>
               </div>
             </div>
-            <button className="mobile-only btn btn-acc" onClick={e => goToSection(e, workshopRef)}>Workshop buchen</button>
+            <button className="btn btn-acc" onClick={e => {}}>Jetz beginnen</button>
           </div>        
         </section>
 
-        <section className="section1-1" ref={ref1}>
+        <section className="section2" ref={ref1}>
           <div className="container text-center">
             <h2 className="acc">Vorteile</h2>
-            <h1 className="desktop-only">Sie wollen Ihre AWS kosten<br/>senken?</h1>
-            <h1 className="mobile-only">Sie wollen Ihre AWS<br/> kosten senken?</h1>
-            <div className="points">
-              <div className="ctn-point">
-                <h1>&lt;1 Woche</h1>
-                <div className="line"></div>
-                <p>
-                  Innerhalb von einer Woche können Sie Ihre Kostenstruktur von AWS komplett erneuern und monatlich Geld einsparen.
-                </p>
+            <h1 className="desktop-only">Ein Paket ein Preis</h1>
+            <h1 className="mobile-only">Ein Paket ein Preis</h1>
+            <div className="ctn-boxes">
+              <div className="box">
+                <img src="assets/th1.png" alt=""/>
+                <span>Verzollung</span>
+                <p>Wir helfen Dir dabei die benötigten Unterlagen auszufüllem</p>
               </div>
-              <div className="ctn-point">
-                <h1>2x schneller</h1>
-                <div className="line"></div>
-                <p>
-                  Durch den Workshop lässt sich eine Effizienzsteigerung von 2x erreichen. 
-                </p>
+              <div className="box">
+                <img src="assets/th2.png" alt=""/>
+                <span>Transport</span>
+                <p>Wir helfen Dir dabei die benötigten Unterlagen auszufüllem</p>
               </div>
-              <div className="ctn-point">
-                <h1>50% sparen</h1>
-                <div className="line"></div>
-                <p>
-                  Unsere Expertern helfen Ihnen dabei Ihre AWS Kosten um bis zu 50% zu reduzieren. 
-                </p>
+              <div className="box">
+                <img src="assets/th3.png" alt=""/>
+                <span>Anmeldung</span>
+                <p>Wir helfen Dir dabei die benötigten Unterlagen auszufüllem</p>
+              </div>
+            </div>
+            <div className="ctn-boxes">
+              <div className="box">
+                <img src="assets/th4.png" alt=""/>
+                <span>Versicherung</span>
+                <p>Wir helfen Dir dabei die benötigten Unterlagen auszufüllem</p>
+              </div>
+              <div className="box">
+                <img src="assets/th5.png" alt=""/>
+                <span>Sicherheit </span>
+                <p>Wir helfen Dir dabei die benötigten Unterlagen auszufüllem</p>
+              </div>
+              <div className="box">
+                <img src="assets/th6.png" alt=""/>
+                <span>Support</span>
+                <p>Wir helfen Dir dabei die benötigten Unterlagen auszufüllem</p>
+              </div>
+            </div>
+            <div className="info-box">
+              <div className="row">
+                <div className="col-7">
+                  <h4>Erhalte direkten Zugang zu den führenden Anbietern auf einer Plattform.</h4>
+                  <p>Erhalten Sie Echtzeitpreise für verfügbare Kapazitäten und buchen Sie direkt in die Systeme der Fluggesellschaften.</p>
+                  <button className="btn btn-acc" onClick={e => {}}>Jetz beginnen</button>
+                </div>
+                <div className="col-5 row">
+                  <div className="col-6 pr-0">
+                    <div className="ctn-cargo"><img src="assets/cargo.png" alt=""/></div>
+                    <div className="ctn-cargo"><img src="assets/cargo.png" alt=""/></div>
+                    <div className="ctn-cargo"><img src="assets/cargo.png" alt=""/></div>
+                  </div>
+                  <div className="col-6 pr-0 mt-4">
+                    <div className="ctn-cargo"><img src="assets/cargo.png" alt=""/></div>
+                    <div className="ctn-cargo"><img src="assets/cargo.png" alt=""/></div>
+                    <div className="ctn-cargo"><img src="assets/cargo.png" alt=""/></div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="section2">
-          <div className="container text-center">            
-            
+        <section className="section3">
+          <div className="container text-center">
+            <h2 className="desktop-only acc">Angebot auswählen</h2>
+            <h1 className="desktop-only">Wählen Sie ihr passendes<br/> Angebot</h1>
+            <h2 className="mobile-only acc">Angebot auswählen</h2>
+            <h1 className="mobile-only">Wählen Sie ihr passendes<br/> Angebot</h1>
+            <div className="ctn-bm-outer">
+              <div className="ctn-layer0">
+                <div className="row">
+                  <div className="col-2"><div></div></div>
+                  <div className="col-8"><div></div></div>
+                  <div className="col-2"><div></div></div>
+                </div><hr/>
+                <div className="row">
+                  <div className="col-2"><div></div></div>
+                  <div className="col-8"><div></div></div>
+                  <div className="col-2"><div></div></div>
+                </div><hr/>
+                <div className="row">
+                  <div className="col-2"><div></div></div>
+                  <div className="col-8"><div></div></div>
+                  <div className="col-2"><div></div></div>
+                </div><hr/>
+                <div className="row">
+                  <div className="col-2"><div></div></div>
+                  <div className="col-8"><div></div></div>
+                  <div className="col-2"><div></div></div>
+                </div><hr/>
+                <div className="row">
+                  <div className="col-2"><div></div></div>
+                  <div className="col-8"><div></div></div>
+                  <div className="col-2"><div></div></div>
+                </div>
+              </div>
+              <div className="ctn-layer1">
+                <div className="bm">Best Match</div>
+                <img src="assets/lufthansa.png" alt=""/>
+                <div className="ctn-ship-info">
+                  <div>
+                    <span className="date">Mon. 11.09.20</span>
+                    <div>9:00</div>
+                    <span className="stadt">BER</span>
+                  </div>
+                  <div className="ctn-ship-graphic">
+                    <div>
+                      <img src="assets/container.png" alt=""/>
+                      <img src="assets/ship.png" alt=""/>
+                      <img src="assets/container.png" alt=""/>
+                    </div>
+                    <div className="bar"></div>
+                    <span className="stadt">SHA</span>
+                  </div>
+                  <div>
+                    <span className="date">Fri. 15.09.20</span>
+                    <div>9:00</div>
+                    <span className="stadt">SHA</span>
+                  </div>
+                </div>
+                <div>
+                  <div>Gesamtbetrag</div>
+                  <div>239 €</div>
+                  <button className="btn btn-sm btn-acc">Buchen</button>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
-        <section className="section4">
+        <section className="section4" ref={ref3}>
           <div className="container text-center">
-            <h2 className="desktop-only acc">AWS Kostenoptimierung</h2>
-            <h1 className="desktop-only">Ausgaben verstehen und senken</h1>
-            <h2 className="mobile-only acc">AWS Kostenoptimierung</h2>
-            <h1 className="mobile-only">Ausgaben verstehen und senken</h1>
-            <p>
-              Wir analysieren Ihre AWS Kosten, identifizieren mögliche Einsparpotenziale
-              und setzen diese mit Ihnen direkt in die Tat um. Wir starten mit einer 
-              Discovery-Phase in der wir Ihre Workloads und Herausforderungen verstehen lernen.
-              <br/><br/><br/><br/>
-              Danach gehen wir die Analyse und stellen Ihnen konkrete Einsparung vor; 
-              diese priorisieren wir danach mit Ihnen. 
-              <br/><br/>
-              Zum Abschluss sorgen wir unmittelbar für die ersten Einsparungen, so dass sich 
-              <br/>Ihr Investment in dieses Paket direkt anfängt zu rentieren.
-            </p>
-            <button className="btn btn-acc" onClick={e => goToSection(e, workshopRef)}>Workshop planen</button>
-          </div>
-        </section>
-
-        <section className="section5" ref={ref3}>
-          <div className="container text-center">
-            <h2 className="desktop-only acc">Weitere Workshopthemen</h2>
-            <h1 className="desktop-only">Sie sind an anderen Themen interessiert?</h1>
-            <h2 className="mobile-only acc">Weitere Workshopthemen</h2>
-            <h1 className="mobile-only">Sie sind an anderen Themen interessiert?</h1>
+            <h2 className="desktop-only acc">Bewertungen</h2>
+            <h1 className="desktop-only">Zufriedene Unternehmen</h1>
+            <h2 className="mobile-only acc">Bewertungen</h2>
+            <h1 className="mobile-only">Zufriedene Unternehmen</h1>
             <div className="ctn-boxes">
               <div className="box" onClick={e => goToSection(e, workshopRef)}>
                 <img src="assets/th1.png" alt=""/>
