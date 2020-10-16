@@ -2,7 +2,7 @@
 /* eslint-disable no-script-url */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react'
-import Carousel from "react-img-carousel"
+import Carousel from 'react-img-carousel'
 
 import '../scss/team.scss'
 import 'react-img-carousel/lib/carousel.css'

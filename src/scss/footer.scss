@@ -1,8 +1,8 @@
 .prefooter{
   @include media("<tab"){ display: none; }
   background: $txt-pr;
-  font-family: $os-r;
-  color: $w;      
+  // font-family: $os-r;
+  // color: $w;      
   hr{ 
     border-top: 1px solid rgba(45, 85, 103, .5); 
     margin-top: 25px;
@@ -10,7 +10,7 @@
 }
 footer{
   background: $txt-pr;
-  font-family: $os-r;
+  font-family: $ex-r;
   color: $w;
   padding-bottom: 50px;
   .ctn-footer{
@@ -21,7 +21,7 @@ footer{
       left: -50px;
     }
     h4{
-      font-family: $os-sb;
+      font-family: $ex-b;
       font-size: 25px;
       margin-bottom: 35px;
     }

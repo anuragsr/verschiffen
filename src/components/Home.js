@@ -5,9 +5,11 @@ import React, { useRef, useState, useEffect } from 'react'
 import { useForm } from 'react-hooks-helper'
 // import { Link, NavLink } from 'react-router-dom'
 // import HttpService from '../services/HttpService'
-
+import Carousel from 'react-img-carousel'
 import { Modal, useModal } from './Modal'
+
 import '../scss/home.scss'
+import 'react-img-carousel/lib/carousel.css'
 
 const l = console.log.bind(window.console)
 
@@ -294,7 +296,7 @@ export default function Main({
                     <span className="stadt">SHA</span>
                   </div>
                 </div>
-                <div>
+                <div className="ctn-price">
                   <div>Gesamtbetrag</div>
                   <div>239 €</div>
                   <button className="btn btn-sm btn-acc">Buchen</button>
@@ -310,257 +312,122 @@ export default function Main({
             <h1 className="desktop-only">Zufriedene Unternehmen</h1>
             <h2 className="mobile-only acc">Bewertungen</h2>
             <h1 className="mobile-only">Zufriedene Unternehmen</h1>
-            <div className="ctn-boxes">
-              <div className="box" onClick={e => goToSection(e, workshopRef)}>
-                <img src="assets/th1.png" alt=""/>
-                <span>Security</span>
-                <p>Uberprüfen und optimieren Sie ihre Sicherheit in der Cloud</p>
+            <div className="row">
+              <div className="col-md-4">
+                <div className="box">
+                  <div className="ctn-stars">
+                    <img src="assets/star2.png" alt=""/>
+                    <img src="assets/star2.png" alt=""/>
+                    <img src="assets/star2.png" alt=""/>
+                    <img src="assets/star2.png" alt=""/>
+                    <img src="assets/star2.png" alt=""/>
+                  </div>
+                  <div className="r-title">Thank You</div>
+                  <p className="r-content">
+                    “Send shareable cloud tests and get feedback immediately.
+                    Send shareable bug tests and get feedback immediately.
+                    Send shareable bug tests and get feedback immediately."
+                  </p>
+                  <div className="r-ft">
+                    Berlin<br/><span>to</span><br/>Shanghai
+                  </div>
+                </div>
               </div>
-              <div className="box" onClick={e => goToSection(e, workshopRef)}>
-                <img src="assets/th2.png" alt=""/>
-                <span>Anbieterauswahl</span>
-                <p>Unsere Experten helfen den besten Cloudanbieter zu finden</p>
+              <div className="col-md-4">
+                <div className="box">
+                  <div className="ctn-stars">
+                    <img src="assets/star2.png" alt=""/>
+                    <img src="assets/star2.png" alt=""/>
+                    <img src="assets/star2.png" alt=""/>
+                    <img src="assets/star2.png" alt=""/>
+                    <img src="assets/star2.png" alt=""/>
+                  </div>
+                  <div className="r-title">All Perfect</div>
+                  <p className="r-content">
+                    “Send shareable cloud tests and get feedback immediately.
+                    Send shareable bug tests and get feedback immediately.
+                    Send shareable bug tests and get feedback immediately."
+                  </p>
+                  <div className="r-ft">
+                    Berlin<br/><span>to</span><br/>Shanghai
+                  </div>
+                </div>
               </div>
-              <div className="box" onClick={e => goToSection(e, workshopRef)}>
-                <img src="assets/th3.png" alt=""/>
-                <span>Kapitalkosten<br/>reduzieren</span>
-                <p>Ein Workshop der hilft die Kapitalkosten zu reduzieren</p>
-              </div>
-              <div className="box" onClick={e => goToSection(e, workshopRef)}>
-                <img src="assets/th4.png" alt=""/>
-                <span>Skalierbarkiet<br/>erhonen</span>
-                <p>Bis zu 58% Effizienzseigerung erzielen</p>
-              </div>
-              <div className="box" onClick={e => goToSection(e, workshopRef)}>
-                <img src="assets/th5.png" alt=""/>
-                <span>Big Data</span>
-                <p>Wir helfen das managen großer Datenmengen</p>
-              </div>
-              <div className="box" onClick={e => goToSection(e, workshopRef)}>
-                <img src="assets/th6.png" alt=""/>
-                <span>Betriebskosten<br/>reduzieren</span>
-                <p>Mithilfe des Workshops Betriebskosten minimieren</p>
-              </div>
-              <div className="desktop-only box" onClick={e => goToSection(e, workshopRef)}>
-                <img src="assets/th7.png" alt=""/>
-                <span>Disaster Recovery<br/>verbessern</span>
-                <p>Redudanz und Disaster Recovery bis zu 35% verbessern</p>
-              </div>
-              <div className="desktop-only box" onClick={e => goToSection(e, workshopRef)}>
-                <img src="assets/th8.png" alt=""/>
-                <span>Effizienz<br/>steigern</span>
-                <p>Kosteneinsparungen von bis zu 50% sind möglich</p>
-              </div>
-              <div className="desktop-only box" onClick={e => goToSection(e, workshopRef)}>
-                <img src="assets/th9.png" alt=""/>
-                <span>Microsoft in der Cloud</span>
-                <p>Wir beraten Sie welche Moglichkeiten mit MS am besten fur Sie passen</p>
-              </div>
-              <div className="desktop-only box" onClick={e => goToSection(e, workshopRef)}>
-                <img src="assets/th10.png" alt=""/>
-                <span>Migration</span>
-                <p>Ein Workshop auf Ihre Bedurfnisse von Smart Data zugeschnitten</p>
-              </div>
-              <div className="desktop-only box" onClick={e => goToSection(e, workshopRef)}>
-                <img src="assets/th10.png" alt=""/>
-                <span>Migration</span>
-                <p>Ein Workshop auf Ihre Bedurfnisse von Smart Data zugeschnitten</p>
-              </div>
-              <div className="desktop-only box" onClick={e => goToSection(e, workshopRef)}>
-                <img src="assets/th10.png" alt=""/>
-                <span>Migration</span>
-                <p>Ein Workshop auf Ihre Bedurfnisse von Smart Data zugeschnitten</p>
+              <div className="col-md-4">
+                <div className="box">
+                  <div className="ctn-stars">
+                    <img src="assets/star2.png" alt=""/>
+                    <img src="assets/star2.png" alt=""/>
+                    <img src="assets/star2.png" alt=""/>
+                    <img src="assets/star2.png" alt=""/>
+                    <img src="assets/star2.png" alt=""/>
+                  </div>
+                  <div className="r-title">Best Experience</div>
+                  <p className="r-content">
+                    “Send shareable cloud tests and get feedback immediately.
+                    Send shareable bug tests and get feedback immediately.
+                    Send shareable bug tests and get feedback immediately."
+                  </p>
+                  <div className="r-ft">
+                    Berlin<br/><span>to</span><br/>Shanghai
+                  </div>
+                </div>
               </div>
             </div>
-            <button className="btn btn-acc" onClick={e => goToSection(e, workshopRef)}>Termin verinbaren</button>          
+            <img src="assets/trustpilot.jpg" alt=""/>
+          </div>
+        </section>
+        
+        <section className="section5">
+          <div className="container">
+            <div className="ctn-carousel">
+              <Carousel 
+                // cellPadding={-55}
+                lazyLoad={false}
+                dots={false}
+                infinite={false}
+                clickToNavigate={false}
+              >
+                <div className="ctn-carousel-single">
+                  <div className="row">
+                    <div className="col-6 h-100 ctn-video"></div>
+                    <div className="col-6 h-100 ctn-testi">
+                      <p>
+                        “Maschinendokumentation und Smart Guide bieten detaillierte 
+                        Anleitungen zur Lösung von aktuell anstehenden Problemen bzw. 
+                        zur Durchführung von Wartungsaufgaben.”
+                      </p> 
+                      <p>
+                        Tim und Dan Joo, Co-founder<br/>
+                        <img src="assets/testi-un.png" alt=""/>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="ctn-carousel-single">
+                  <div className="row">
+                    <div className="col-6 h-100 ctn-video"></div>
+                    <div className="col-6 h-100 ctn-testi">
+                      <p>
+                        “Maschinendokumentation und Smart Guide bieten detaillierte 
+                        Anleitungen zur Lösung von aktuell anstehenden Problemen bzw. 
+                        zur Durchführung von Wartungsaufgaben.”
+                      </p> 
+                      <p>
+                        Tim und Dan Joo, Co-founder<br/>
+                        <img src="assets/testi-un.png" alt=""/>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              
+              </Carousel>
+            </div>
           </div>
         </section>
 
         <section className="section6">
           <div className="container text-center">
-            <div className="desktop-only">
-              <h2 className="acc">Unser Leistungsumfang</h2>
-              <h1>Flexibel und für alle Cloudanbieter</h1>
-              <div className="ctn-table">
-                <div className="ctn-table-inner">
-                  <div className="row">
-                    <div className="col-md-3"></div>
-                    <div className="col-md-3"></div>
-                    <div className="col-md-3"></div>
-                    <div className="col-md-3"></div>
-                  </div>
-                  <div className="row">
-                    <div className="col-md-3">Leistungsspektrum</div>
-                    <div className="col-md-3">Beratunghauser</div>
-                    <div className="col-md-3">Cloudanbieter</div>
-                    <div className="col-md-3"><img src="assets/logo.svg" alt=""/></div>
-                  </div>
-                  <div className="row">
-                    <div className="col-md-3">Dienstleistung</div>
-                    <div className="col-md-3">Strategie und Implementierung</div>
-                    <div className="col-md-3">Freelancer fur<br/> Anbieter</div>
-                    <div className="col-md-3">Passende<br/> Cloudexperten</div>
-                  </div>
-                  <div className="row">
-                    <div className="col-md-3">Cloud Expertise</div>
-                    <div className="col-md-3">Mittel</div>
-                    <div className="col-md-3">Hoch</div>
-                    <div className="col-md-3">Hoch</div>
-                  </div>
-                  <div className="row">
-                    <div className="col-md-3">Projektlange</div>
-                    <div className="col-md-3">Langere<br/>Einsatze</div>
-                    <div className="col-md-3">Flexibel</div>
-                    <div className="col-md-3">Flexibel</div>
-                  </div>
-                  <div className="row">
-                    <div className="col-md-3">Abdeckung<br/>Cloudanbieter</div>
-                    <div className="col-md-3">Hoch</div>
-                    <div className="col-md-3">Nur ein Anbiter</div>
-                    <div className="col-md-3">Alle</div>
-                  </div>
-                  <div className="row">
-                    <div className="col-md-3">Kosten</div>
-                    <div className="col-md-3">Hoch</div>
-                    <div className="col-md-3">Mittel</div>
-                    <div className="col-md-3">Mittel</div>
-                  </div>
-                  <div className="row">
-                    <div className="col-md-3"></div>
-                    <div className="col-md-3"></div>
-                    <div className="col-md-3"></div>
-                    <div className="col-md-3">
-                      <button className="btn btn-acc" onClick={e => goToSection(e, workshopRef)}>Workshop planen</button>
-                    </div>
-                  </div>              
-                </div>
-              </div>
-            </div>
-            <div className="mobile-only">
-              <div className="ctn-vor-outer">
-                <div className="block">
-                  <span className="acc">Cloud</span>basiert
-                </div>
-                <div className="block">
-                  <h4>Vorteile gegenüber<br/>anderen Anbieter</h4>
-                </div>
-                <div className="block reg">
-                  <img src="assets/tick.png" alt=""/><br/>
-                  <p>Passenden Cloudexperten</p>
-                </div>
-                <div className="block reg">
-                  <img src="assets/tick.png" alt=""/><br/>
-                  <p>Sehr hohe Cloud Expertise</p>
-                </div>
-                <div className="block reg">
-                  <img src="assets/tick.png" alt=""/><br/>
-                  <p>Flexible Projektlänge</p>
-                </div>
-                <div className="block reg">
-                  <img src="assets/tick.png" alt=""/><br/>
-                  <p>Alle Cloudanbieter werden abgedeckt</p>
-                </div>
-                <div className="block reg">
-                  <img src="assets/tick.png" alt=""/><br/>
-                  <p>Keine Versteckte Kosten</p>
-                </div>
-                <div className="block reg">
-                  <img src="assets/tick.png" alt=""/><br/>
-                  <p>Medication prescribed by a physician</p>
-                </div>
-                <div className="block">
-                  <button className="btn btn-acc" onClick={e => goToSection(e, workshopRef)}>Start now</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="section7">
-          <div className="container text-center">
-            <h2 className="desktop-only acc">USP</h2>
-            <h1 className="desktop-only">Warum Cloudbasiert</h1>
-            <h2 className="mobile-only acc">USP</h2>
-            <h1 className="mobile-only">Innovation mit Cloud</h1>
-            <div className="row usp">
-              <div className="col-md-6">
-                <img src="assets/usp1.png" alt=""/>
-                <span>Top Experten</span>
-                <p>Wir prüfen jeden unserer Cloudexperten genau. Die Experten auf Cloudbasiert sind die besten 5%</p>
-              </div>
-              <div className="col-md-6">
-                <img src="assets/usp2.png" alt=""/>
-                <span>Schnelle Hilfe</span>
-                <p>In nur 48 Stunden finden Sie über Cloudbasiert den geeigneten Experten für Ihr Anliegen</p>
-              </div>
-            </div>
-            <div className="row usp last">
-              <div className="col-md-6">
-                <img src="assets/usp3.png" alt=""/>
-                <span>Personliche<br/> Beratung</span>
-                <p>Cloudbasiert ist jederzeit an ihrer Seite und stellt sicher, dass ihr Projekt erfolgreich abläuft</p>
-              </div>
-              <div className="desktop-only col-md-6">
-                <img src="assets/usp4.png" alt=""/>
-                <span>100% Erfolgreich<br/>&nbsp;</span>
-                <p>Cloudbasiert stellt sicher, dass Sie den geeigneten Experten bekommen. Sollten sie unzufrieden sein, vermittlen wir kostenlos einen neuen Experten.</p>
-              </div>
-            </div>
-            <div className="info-box row">
-              <div className="col-md-8">
-                <h2>Warum <span className="acc">Cloud</span>basiert?</h2>
-                <p>
-                  Mit Cloudbasiert finden Sie immer die richtige Expertise für Ihr 
-                  Digitalisierungsvorhaben in der Cloud. Innerhalb von 48 Stunden 
-                  erhalten Sie Ihren Experten, für Ihre Cloud-Projekte.<br/><br/>
-                  Die Experten von Cloudbasiert unterstützen Sie bei der strategischen 
-                  Zieldefinition und helfen Ihnen operative bei der Realisierung.<br/><br/>
-                  Egal was Sie in der Cloud umsetzen möchten, unsere Experten wählen mit 
-                  Ihnen die passenden Technologiepartner aus.<br/><br/>
-                  <span className="acc">Ihr Erfolg ist unsere Aufgabe!</span>
-                </p>
-              </div>
-              <div className="col-md-4 bg">
-                <h1 className="acc">&lt;1 Wochen</h1>
-                <p>bis das Projekt begonnen hat</p>
-                <h1 className="acc">2x schneller</h1>
-                <p>konnen nun Daten abgerufen werden</p>
-                <h1 className="acc">50% gesparen</h1>
-                <p>im Vergleich zum Onpremis</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="section8">
-          <div className="container text-center">
-            <h2 className="desktop-only acc">Zertifizierte Unterstützer</h2>
-            <h1 className="desktop-only">Höchste Auszeichnungen unser Experten</h1>
-            <h2 className="mobile-only acc">Zertifizierte<br/>Unterstützer</h2>
-            <h1 className="mobile-only">Höchste Auszeichnungen unser Experten</h1>
-            <div className="row">
-              <div className="col-md-4">
-                <div className="box">
-                  <img src="assets/aws.png" alt=""/>
-                  <span className="acc">PREMIER</span>
-                  <p>Consulting Partner</p>
-                </div>
-              </div>
-              <div className="col-md-4">
-                <div className="box">
-                  <img src="assets/azure.png" alt=""/>
-                  <span className="acc">GOLD</span>
-                  <p>Consulting Partner</p>
-                </div>
-              </div>
-              <div className="col-md-4">
-                <div className="box">
-                  <img src="assets/gcp.png" alt=""/>
-                  <span className="acc">ADVANCED</span>
-                  <p>Consulting Partner</p>
-                </div>
-              </div>
-            </div>
             <div className="row" ref={ref4}>
               <div className="desktop-only col-md-6">
                 <div className="act act1 text-left">
@@ -594,13 +461,12 @@ export default function Main({
             </div>
             <div className="desktop-only row info">
               <div className="ctn-img">
-                <img src="assets/aws.png" alt=""/>
-                <img src="assets/azure.png" alt=""/>
-                <img src="assets/gcp.png" alt=""/>
-                <img src="assets/alib.png" alt=""/>
+                <img src="assets/cargo-dark.png" alt=""/>
+                <img src="assets/cargo-dark.png" alt=""/>
+                <img src="assets/cargo-dark.png" alt=""/>
               </div>
-              <h1>Sie möchten die Vorteile der Cloud <br/>nutzen?</h1>
-              <p>Unser Experten unterstützen Sie bei der Projekt Erstellung</p>
+              <h1>Sie benötigen Unterstützung bei <br/>der Reisebuchung?</h1>
+              <p>Unser Experten unterstützen Sie bei der Flugbuchung</p>
               <p className="acc"><img height="20" src="assets/phone.png" alt=""/>&nbsp;+49 (175) 91234</p>
               <p>
                 Telefonisch erreichbar Montag bis Freitag von 8:00 bis 20:00 Uhr (UTC -5). 
@@ -610,18 +476,19 @@ export default function Main({
           </div>
         </section>
         
-        <section className="section9">
+        <section className="section7">
           <div className="container text-center">
-            <p className="desktop-only">Jetzt kostenfreien individual Workshop beantragen</p>
-            <p className="mobile-only">Finden Sie on-demand Experten für Ihre Cloud Projekte</p>
-            <button className="desktop-only btn btn-acc" onClick={e => goToSection(e, workshopRef)}>Workshop planen</button>
-            <button className="mobile-only btn btn-acc" onClick={e => goToSection(e, workshopRef)}>Jetzt starten</button>
+            <img src="assets/starten.png" alt=""/>
+            <p className="desktop-only">Verschiffen Sie Ihre Ware weltweit</p>
+            <p className="mobile-only">Verschiffen Sie Ihre Ware weltweit</p>
+            <button className="btn btn-acc mr-3" onClick={e => {}}>Angebot ansehen</button>
+            <button className="btn btn-sec" onClick={e => {}}>Jetzt vergleichen</button>
           </div>
         </section>
 
         <section className="prefooter">
           <div className="container text-center">
-            Sind Sie auf der Suche nach einer größeren Cloud Projekt interessiert? Kommen Sie gern auf uns zu.
+            Sie suchen nach Hilfe für die Planung  einer Reise mit einer größeren Gruppe an Personen? Schreiben Sie uns einfach an. 
             <hr/>
           </div>
         </section>

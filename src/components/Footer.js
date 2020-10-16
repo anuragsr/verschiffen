@@ -11,7 +11,7 @@ export default function Footer(){
         <div className="row ctn-footer">
           <div className="col-md-5 col-left">
             <h4 className="links">
-              <Link to="/">Cloudbasiert</Link>
+              <Link to="/">Verschiffen.com</Link>
             </h4>
             <p>
               Mit unserem engagierten Kundenservice sind wir für dich da! 
@@ -52,7 +52,7 @@ export default function Footer(){
           </div>
         </div>
         <div className="text-center">
-          Cloudbasiert.com 2020
+          Verschiffen.com 2020
         </div>
       </div>
       <div className="container mobile-only">
@@ -85,7 +85,7 @@ export default function Footer(){
           <a href="#"><img src="assets/instagram.png" alt=""/></a>
         </div>
         <div className="text-center">
-          <p>Cloudbasiert.com ist ein Deutsches<br/> Unternehmen mit Firmensitz Berlin.</p>
+          <p>Verschiffen.com ist ein Deutsches<br/> Unternehmen mit Firmensitz Berlin.</p>
           <p>Oranienburger Str. 103,<br/>10117 Berlin</p>
         </div>
       </div>
