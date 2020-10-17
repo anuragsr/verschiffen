@@ -13,39 +13,19 @@ import 'react-img-carousel/lib/carousel.css'
 
 const l = console.log.bind(window.console)
 
-export default function Main({ 
-  workshopRef, ref1, ref2 , ref3, ref4 
-}){
+export default function Main({ ref1, ref2 , ref3, ref4 }){
 
   const { 
     isShowing, toggle, 
-    // currStep, setStep,
-    // opts, setOpt, 
-    // showMoreInfo, toggleMoreInfo,
-    // firstName, lastName, phone, email, setValue,
-    // isFormValid, currEvent
+    showMoreInfo, toggleMoreInfo,
   } = useModal()
-  , calendarDesktopRef = useRef(null)
-  , calendarRef = useRef(null)
-  , mySqlDate = function(date) {
-    const twoDigits = d => {
-      if(0 <= d && d < 10) return "0" + d.toString()
-      if(-10 < d && d < 0) return "-0" + (-1*d).toString()
-      return d.toString()
-    }
-    return date.getUTCFullYear() + "-" + twoDigits(1 + date.getUTCMonth()) + "-" + twoDigits(date.getUTCDate())
-  }
-  , getStartEnd = time => {
-    let hr = parseInt(time.split(":")[0]) + 2
-    if(hr < 10) hr = "0" + hr
-    return `${time} - ${hr}:00`
-  }
   , initFormData = { vonStadt: 'Berlin', nachStadt: 'Shanghai' }
   , [{ vonStadt, nachStadt }, setValue] = useForm(initFormData)
   , onFormSubmit = e => {
     l("Submit")
     l({ vonStadt, nachStadt })
     e.preventDefault()
+    toggle()
     // toggle({ 
     //   eventStr: info.event.extendedProps.dateTime, 
     //   eventDate: mySqlDate(info.event.start),
@@ -58,7 +38,6 @@ export default function Main({
     const scrollTop = window.pageYOffset + ref.current.getBoundingClientRect().top - 60
     window.scrollTo({ top: scrollTop, behavior: 'smooth' })
   }
-  // useEffect(() => { getEvents() }, [])
 
   return (
     <>  
@@ -382,7 +361,6 @@ export default function Main({
           <div className="container">
             <div className="ctn-carousel">
               <Carousel 
-                // cellPadding={-55}
                 lazyLoad={false}
                 dots={false}
                 infinite={false}
@@ -496,20 +474,8 @@ export default function Main({
       <Modal 
         isShowing={isShowing}
         toggle={toggle}
-        // currStep={currStep}
-        // setStep={setStep}
-        // opts={opts}
-        // setOpt={setOpt}
-        // showMoreInfo={showMoreInfo}
-        // toggleMoreInfo={toggleMoreInfo}
-        // firstName={firstName}
-        // lastName={lastName}
-        // phone={phone}
-        // email={email}
-        // setValue={setValue}
-        // isFormValid={isFormValid}
-        // currEvent={currEvent}
-        // getEvents={getEvents}
+        showMoreInfo={showMoreInfo}
+        toggleMoreInfo={toggleMoreInfo}
       />
     </>
   )

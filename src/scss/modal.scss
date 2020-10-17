@@ -19,7 +19,7 @@
   width: 100vw;
   height: 100vh;
   background-color: #fff;
-  opacity: .95;
+  // opacity: .95;
 }
 
 .modal-wrapper {
@@ -38,23 +38,19 @@
     margin: 25px;
   }
   .modal-inner {
+    @extend %fhw;
+    display: flex;
+    flex-direction: column;
+    // justify-content: space-between;
     font-family: $ex-sb;
     z-index: 100;
-    background: white;
+    background: $w;
     position: relative;
     margin: 0 auto;
     border-radius: 3px;
-    width: 60vw;
-    @include media("<tab"){
-      width: 100%;
-    }
-    // height: 70vh;
-    padding: 3vh 5vw;
-    // border: solid 1px rgba(31, 68, 84, 0.2);
+    padding: 3vh 5vw;    
     .modal-header {
-      // display: flex;
       justify-content: flex-end;
-      // align-items: center;
       border: none;
       padding: 0;
       .logo{ 
@@ -63,194 +59,279 @@
         @extend %fw;
         z-index: -1;
         text-align: center;
-        @include media(">=tab"){
-          visibility: hidden;
-        }
+      }
+      .close-button {
+        font-size: 24px;
+        width: 40px;
+        height: 40px;
+        border-radius: 40px;
+        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.05);
+        background-color: $w;
+        cursor: pointer;
+        border: none;
+        &:focus{ outline: none!important;}
       }
     }
-    .close-button {
-      font-size: 24px;
-      width: 40px;
-      height: 40px;
-      border-radius: 40px;
-      box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.05);
-      background-color: $w;
-      cursor: pointer;
-      border: none;
-      &:focus{ outline: none!important;}
-    }
-    .step{
-      h4{
-        position: relative;
-        display: inline-block;
-        margin: 25px auto;
-        font-size: 27px;
-        @include media("<tab"){
-          font-size: 24px;
+    .modal-body-custom{
+      position: relative;
+      height: 60vh;
+      margin-top: 5vh;
+      .step{
+        @extend %fhw;
+        overflow: hidden;
+        z-index: 0;
+        opacity: 0;
+              
+        // Animation
+        $dist: 5;
+        @include pa(0, "", "", -#{$dist}, "%");
+        transition: all 0.2s ease-out;
+        transition-delay: .05s;
+        &.next{ right: -#{$dist}#{"%"}; transition-delay: 0s; }
+        &.prev{ right: #{$dist}#{"%"}; transition-delay: 0s; }
+        &.current{
+          right: 0;
+          opacity: 1;
+          z-index: 1;
+          overflow-x: hidden; 
+          overflow-y: visible;
         }
-        img{
-          @include pa(-10, "", "", -20);
-          cursor: pointer;
+
+        .inner{
+          width: 40vw;
+          margin: 0 auto;
         }
-      }
-      .ctn-btn{
-        @include media("<tab"){
+
+        .ctn-heading{
           text-align: center;
-        }
-      }
-      &.step1{
-        .main{ height: 90px; }
-        h5{ 
-          font-size: 16px;
-          margin-bottom: 15px;
-        }
-        .ctn-box{ 
-          margin: 20px 0;
-          .box{
-            @extend %j-c;
-            cursor: pointer;
-            display: inline-flex;
-            vertical-align: top;
-            flex-direction: column;
+          margin-bottom: 50px;
+          h4{
             position: relative;
-            // height: 150px;
-            // width: 200px;
-            height: 120px;
-            width: 175px;
-            border-radius: 2px;
-            border: solid 1px #22b7e7;          
-            margin-right: 10px;
-            margin-bottom: 10px;
-            img{ height: 40px; margin-bottom: 10px; }
-            span{ font-size: 15px; }
-            opacity: .5;
+            display: inline-block;
+            margin: 5px auto;
+            font-size: 27px;
             @include media("<tab"){
-              width: 46%;
-              margin: 5px;
+              font-size: 24px;
             }
-            &:hover{
-              @include media(">=tab"){
+            img{
+              @include pa(0, "", "", -25);
+              cursor: pointer;
+            }
+          }          
+          .subtitle{
+            font-family: $ex-r;
+            font-size: 15px;
+            color: rgba(37, 58, 65, 0.3);
+          }
+        }
+
+        .ctn-content{
+          margin-bottom: 35px;
+          h5{ 
+            font-size: 16px;
+            margin-bottom: 35px;
+          }
+        }
+
+        &.step1{
+          .check-ind{
+            border: 2px solid $acc;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            padding: 2px;
+            .check-ind-inner{
+              opacity: 0;
+              width: 100%;
+              height: 100%;
+              background: $acc;
+              border-radius: 50%;
+            }
+          }
+          .selected{
+            .check-ind{
+              .check-ind-inner{ opacity: 1; }
+            }
+          }
+          .ctn-box{ 
+            @extend %j-c;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            .box{
+              @extend %j-c;
+              display: inline-flex;
+              // vertical-align: top;
+              flex-direction: column;
+              flex-shrink: 0;
+              cursor: pointer;
+              position: relative;
+              height: 120px;
+              width: 175px;
+              border-radius: 2px;
+              border: solid 1px #22b7e7;          
+              margin-right: 15px;
+              margin-bottom: 15px;
+              img{ height: 40px; margin-bottom: 10px; }
+              span{ font-size: 15px; }
+              opacity: .5;
+              @include media("<tab"){
+                width: 46%;
+                margin: 5px;
+              }
+              .check-ind{
+                @include pa(10, "", "", 10);
+              }
+              &:hover{
+                @include media(">=tab"){
+                  opacity: 1;
+                  background-color: rgba(34, 183, 231, 0.1);
+                  .check-ind{
+                    .check-ind-inner{ opacity: 1; }
+                  }
+                }
+              }
+              &.selected{
                 opacity: 1;
                 background-color: rgba(34, 183, 231, 0.1);
-                .check-ind{
-                  .check-ind-inner{ opacity: 1; }
-                }
-                // .check-ind::after{
-                //   opacity: 1;
+                // .check-ind{
+                //   .check-ind-inner{ opacity: 1; }
                 // }
               }
             }
-            &.selected{
-              opacity: 1;
-              background-color: rgba(34, 183, 231, 0.1);
-              .check-ind{
-                .check-ind-inner{ opacity: 1; }
-              }
-              // .check-ind::after{
-              //   opacity: 1;
-              // }
-            }
-            .check-ind{
-              @include pa(10, "", "", 10);            
-              border: 2px solid $acc;
-              border-radius: 50%;
-              width: 20px;
-              height: 20px;
-              padding: 2px;
-              // @include media("<tab"){
-              //   width: 20px;
-              //   height: 20px;
-              // }
-              .check-ind-inner{
-                opacity: 0;
-                width: 100%;
-                height: 100%;
-                background: $acc;
-                border-radius: 50%;
-              }
-              // &::after{
-              //   @include pa(0, 0);            
-              //   content: "";
-              //   opacity: 0;
-              //   width: 100%;
-              //   height: 100%;
-              //   background: $acc;
-              //   transform: scale(.7);
-              //   transform-origin: 50% 50%;
-              //   border-radius: 50%;
-              // }
-            }
           }
-        }
-      }
-      &.step2{
-        h4{ 
-          font-family: $os-b; 
-          font-size: 40px;
-          @include media("<tab"){
-            font-size: 24px;
-          }
-        }
-        p{ font-family: $ex-r; }     
-        form{ 
-          width: 20vw; 
-          margin: 50px auto; 
-          @include media("<tab"){
-            width: 100%;
-          }
-          .form-group{
-            margin-bottom: 25px;
-          }
-          .form-control{
-            height: 40px;
-            font-family: $ex-r;
-            color: rgba(37, 58, 65, 0.4);
-            border-radius: 4px;
-            box-shadow: inset 0 4px 4px 0 rgba(0, 0, 0, 0.05);
-            border: solid 1px rgba(34, 183, 231, 0.2);
-          }
-        }   
-      }
-      &.step3{
-        padding-bottom: 5vh;
-        .message{ 
-          margin: 50px auto; 
-          font-family: $os-b; 
-          font-size: 25px;
-          h1{ 
-            font-size: 40px;
-          }
-        }
-        button{ 
-          // display: flex;
-          // padding-left: 50px;
-          font-family: $ex-r;
-          margin: 0 auto;
-          width: 20vw; 
-          position: relative;
-          color: rgba(37, 58, 65, 0.4);
-          height: 45px;
-          &>.row{ align-items: center; }
-          &.btn-outlook{
-            color: $w;
-            background-color: #4469b0;
-          }
-          img{
-            // position: relative;
-            // top: -2px;
-            // margin-right: 17px;
-            height: 25px;
-          }
-          @include media("<=ld"){
-            font-size: 14px;
-            width: 30vw; 
-          }
-          @include media("<tab"){
-            width: 100%; 
+          .ctn-check{
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+            span{ font-family: $ex-r; margin-left: 10px;}
           }
         }
       }
     }
+    .modal-footer-custom{ 
+      @include pa("", 0, 0, "");
+      @extend %fw;
+      .progress{
+        @extend %fw;
+        height: 3px;
+        box-shadow: 0 -4px 14px 0 rgba(93, 181, 209, 0.01);
+        background-color: rgba(34, 183, 231, 0.24);
+        .bar{
+          @extend %fh;
+          width: 30%;
+          background-color: $acc;
+          transition: width .3s;
+        }
+      }
+      .content{ padding: 50px; }
+      .footer-text{
+        @include pa(0, 0);
+        @extend %fhw;
+        @extend %j-c;
+        font-family: $ex-r;
+        z-index: -1;
+        img{
+          position: relative;
+          top: 2px;
+        }
+        span{ font-family: $ex-b; }
+      }
+    }
+    .btn-back{ 
+      display: inline-block;
+      cursor: pointer; 
+      font-size: 16px;
+      font-family: $ex-r;
+      img{ margin-right: 25px; }
+    }
+    // .step{
+    //   h4{
+    //     position: relative;
+    //     display: inline-block;
+    //     margin: 25px auto;
+    //     font-size: 27px;
+    //     @include media("<tab"){
+    //       font-size: 24px;
+    //     }
+    //     img{
+    //       @include pa(-10, "", "", -20);
+    //       cursor: pointer;
+    //     }
+    //   }
+    //   .ctn-btn{
+    //     @include media("<tab"){
+    //       text-align: center;
+    //     }
+    //   }
+    
+    //   &.step2{
+    //     h4{ 
+    //       font-family: $os-b; 
+    //       font-size: 40px;
+    //       @include media("<tab"){
+    //         font-size: 24px;
+    //       }
+    //     }
+    //     p{ font-family: $ex-r; }     
+    //     form{ 
+    //       width: 20vw; 
+    //       margin: 50px auto; 
+    //       @include media("<tab"){
+    //         width: 100%;
+    //       }
+    //       .form-group{
+    //         margin-bottom: 25px;
+    //       }
+    //       .form-control{
+    //         height: 40px;
+    //         font-family: $ex-r;
+    //         color: rgba(37, 58, 65, 0.4);
+    //         border-radius: 4px;
+    //         box-shadow: inset 0 4px 4px 0 rgba(0, 0, 0, 0.05);
+    //         border: solid 1px rgba(34, 183, 231, 0.2);
+    //       }
+    //     }   
+    //   }
+    //   &.step3{
+    //     padding-bottom: 5vh;
+    //     .message{ 
+    //       margin: 50px auto; 
+    //       font-family: $os-b; 
+    //       font-size: 25px;
+    //       h1{ 
+    //         font-size: 40px;
+    //       }
+    //     }
+    //     button{ 
+    //       // display: flex;
+    //       // padding-left: 50px;
+    //       font-family: $ex-r;
+    //       margin: 0 auto;
+    //       width: 20vw; 
+    //       position: relative;
+    //       color: rgba(37, 58, 65, 0.4);
+    //       height: 45px;
+    //       &>.row{ align-items: center; }
+    //       &.btn-outlook{
+    //         color: $w;
+    //         background-color: #4469b0;
+    //       }
+    //       img{
+    //         // position: relative;
+    //         // top: -2px;
+    //         // margin-right: 17px;
+    //         height: 25px;
+    //       }
+    //       @include media("<=ld"){
+    //         font-size: 14px;
+    //         width: 30vw; 
+    //       }
+    //       @include media("<tab"){
+    //         width: 100%; 
+    //       }
+    //     }
+    //   }
+    // }
   }
 }
 
