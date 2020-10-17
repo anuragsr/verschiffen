@@ -54,7 +54,7 @@ const l = console.log.bind(window.console)
   }, [opts, checked, setFormObj])
 
   return (
-    <div className={`step1 step${isCurrentClass}${isPrevClass}${isNextClass}`}>
+    <div className={`step step1${isCurrentClass}${isPrevClass}${isNextClass}`}>
       <div className="inner">
         
         <div className="container">
@@ -106,7 +106,8 @@ const l = console.log.bind(window.console)
   , isCurrentClass = isCurrent ? " current" : ""
   , isPrevClass = isPrev ? " prev" : ""
   , isNextClass = isNext ? " next" : ""
-  
+  , labels = ['0', '1/3', '1/2', '2/3', '1']
+  , [sliderValue, setSliderValue] = useState(0)
   useEffect(() => {
 
     // setFormText
@@ -123,13 +124,21 @@ const l = console.log.bind(window.console)
           </div>
           <div className="ctn-content">
             <h5>Wie viel der Ware wollen Sie verschiffen?</h5>
-            <Slider 
-              defaultValue={20}
-              min={0}
-              step={10}
-              max={50}
-              progress
-            />
+            <div className="ctn-slider">
+              <img src="assets/cargo.jpg" alt=""/>
+              <Slider 
+                defaultValue={1}
+                min={0}
+                max={labels.length - 1}
+                step={1}
+                value={sliderValue}
+                renderTooltip={() => labels[sliderValue]}
+                onChange={setSliderValue}
+                progress
+              />
+            </div>
+
+            <h5>Wie viele Kontainer wollen Sie versenden?</h5>
           </div>
           <div className="ctn-btn">
             <button className="btn btn-sec mr-2" onClick={previous}>Zurück</button>
