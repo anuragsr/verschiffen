@@ -126,6 +126,7 @@
         }
 
         .ctn-content{
+          max-height: 55vh;
           margin-bottom: 35px;
           h5{ 
             font-size: 16px;
@@ -208,15 +209,23 @@
         }
 
         &.step2{
+          .ctn-content{
+            width: 25vw;
+          }
           .ctn-slider{
+            padding: 0 35px;
             display: flex;
             flex-direction: column;
-            width: 25vw;
             margin-bottom: 25px;
             img{ 
               width: 100px; 
               margin: 0 auto; 
-              margin-bottom: 25px;
+              margin-bottom: 50px;
+            }
+            .ctn-label{
+              @extend %j-s-b;
+              font-family: $ex-r;
+              margin-top: 10px;
             }
           }
           .rs-slider-bar{
@@ -253,7 +262,45 @@
               }
             }
           }
+          .ctn-num{
+            select{
+              color: rgba(37, 58, 65, 0.3);
+              font-family: $ex-r;
+            }
+          }
         }
+
+        &.step3{
+          .row{
+            span{ font-family: $ex-r; }
+            .right{
+              position: relative;
+              font-family: $ex-r;
+              font-size: 19px;
+              .unit{
+                @include pa(8, 8);
+                z-index: 1;
+                // padding: 2px;
+                background: $w;
+                color: $acc;
+                line-height: 20px;
+                font-family: $ex-b;
+              }
+              input{
+                text-align: right;
+                width: 125px;
+                color: $b;
+                border-radius: 2px;
+                box-shadow: 0 4px 4px 0 rgba($b, 0.05);
+                border: solid 1px #22b7e7;
+                display: inline-block;
+                vertical-align: middle;
+                height: 38px;
+              }
+            }
+          }
+        }
+
       }
     }
     .modal-footer-custom{ 

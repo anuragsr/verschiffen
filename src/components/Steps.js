@@ -99,19 +99,40 @@ const l = console.log.bind(window.console)
   )
 }
 
-, Step2 = ({ indicators, setFormText, formTextData, navigation, toggleMoreInfo }) => {
-  const { filled } = formTextData
+, Step2 = ({ indicators, formObjData, setFormObj, formTextData, setFormText, navigation, toggleMoreInfo }) => {
+  const { numCon } = formTextData
   , { previous, next } = navigation
   , { isNext, isCurrent, isPrev } = indicators
   , isCurrentClass = isCurrent ? " current" : ""
   , isPrevClass = isPrev ? " prev" : ""
   , isNextClass = isNext ? " next" : ""
   , labels = ['0', '1/3', '1/2', '2/3', '1']
-  , [sliderValue, setSliderValue] = useState(0)
-  useEffect(() => {
+  , [sliderValue, setSliderValue] = useState(1)
+  , numConArr = [ 
+    {label: "1", value: 1},
+    {label: "2", value: 2},
+    {label: "3", value: 3},
+    {label: "4", value: 4},
+    {label: "5", value: 5},
+    {label: "5+", value: 5},
+  ]
+  , [conWeights, setConWeights] = useState([])
 
-    // setFormText
-  }, [])
+  useEffect(() => {
+    setFormObj(prev => ({
+      ...prev,
+      filled: labels[sliderValue]
+    }))
+  }, [sliderValue])
+
+  useEffect(() => {
+    setConWeights([...[...Array(parseInt(numCon)).keys()].map(el => "0.00")])
+  }, [numCon])
+  
+  useEffect(() => {
+    // l(conWeights)
+    setFormObj(prev => ({ ...prev, conWeights }))
+  }, [conWeights])
 
   return (
     <div className={`step step2${isCurrentClass}${isPrevClass}${isNextClass}`}>
@@ -127,7 +148,6 @@ const l = console.log.bind(window.console)
             <div className="ctn-slider">
               <img src="assets/cargo.jpg" alt=""/>
               <Slider 
-                defaultValue={1}
                 min={0}
                 max={labels.length - 1}
                 step={1}
@@ -136,40 +156,93 @@ const l = console.log.bind(window.console)
                 onChange={setSliderValue}
                 progress
               />
+              <div className="ctn-label">
+                <span>leer</span>
+                <span>voll</span>
+              </div>
             </div>
 
             <h5>Wie viele Kontainer wollen Sie versenden?</h5>
+            <div className="ctn-num">
+              <select 
+                className="select form-control"
+                name="numCon" 
+                value={numCon} 
+                onChange={setFormText}>
+                  <option value="0">Anzahl auswählen</option>
+                  {numConArr.map((obj, idx) => (
+                    <option key={idx} value={obj.value}>{obj.label}</option>
+                  ))}
+              </select>
+            </div>
           </div>
           <div className="ctn-btn">
             <button className="btn btn-sec mr-2" onClick={previous}>Zurück</button>
-            <button className="btn btn-acc" onClick={next}>Fortfahren</button>
+            <button className="btn btn-acc" onClick={() => {next(); l(formTextData, formObjData)}}>Fortfahren</button>
           </div>
         </div>
-        {/* <div className="container">
-          <div className="btn-back" onClick={previous}>
-            <img src="assets/img/arr-left-tr.png" alt=""/>
-            <span>&nbsp;&nbsp;Zurück</span>
+      </div>
+    </div>
+  )
+}
+
+, Step3 = ({ indicators, formObjData, setFormObj, formTextData, setFormText, navigation, toggleMoreInfo }) => {
+  const { conWeights } = formObjData
+  , { previous, next } = navigation
+  , { isNext, isCurrent, isPrev } = indicators
+  , isCurrentClass = isCurrent ? " current" : ""
+  , isPrevClass = isPrev ? " prev" : ""
+  , isNextClass = isNext ? " next" : ""
+  , handleChange = (e, idx) => {
+    conWeights[idx] = e.target.value
+    setFormObj(prev => ({ ...prev, conWeights }))
+  }
+  
+  // useEffect(() => {
+  //   l(conWeights)
+  //   // setFormObj(prev => ({
+  //   //   ...prev,
+  //   //   filled: labels[sliderValue]
+  //   // }))
+  // }, [formObjData])
+
+  return (
+    <div className={`step step3${isCurrentClass}${isPrevClass}${isNextClass}`}>
+      <div className="inner">
+
+        <div className="container">
+          <div className="ctn-heading">
+            <h4>Quantität<img onClick={toggleMoreInfo} src="assets/info.png" alt=""/></h4>
+            <div className="subtitle">Schritt 3 von 7</div>
           </div>
-          <label className="label">
-            <h4>Beschreiben Sie ihren Betreff ausführlich.</h4>
-          </label>
-          <textarea
-            className="textarea form-control"
-            name="details" 
-            // value={details} 
-            placeholder="Geben Sie die Angelegenheit hier ein"
-            onChange={setForm}
-            >
-          </textarea>
-          <div className="ctn-submit">
-            <button 
-              className="btn btn-lg btn-cta" 
-              onClick={next}
-              // disabled={!details.length}
-              >Weiter</button>
+          <div className="ctn-content">
+            <h5>Wie viel kg oder l wird die gesamte Versendung wiegen?</h5>
+            {/* <pre>{JSON.stringify(conWeights)}</pre> */}
+            {
+              conWeights && conWeights.map((el, i) => (
+                <div className="row mb-4" key={i}>
+                  <div className="col-6">
+                    <div>Gesamtgewicht pro Container</div>
+                    <span>Container der versendet wird</span>
+                  </div>
+                  <div className="col-6 right pl-0">
+                    <div className="unit">kg</div>                
+                    <input 
+                      className="form-control" 
+                      type="text"                       
+                      value={conWeights[i]}
+                      onChange={e => handleChange(e, i)}
+                      placeholder="0.00"/> / Container
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+          <div className="ctn-btn">
+            <button className="btn btn-sec mr-2" onClick={previous}>Zurück</button>
+            <button className="btn btn-acc" onClick={() => {next(); l(formTextData, formObjData)}}>Fortfahren</button>
           </div>
         </div>
-         */}
       </div>
     </div>
   )
@@ -243,7 +316,31 @@ const l = console.log.bind(window.console)
 //   return (
 //     <div className={`step${isCurrentClass}${isPrevClass}${isNextClass}`}>
 //       <div className="inner">
-
+/* <div className="container">
+          <div className="btn-back" onClick={previous}>
+            <img src="assets/img/arr-left-tr.png" alt=""/>
+            <span>&nbsp;&nbsp;Zurück</span>
+          </div>
+          <label className="label">
+            <h4>Beschreiben Sie ihren Betreff ausführlich.</h4>
+          </label>
+          <textarea
+            className="textarea form-control"
+            name="details" 
+            // value={details} 
+            placeholder="Geben Sie die Angelegenheit hier ein"
+            onChange={setForm}
+            >
+          </textarea>
+          <div className="ctn-submit">
+            <button 
+              className="btn btn-lg btn-cta" 
+              onClick={next}
+              // disabled={!details.length}
+              >Weiter</button>
+          </div>
+        </div>
+         */
 //         <div className="container">
 //           <div className="btn-back" onClick={previous}>
 //             <img src="assets/img/arr-left-tr.png" alt=""/>
@@ -251,7 +348,7 @@ const l = console.log.bind(window.console)
 //           </div>
 //           <label className="label">
 //             <h4>In welcher Stadt benötigen Sie einen Notar?</h4>
-//           </label>
+//           </label>        
 //           <select 
 //             className="select form-control"
 //             name="city" 
@@ -417,6 +514,6 @@ const l = console.log.bind(window.console)
 //   )
 // }
 
-export { Step1, Step2, 
-  // Step3, Step4, Step5, Step6 
+export { Step1, Step2, Step3, 
+  // Step4, Step5, Step6 
 }
