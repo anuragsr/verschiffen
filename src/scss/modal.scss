@@ -132,9 +132,12 @@
             font-size: 16px;
             margin-bottom: 35px;
           }
-        }
-
-        &.step1{
+          .ctn-check{
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+            span{ font-family: $ex-r; margin-left: 10px;}
+          }
           .check-ind{
             border: 2px solid $acc;
             border-radius: 50%;
@@ -147,13 +150,16 @@
               height: 100%;
               background: $acc;
               border-radius: 50%;
-            }
+            }            
           }
           .selected{
             .check-ind{
               .check-ind-inner{ opacity: 1; }
             }
           }
+        }
+
+        &.step1{
           .ctn-box{ 
             @extend %j-c;
             flex-wrap: wrap;
@@ -200,28 +206,33 @@
               }
             }
           }
-          .ctn-check{
-            display: inline-flex;
-            align-items: center;
-            cursor: pointer;
-            span{ font-family: $ex-r; margin-left: 10px;}
-          }
         }
 
         &.step2{
           .ctn-content{
             width: 25vw;
           }
+          .ctn-cargo-ind{
+            position: relative;
+            height: 100px;
+            width: 100px;            
+            margin: 0 auto; 
+            margin-bottom: 50px;
+            overflow: hidden;
+            img{ 
+              @include pa("", 0, 0, "");
+              @extend %fhw;
+              &.water{
+                transition: bottom .3s;
+                z-index: -1;
+              }
+            }
+          }
           .ctn-slider{
             padding: 0 35px;
             display: flex;
             flex-direction: column;
             margin-bottom: 25px;
-            img{ 
-              width: 100px; 
-              margin: 0 auto; 
-              margin-bottom: 50px;
-            }
             .ctn-label{
               @extend %j-s-b;
               font-family: $ex-r;
@@ -301,6 +312,82 @@
           }
         }
 
+        &.step4{
+          .ctn-content{ 
+            margin-bottom: 0px; 
+            h5{ margin-bottom: 15px; }
+          }
+          .ctn-heading{ margin-bottom: 20px; }
+          .ctn-calendar{
+            margin-bottom: 20px;
+            width: 25vw;
+            .fc{
+              .fc-toolbar-chunk:not(:empty){
+                @extend %j-c;
+                border: 1px solid $acc;
+                border-radius: 5px;
+                .fc-toolbar-title{
+                  color: $acc;
+                  margin-left: .5em;
+                  font-size: 16px;
+                }
+                .fc-button-primary{
+                  color: $acc;
+                  border: none;
+                  background: none;
+                  padding: 5px;
+                  &:focus{
+                    outline: none!important;
+                    box-shadow: none!important;
+                  }
+                }
+              }
+              .fc-daygrid-day-frame{ height: 35px; }
+              .fc-daygrid-day{ 
+                cursor: pointer; 
+                &:hover, &.active{
+                  a { background: $acc; color: $w; }
+                }
+              }
+              .fc-day-today{ background: none; }
+              .fc-daygrid-day-top{ 
+                @extend %fh;
+                align-items: center;
+                justify-content: center;
+                flex-direction: row;
+               }
+              .fc-daygrid-day-number,
+              .fc-col-header-cell-cushion{ 
+                color: $b; text-decoration: none; 
+              }
+              .fc-daygrid-day-number{
+                height: 30px;
+                width: 30px;
+                border-radius: 50%;
+                text-align: center;
+              }
+            }
+          }
+          .ctn-btn{ margin-top: 25px; }
+        }
+
+        &.step5{
+          .dropzone{
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            border-width: 2px;
+            border-radius: 2px;
+            border-color: #eeeeee;
+            border-style: dashed;
+            background-color: #fafafa;
+            color: #bdbdbd;
+            outline: none;
+            transition: border .24s ease-in-out;
+          }
+        }
       }
     }
     .modal-footer-custom{ 

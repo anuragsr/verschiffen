@@ -6,7 +6,7 @@ import Home from './components/Home'
 import Team from './components/Team'
 import FAQ from './components/FAQ'
 import Impressum from './components/Impressum'
-import ScrollToTop from './components/ScrollToTop'
+import ScrollToTop from './helpers/ScrollToTop'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Header from './components/Header'

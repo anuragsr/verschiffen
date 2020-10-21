@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fullcalendar/core": "^5.3.1",
+    "@fullcalendar/daygrid": "^5.3.2",
+    "@fullcalendar/interaction": "^5.3.1",
+    "@fullcalendar/react": "^5.3.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -16,6 +20,7 @@
     "react": "^16.13.1",
     "react-datetime": "^3.0.4",
     "react-dom": "^16.13.1",
+    "react-dropzone": "^11.2.0",
     "react-hooks-helper": "^1.6.0",
     "react-img-carousel": "^1.7.0",
     "react-router-dom": "^5.2.0",

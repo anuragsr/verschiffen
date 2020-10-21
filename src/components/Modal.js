@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useForm, useStep } from 'react-hooks-helper'
-import { Step1, Step2, Step3, 
+import { Step1, Step2, Step3, Step4, Step5, 
   // Step4, Step5, Step6 
 } from "./Steps"
 
 const l = console.log.bind(window.console)
-, steps = [ Step1, Step2, Step3, 
-  // Step4, Step5, Step6 
+, steps = [ Step1, Step2, Step3, Step4, Step5, 
+  // Step5, Step6 
 ]
 , useModal = () => {
   const [isShowing, setIsShowing] = useState(true)
@@ -28,24 +28,25 @@ const l = console.log.bind(window.console)
   // Form and Navigation
   const textData = {
     numCon: 0,
-    odate:"",
     details: "",
-    city: "Berlin",
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
+    // odate:"",
+    // city: "Berlin",
+    // firstName: "",
+    // lastName: "",
+    // email: "",
+    // phone: "",
   }
   , objData = {
-    conWeights: [],
-    date: new Date(),
     selOpts: "",
     isPacked: false,
     filled: "0",
+    conWeights: [],
+    date: new Date(),
+    isDateCommit: false,
   }
   , [formTextData, setFormText] = useForm(textData)
   , [formObjData, setFormObj] = useState(objData)
-  , { index, navigation } = useStep({ initialStep: 1, steps })
+  , { index, navigation } = useStep({ initialStep: 4, steps })
   , props = { 
     isShowing, toggle, 
     showMoreInfo, toggleMoreInfo,

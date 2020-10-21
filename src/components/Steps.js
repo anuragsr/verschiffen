@@ -2,14 +2,17 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import { Slider } from 'rsuite'
-
+import FullCalendar from '@fullcalendar/react'
+import dayGridPlugin from '@fullcalendar/daygrid'
+import interactionPlugin from '@fullcalendar/interaction'
+import deLocale from '@fullcalendar/core/locales/de'
 import moment from "moment"
 import 'moment/locale/de'
-import DateTime from 'react-datetime'
-import HttpService from "../services/HttpService"
+
+import Dropzone from "../helpers/Dropzone"
+import HttpService from "../helpers/HttpService"
 
 import 'rsuite/dist/styles/rsuite-default.css'
-import "react-datetime/css/react-datetime.css"
 
 const l = console.log.bind(window.console)
 
@@ -19,14 +22,14 @@ const l = console.log.bind(window.console)
   , isCurrentClass = isCurrent ? " current" : ""
   , isPrevClass = isPrev ? " prev" : ""
   , isNextClass = isNext ? " next" : ""
-  , [checked, setChecked] = useState(false)
+  , [isPacked, setIsPacked] = useState(false)
   , [opts, setOpts] = useState([
-    { name: "Verpackte<br/>Materialien", img: "assets/th6.png", selected: true },
-    { name: "Sonder-<br/>gepack", img: "assets/opt1.jpg", selected: false },
-    { name: "Gasförmige<br/>Materialien", img: "assets/devops.png", selected: false },
-    { name: "Fluide", img: "assets/th4.png", selected: false },
-    { name: "Schüttgut", img: "assets/th2.png", selected: false },
-    { name: "Hier nicht aufgeführt", img: "assets/th1.png", selected: false },
+    { name: "Verpackte<br/>Materialien", img: "assets/opt1.png", selected: true },
+    { name: "Sonder-<br/>gepack", img: "assets/opt2.png", selected: false },
+    { name: "Gasförmige<br/>Materialien", img: "assets/opt3.png", selected: false },
+    { name: "Fluide", img: "assets/opt4.png", selected: false },
+    { name: "Schüttgut", img: "assets/opt5.png", selected: false },
+    { name: "Hier nicht aufgeführt", img: "assets/opt6.png", selected: false },
   ])
   , setOpt = idx => {
     // To select just one
@@ -49,9 +52,9 @@ const l = console.log.bind(window.console)
         .reduce((a, b) => ({
           name: (a.name.length ? (a.name + ', ') : '') + b.name.replace(/<br\s*\/?>/gi, ' ').replace(/-/g, '')
         }), { name: '' }).name,
-      isPacked: checked
+      isPacked
     }))
-  }, [opts, checked, setFormObj])
+  }, [opts, isPacked, setFormObj])
 
   return (
     <div className={`step step1${isCurrentClass}${isPrevClass}${isNextClass}`}>
@@ -79,8 +82,8 @@ const l = console.log.bind(window.console)
               ))
             }</div>
             <div 
-              className={`ctn-check${checked? " selected" : ""}`}
-              onClick={() => setChecked(!checked)} 
+              className={`ctn-check${isPacked? " selected" : ""}`}
+              onClick={() => setIsPacked(!isPacked)} 
               >
               <div className="check-ind">
                 <div className="check-ind-inner"></div>
@@ -106,15 +109,21 @@ const l = console.log.bind(window.console)
   , isCurrentClass = isCurrent ? " current" : ""
   , isPrevClass = isPrev ? " prev" : ""
   , isNextClass = isNext ? " next" : ""
-  , labels = ['0', '1/3', '1/2', '2/3', '1']
+  , labels = [
+    { text: '0',   waterLevel: -75 },
+    { text: '1/3', waterLevel: -60 },
+    { text: '1/2', waterLevel: -50 },
+    { text: '2/3', waterLevel: -40 },
+    { text: '1',   waterLevel: -20 },    
+  ]
   , [sliderValue, setSliderValue] = useState(1)
   , numConArr = [ 
-    {label: "1", value: 1},
-    {label: "2", value: 2},
-    {label: "3", value: 3},
-    {label: "4", value: 4},
-    {label: "5", value: 5},
-    {label: "5+", value: 5},
+    { label: "1", value: 1 },
+    { label: "2", value: 2 },
+    { label: "3", value: 3 },
+    { label: "4", value: 4 },
+    { label: "5", value: 5 },
+    { label: "5+", value: 5 },
   ]
   , [conWeights, setConWeights] = useState([])
 
@@ -145,14 +154,21 @@ const l = console.log.bind(window.console)
           </div>
           <div className="ctn-content">
             <h5>Wie viel der Ware wollen Sie verschiffen?</h5>
+            <div className="ctn-cargo-ind">
+              <img src="assets/container-empty.png" alt=""/>
+              <img 
+                className="water" 
+                src="assets/water.png" alt=""
+                style={{ bottom: labels[sliderValue].waterLevel }}
+                />
+            </div>
             <div className="ctn-slider">
-              <img src="assets/cargo.jpg" alt=""/>
               <Slider 
                 min={0}
                 max={labels.length - 1}
                 step={1}
                 value={sliderValue}
-                renderTooltip={() => labels[sliderValue]}
+                renderTooltip={() => labels[sliderValue].text }
                 onChange={setSliderValue}
                 progress
               />
@@ -186,7 +202,7 @@ const l = console.log.bind(window.console)
   )
 }
 
-, Step3 = ({ indicators, formObjData, setFormObj, formTextData, setFormText, navigation, toggleMoreInfo }) => {
+, Step3 = ({ indicators, formObjData, setFormObj, formTextData, navigation, toggleMoreInfo }) => {
   const { conWeights } = formObjData
   , { previous, next } = navigation
   , { isNext, isCurrent, isPrev } = indicators
@@ -197,14 +213,6 @@ const l = console.log.bind(window.console)
     conWeights[idx] = e.target.value
     setFormObj(prev => ({ ...prev, conWeights }))
   }
-  
-  // useEffect(() => {
-  //   l(conWeights)
-  //   // setFormObj(prev => ({
-  //   //   ...prev,
-  //   //   filled: labels[sliderValue]
-  //   // }))
-  // }, [formObjData])
 
   return (
     <div className={`step step3${isCurrentClass}${isPrevClass}${isNextClass}`}>
@@ -248,125 +256,125 @@ const l = console.log.bind(window.console)
   )
 }
 
-// , Step3 = ({ isNext, isCurrent, isPrev, date, setDate, navigation, toggle, toggleMoreInfo }) => {  
-//   const { previous, next } = navigation
-//   , isCurrentClass = isCurrent ? " current" : ""
-//   , isPrevClass = isPrev ? " prev" : ""
-//   , isNextClass = isNext ? " next" : ""
-//   , yesterday = DateTime.moment().subtract( 1, 'day' )
-//   , validDate = current => current.isAfter(yesterday)
-//   , setDateValue = e => {
-//     // l(e, typeof e) 
-//     if(typeof e === "object") setDate(e.toDate())
-//     else setDate(e)
-//   }
+, Step4 = ({ indicators, formObjData, setFormObj, formTextData, navigation, toggleMoreInfo }) => {  
+  const { previous, next } = navigation
+  , { isNext, isCurrent, isPrev } = indicators
+  , isCurrentClass = isCurrent ? " current" : ""
+  , isPrevClass = isPrev ? " prev" : ""
+  , isNextClass = isNext ? " next" : ""
+  , [isDateCommit, setIsDateCommit] = useState(false)
+  , onDateClick = info => {
+    // l(info)
+    const { date, dayEl, jsEvent } = info
+    
+    jsEvent.preventDefault() // don't let the browser navigate
+    
+    document
+    .querySelectorAll(".fc-daygrid-day.active")
+    .forEach(el => el.classList.remove("active"))
+    dayEl.classList.add("active")
 
-//   return (
-//     <div className={`step${isCurrentClass}${isPrevClass}${isNextClass}`}>
-//       <div className="inner">
+    setFormObj(prev => ({ ...prev, date }))
+  }
 
-//         <div className="container">
-//           <div className="btn-back" onClick={previous}>
-//             <img src="assets/img/arr-left-tr.png" alt=""/>
-//             <span>&nbsp;&nbsp;Zurück</span>
-//           </div>
-//           <label className="label">
-//             <h4>Wählen Sie einen Termin zum Rückruf aus.</h4>
-//           </label>
-//           <DateTime 
-//             closeOnSelect 
-//             locale="de" 
-//             isValidDate={validDate} 
-//             value={date}
-//             onChange={setDateValue}
-//             inputProps={{
-//               className: "input form-control",
-//               placeholder: "Wählen Sie ein Datum und eine Uhrzeit",
-//             }}
-//           />
-//           <div className="ctn-submit">
-//             <button 
-//               className="btn btn-lg btn-cta" 
-//               onClick={next}
-//               disabled={!moment(date).isValid()}
-//               >Weiter</button>
-//           </div>
-//           {/* <div className="row">
-//             <div className="col-md-6">
-//             </div>
-//           </div>   */}
-//         </div>
+  useEffect(() => {
+    setFormObj(prev => ({ ...prev, isDateCommit }))
+  }, [isDateCommit, setFormObj])
 
-//       </div>
-//     </div>
-//   )
-// }
+  return (
+    <div className={`step step4${isCurrentClass}${isPrevClass}${isNextClass}`}>
+      <div className="inner">
 
-// , Step4 = ({ isNext, isCurrent, isPrev, setForm, formData, navigation, toggle, toggleMoreInfo }) => {
-//   const { city } = formData
-//   , { previous, next } = navigation
-//   , isCurrentClass = isCurrent ? " current" : ""
-//   , isPrevClass = isPrev ? " prev" : ""
-//   , isNextClass = isNext ? " next" : ""
-//   , cities = [
-//     "Berlin",
-//     "Munich",
-//     "Frankfurt",
-//   ]
-//   return (
-//     <div className={`step${isCurrentClass}${isPrevClass}${isNextClass}`}>
-//       <div className="inner">
-/* <div className="container">
-          <div className="btn-back" onClick={previous}>
-            <img src="assets/img/arr-left-tr.png" alt=""/>
-            <span>&nbsp;&nbsp;Zurück</span>
+        <div className="container">
+          <div className="ctn-heading">
+            <h4>Datum<img onClick={toggleMoreInfo} src="assets/info.png" alt=""/></h4>
+            <div className="subtitle">Schritt 4 von 7</div>
           </div>
-          <label className="label">
-            <h4>Beschreiben Sie ihren Betreff ausführlich.</h4>
-          </label>
-          <textarea
-            className="textarea form-control"
-            name="details" 
-            // value={details} 
-            placeholder="Geben Sie die Angelegenheit hier ein"
-            onChange={setForm}
-            >
-          </textarea>
-          <div className="ctn-submit">
-            <button 
-              className="btn btn-lg btn-cta" 
-              onClick={next}
-              // disabled={!details.length}
-              >Weiter</button>
+          <div className="ctn-content">            
+            <h5>Wann wollen Sie ihre Ware verschiffen?</h5>
+            <div className="ctn-calendar">
+              <FullCalendar
+                locale={deLocale}
+                plugins={[ dayGridPlugin, interactionPlugin ]}
+                initialView="dayGridMonth"
+                dateClick={onDateClick}
+                headerToolbar={{
+                  start: null, // will normally be on the left. if RTL, will be on the right
+                  center: 'prev title next',
+                  end: null // will normally be on the right. if RTL, will be on the left
+                }}
+                height="100%"
+                contentHeight={"auto"}
+                // selectable={true}
+                // unselectAuto={false}
+              />
+            </div>
+            <div 
+              className={`ctn-check${isDateCommit? " selected" : ""}`}
+              onClick={() => setIsDateCommit(!isDateCommit)} 
+              >
+              <div className="check-ind">
+                <div className="check-ind-inner"></div>
+              </div>
+              <span>Ich will mich nicht festlegen.</span>
+            </div>
+          </div>
+          <div className="ctn-btn">
+            <button className="btn btn-sec mr-2" onClick={previous}>Zurück</button>
+            <button className="btn btn-acc" onClick={() => {next(); l(formTextData, formObjData)}}>Fortfahren</button>
           </div>
         </div>
-         */
-//         <div className="container">
-//           <div className="btn-back" onClick={previous}>
-//             <img src="assets/img/arr-left-tr.png" alt=""/>
-//             <span>&nbsp;&nbsp;Zurück</span>
-//           </div>
-//           <label className="label">
-//             <h4>In welcher Stadt benötigen Sie einen Notar?</h4>
-//           </label>        
-//           <select 
-//             className="select form-control"
-//             name="city" 
-//             value={city} 
-//             onChange={setForm}>
-//             {cities.map((value, idx) => (
-//               <option key={idx} value={value}>{value}</option>
-//             ))}
-//           </select>          
-//           <div className="ctn-submit">
-//             <button className="btn btn-lg btn-cta" onClick={next}>Weiter</button>
-//           </div>
-//         </div>
 
-//       </div>
-//     </div>
-//   )
-// }
+      </div>
+    </div>
+  )
+}
+
+, Step5 = ({ indicators, formObjData, setFormObj, formTextData, setFormText, navigation, toggleMoreInfo }) => {  
+  const { details } = formTextData
+  , { previous, next } = navigation
+  , { isNext, isCurrent, isPrev } = indicators
+  , isCurrentClass = isCurrent ? " current" : ""
+  , isPrevClass = isPrev ? " prev" : ""
+  , isNextClass = isNext ? " next" : ""
+  , cities = [
+    "Berlin",
+    "Munich",
+    "Frankfurt",
+  ]
+  return (
+    <div className={`step step5${isCurrentClass}${isPrevClass}${isNextClass}`}>
+      <div className="inner">
+
+        <div className="container">
+          <div className="ctn-heading">
+            <h4>Beschreibung<img onClick={toggleMoreInfo} src="assets/info.png" alt=""/></h4>
+            <div className="subtitle">Schritt 5 von 7</div>
+          </div>
+          <div className="ctn-content">            
+            <h5>Möchsten Sie uns noch Dokumente zusenden?</h5>
+            <div className="ctn-txt">
+              <textarea
+                className="textarea form-control"
+                name="details" 
+                value={details} 
+                placeholder="Geben Sie die Angelegenheit hier ein"
+                onChange={setFormText}
+                >
+              </textarea>
+            </div>
+            <Dropzone />
+          </div>
+          <div className="ctn-btn">
+            <button className="btn btn-sec mr-2" onClick={previous}>Zurück</button>
+            <button className="btn btn-acc" onClick={() => {next(); l(formTextData, formObjData)}}>Fortfahren</button>
+          </div>          
+        </div>         
+
+      </div>
+    </div>
+  )
+}
 
 // , Step5 = ({ isNext, isCurrent, isPrev, date, setForm, formData, navigation, toggle, toggleMoreInfo }) => {
 //   const { firstName, lastName, email, phone } = formData
@@ -514,6 +522,6 @@ const l = console.log.bind(window.console)
 //   )
 // }
 
-export { Step1, Step2, Step3, 
+export { Step1, Step2, Step3, Step4, Step5, 
   // Step4, Step5, Step6 
 }
