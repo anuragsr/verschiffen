@@ -1,16 +1,12 @@
 import React, { useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useForm, useStep } from 'react-hooks-helper'
-import { Step1, Step2, Step3, Step4, Step5, 
-  // Step4, Step5, Step6 
-} from "./Steps"
+import { Step1, Step2, Step3, Step4, Step5, Step6, Step7, Step8 } from "./Steps"
 
 const l = console.log.bind(window.console)
-, steps = [ Step1, Step2, Step3, Step4, Step5, 
-  // Step5, Step6 
-]
+, steps = [ Step1, Step2, Step3, Step4, Step5, Step6, Step7, Step8 ]
 , useModal = () => {
-  const [isShowing, setIsShowing] = useState(true)
+  const [isShowing, setIsShowing] = useState(false)
   , [showMoreInfo, setShowMoreInfo] = useState(false)
   , toggle = () => { setIsShowing(!isShowing) }
   , toggleMoreInfo = () => { setShowMoreInfo(!showMoreInfo) }
@@ -29,12 +25,13 @@ const l = console.log.bind(window.console)
   const textData = {
     numCon: 0,
     details: "",
-    // odate:"",
-    // city: "Berlin",
-    // firstName: "",
-    // lastName: "",
-    // email: "",
-    // phone: "",
+    email: "",
+    phone: "",
+    fname: "",
+    lname: "",
+    street:"",
+    postcode:"",
+    place: "",
   }
   , objData = {
     selOpts: "",
@@ -43,10 +40,11 @@ const l = console.log.bind(window.console)
     conWeights: [],
     date: new Date(),
     isDateCommit: false,
+    files: []
   }
   , [formTextData, setFormText] = useForm(textData)
   , [formObjData, setFormObj] = useState(objData)
-  , { index, navigation } = useStep({ initialStep: 4, steps })
+  , { index, navigation } = useStep({ initialStep: 0, steps })
   , props = { 
     isShowing, toggle, 
     showMoreInfo, toggleMoreInfo,
@@ -105,128 +103,6 @@ const l = console.log.bind(window.console)
                 </div>
               </div>
             </div>
-            {/* {currStep === 1 && <div className="step step1">
-              <div className="text-center">
-                <img className="desktop-only main" src="assets/search.png" alt=""/><br/>
-                <h4>Themenschwerpunkte<img onClick={toggleMoreInfo} src="assets/info.png" alt=""/></h4>
-              </div>
-              <div className="opts">
-                <h5>Welchen Themen sollten im Workshop besprochen werden?</h5>
-                <div className="ctn-box">
-                  {
-                    opts.map((opt, idx) => (
-                      <div 
-                        key={idx}
-                        className={`box text-center${opt.selected ? " selected":""}`}
-                        onClick={() => {setOpt(idx)}}
-                      >
-                        <img src={opt.img} alt=""/>
-                        <span dangerouslySetInnerHTML={{__html: opt.name}}/>
-                        <div className="check-ind">
-                          <div className="check-ind-inner"></div>
-                        </div>
-                      </div>
-                    ))
-                  }
-                </div>
-              </div>
-              <div className="ctn-btn">
-                <button className="btn btn-sec mr-2" onClick={toggle}>Zurück</button>
-                <button className="btn btn-acc" onClick={() => setStep(2)}>Fortfahren</button>
-              </div>
-            </div>}
-            {currStep === 2 && <div className="step step2">
-              <div className="text-center">
-                <img className="desktop-only" src="assets/meeting.png" alt=""/><br/>
-                <h4>Workshop bestätigen<img onClick={toggleMoreInfo} src="assets/info.png" alt=""/></h4>
-                <p>Die Veranstaltung wird über Zoom durchgeführt. Ein Link wird 24h vorher versendet.</p>
-              </div>
-              <form>
-                <div className="form-row">
-                  <div className="form-group col-md-6">
-                    <input onChange={setValue} type="text" value={firstName} name="firstName" className="form-control" placeholder="Vorname" />
-                  </div>
-                  <div className="form-group col-md-6">
-                    <input onChange={setValue} type="text" value={lastName} name="lastName" className="form-control" placeholder="Nachname" />
-                  </div>
-                </div>
-                <div className="form-group">
-                  <input onChange={setValue} type="text" value={phone} name="phone"className="form-control" placeholder="Tragen Sie Ihre Telfonnummer ein" />
-                </div>
-                <div className="form-group">
-                  <input onChange={setValue} type="email" value={email} name="email" className="form-control" placeholder="Tragen hier Ihre E-Mail ein" />
-                </div>
-                <div className="ctn-btn">
-                  <button type="button" className="btn btn-sec mr-2" onClick={() => setStep(1)}>Zurück</button>
-                  <button 
-                    className="btn btn-acc" 
-                    type="button"
-                    disabled={!isFormValid()}
-                    onClick={
-                      () => {
-                        const selOpts = opts
-                        .filter(opt => opt.selected)
-                        .reduce((a, b) => { 
-                          return { 
-                            name: (a.name.length ? (a.name + ', ') : '') + b.name.replace(/<br\s*\/?>/gi, ' ')
-                          } 
-                        }, { name: '' }).name
-                        , formData = { selOpts, currEvent, firstName, lastName, phone, email }
-                        
-                        submit({ formData, setStep, getEvents })
-                      }
-                    }
-                  >
-                    Bestätigen</button>
-                </div>
-              </form>
-            </div>}
-            {currStep === 3 && <div className="step step3">
-              <div className="text-center">
-                <img className="desktop-only" src="assets/done.png" alt=""/><br/>
-                <div className="message">
-                  <h1>Bestätigt!</h1><br/>
-                  Dien Termin:
-                  <h1>{currEvent.eventStr}</h1>
-                  Zoom meeting
-                </div>
-                <button className="btn btn-sec mb-2" onClick={() => outlook(toggle)}>
-                  <div className="row">
-                    <div className="col-4">
-                      <img src="assets/Outlook.com_icon.svg" alt=""/>
-                    </div>
-                    <div className="col-8 pl-0 text-left">
-                      In Outlook hinzufügen
-                    </div>
-                  </div>
-                </button><br/>
-                <button 
-                  className="btn btn-sec" 
-                  onClick={() => {
-                    const selOpts = opts
-                      .filter(opt => opt.selected)
-                      .reduce((a, b) => { 
-                        return { 
-                          name: (a.name.length ? (a.name + ', ') : '') + b.name.replace(/<br\s*\/?>/gi, ' ')
-                        } 
-                      }, { name: '' }).name
-                      , formData = { selOpts, currEvent, firstName, lastName, phone, email }
-
-                    sendMail(toggle, formData)
-                  }}
-                  >
-                  <div className="row">
-                    <div className="col-4">
-                      <img src="assets/email.svg" alt=""/>
-                    </div>
-                    <div className="col-8 pl-0 text-left">
-                      Termin an Email senden
-                    </div>
-                  </div>
-                </button>
-              </div>
-            </div>}
-          */}
           </div>
         </div>
       </div>
@@ -237,7 +113,7 @@ const l = console.log.bind(window.console)
           <div className="modal-inner">
             <div className="modal-header">
               <div className="logo">
-                <span className="acc">Cloud</span>basiert.com
+                <span className="acc">Verschiffen</span>.com
               </div>
               <button 
                 type="button" 

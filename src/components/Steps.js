@@ -8,8 +8,8 @@ import interactionPlugin from '@fullcalendar/interaction'
 import deLocale from '@fullcalendar/core/locales/de'
 import moment from "moment"
 import 'moment/locale/de'
-
-import Dropzone from "../helpers/Dropzone"
+import Dropzone from 'react-dropzone'
+// import Dropzone from "../helpers/Dropzone"
 import HttpService from "../helpers/HttpService"
 
 import 'rsuite/dist/styles/rsuite-default.css'
@@ -332,16 +332,13 @@ const l = console.log.bind(window.console)
 
 , Step5 = ({ indicators, formObjData, setFormObj, formTextData, setFormText, navigation, toggleMoreInfo }) => {  
   const { details } = formTextData
+  , { files } = formObjData
   , { previous, next } = navigation
   , { isNext, isCurrent, isPrev } = indicators
   , isCurrentClass = isCurrent ? " current" : ""
   , isPrevClass = isPrev ? " prev" : ""
   , isNextClass = isNext ? " next" : ""
-  , cities = [
-    "Berlin",
-    "Munich",
-    "Frankfurt",
-  ]
+
   return (
     <div className={`step step5${isCurrentClass}${isPrevClass}${isNextClass}`}>
       <div className="inner">
@@ -353,175 +350,288 @@ const l = console.log.bind(window.console)
           </div>
           <div className="ctn-content">            
             <h5>Möchsten Sie uns noch Dokumente zusenden?</h5>
-            <div className="ctn-txt">
-              <textarea
-                className="textarea form-control"
-                name="details" 
-                value={details} 
-                placeholder="Geben Sie die Angelegenheit hier ein"
-                onChange={setFormText}
-                >
-              </textarea>
-            </div>
-            <Dropzone />
+            <textarea
+              className="textarea form-control"
+              name="details" 
+              value={details} 
+              placeholder={"* Lorem ipsum dolo iris\x0a* Lorem ipsum dolo iris\x0a* Lorem ipsum dolo iris"}
+              onChange={setFormText}
+              >
+            </textarea>
+            <h5>Zusätzliche  Unterlagen, Referenzen, o.ä. (optional)</h5>
+            <Dropzone 
+              noClick={true}
+              noKeyboard={true}
+              onDrop={acceptedFiles => 
+                setFormObj(prev => ({...prev, files: acceptedFiles}))
+              }
+              >
+              {({getRootProps, getInputProps, open}) => (
+                <section>
+                  <div {...getRootProps({className: 'dropzone'})}>
+                    <input {...getInputProps()} />
+                      <p>Datei in dieses Feld ziehen oder <a href="javascript:void(0)" onClick={open}>hier clicken</a></p>
+                  </div>
+                  <aside>
+                    <ul>{
+                      files && (files.length !== 0) && files.map(file => (
+                        <li key={file.path}>
+                          {file.path} - {file.size} bytes
+                        </li>
+                      ))
+                    }</ul>
+                  </aside>
+                </section>
+              )}
+            </Dropzone>
           </div>
           <div className="ctn-btn">
             <button className="btn btn-sec mr-2" onClick={previous}>Zurück</button>
             <button className="btn btn-acc" onClick={() => {next(); l(formTextData, formObjData)}}>Fortfahren</button>
           </div>          
-        </div>         
+        </div>
 
       </div>
     </div>
   )
 }
 
-// , Step5 = ({ isNext, isCurrent, isPrev, date, setForm, formData, navigation, toggle, toggleMoreInfo }) => {
-//   const { firstName, lastName, email, phone } = formData
-//   , { previous, next } = navigation
-//   , isCurrentClass = isCurrent ? " current" : ""
-//   , isPrevClass = isPrev ? " prev" : ""
-//   , isNextClass = isNext ? " next" : ""
-//   , [isAccept, setAccept] = useState(false)
-//   , isEmailValid = emailStr => {
-//     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-//     return re.test(String(emailStr).toLowerCase())
-//   }
-//   , isFormValid = () => {
-//     return (
-//       firstName.length > 0
-//       && lastName.length > 0
-//       && isEmailValid(email)
-//       && isAccept
-//     )
-//   }
-//   , submitForm = e => {
-//     formData.date = date.toISOString().slice(0, 19).replace('T', ' ')
-//     // l(formData)
-//     new HttpService()
-//     .post('/process.php', { formData })
-//     .then(res => {
-//       const { data } = res
-//       // l(data)
-//       if(data.result) next(e)
-//       else alert(data.message)
-//     })
-//   }
+, Step6 = ({ indicators, formObjData, setFormObj, formTextData, setFormText, navigation, toggleMoreInfo }) => {  
+  const { email, phone } = formTextData
+  , { previous, next } = navigation
+  , { isNext, isCurrent, isPrev } = indicators
+  , isCurrentClass = isCurrent ? " current" : ""
+  , isPrevClass = isPrev ? " prev" : ""
+  , isNextClass = isNext ? " next" : ""
+  // , [isAccept, setAccept] = useState(false)
+  , isEmailValid = emailStr => {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    return re.test(String(emailStr).toLowerCase())
+  }
+  , isFormValid = () => {
+    // return (
+    //   firstName.length > 0
+    //   && lastName.length > 0
+    //   && isEmailValid(email)
+    //   && isAccept
+    // )
+  }
+  , submitForm = e => {
+    // formData.date = date.toISOString().slice(0, 19).replace('T', ' ')
+    // // l(formData)
+    // new HttpService()
+    // .post('/process.php', { formData })
+    // .then(res => {
+    //   const { data } = res
+    //   // l(data)
+    //   if(data.result) next(e)
+    //   else alert(data.message)
+    // })
+  }
 
-//   return (
-//     <div className={`contact step${isCurrentClass}${isPrevClass}${isNextClass}`}>
-//       <div className="inner">
+  return (
+    <div className={`step step6${isCurrentClass}${isPrevClass}${isNextClass}`}>
+      <div className="inner">
 
-//         <div className="container">
-//           <div className="btn-back" onClick={previous}>
-//             <img src="assets/img/arr-left-tr.png" alt=""/>
-//             <span>&nbsp;&nbsp;Zurück</span>
-//           </div>
-//           <label className="label">
-//             <h4>Tragen Sie ihre Daten unverbindlich ein.</h4>
-//           </label>
-//           <div className="form row">
-//             <div className="col-md-6">
-//               <label>Vorname</label>
-//               <input
-//                 placeholder="Vornamen eingeben"
-//                 className="input form-control"
-//                 name="firstName"
-//                 type="text"
-//                 value={firstName} 
-//                 onChange={setForm}/>
-//             </div>
-//             <div className="col-md-6">
-//               <label>Nachname</label>
-//               <input
-//                 placeholder="Nachnamen eingeben"
-//                 className="input form-control"
-//                 name="lastName"
-//                 type="text"
-//                 value={lastName} 
-//                 onChange={setForm}/>
-//             </div>
-//             <div className="col-md-6">
-//               <label>Email</label>
-//               <input
-//                 placeholder="Email eingeben"
-//                 className="input form-control"
-//                 name="email"
-//                 type="email"
-//                 value={email} 
-//                 onChange={setForm}/>
-//             </div>
-//             <div className="col-md-6">
-//               <label>Telefon (Optimal)</label>
-//               <input
-//                 placeholder="Phone eingeben"
-//                 className="input form-control"
-//                 name="phone"
-//                 type="text"
-//                 value={phone} 
-//                 onChange={setForm}/>
-//             </div>
-//           </div>
-//           <div className="custom-control custom-checkbox">
-//             <input 
-//               value="true"
-//               type="checkbox" 
-//               className="custom-control-input" 
-//               id="customCheck1"
-//               checked={isAccept}
-//               onChange={e => setAccept(e.target.checked)}
-//               />
-//             <label className="custom-control-label" htmlFor="customCheck1">
-//               Ich habe die <a href="#">Nutzungsbedingungen</a> gelesen.
-//             </label>
-//           </div>
+        <div className="container">
+          <div className="ctn-heading">
+            <img src="assets/received.jpg" alt=""/><br/>            
+            <h4>Angebot erhalten<img onClick={toggleMoreInfo} src="assets/info.png" alt=""/></h4>
+            <div className="subtitle">
+              Nachdem Sie ihre Kontaktdaten eingetragen haben, werden wir uns mit einem personalisierten Angebot melden.
+            </div>
+          </div>
+          <div className="ctn-content row">
+            <div className="col-md-3"></div>
+            <div className="form col-md-6">
+              <div className="input-group">
+                <input
+                  placeholder="Tragen Sie Ihre Telfonnummer ein"
+                  className="input form-control"
+                  name="phone"
+                  type="text"
+                  value={phone} 
+                  onChange={setFormText}/>
+              </div>
 
-//           <div className="ctn-submit">
-//             <button 
-//               disabled={!isFormValid()}
-//               className="btn btn-lg btn-cta" 
-//               onClick={submitForm}>
-//               Weiter
-//             </button>
-//           </div>
-//         </div>
+              <div className="input-group">
+                <input
+                  placeholder="Tragen hier Ihre E-Mail ein "
+                  className="input form-control"
+                  name="email"
+                  type="email"
+                  value={email} 
+                  onChange={setFormText}/>
+              </div>
+              
+              <div className="ctn-btn">
+                <button className="btn btn-sec mr-2" onClick={previous}>Zurück</button>
+                <button className="btn btn-acc" onClick={() => {next(); l(formTextData, formObjData)}}>Bestätigen</button>
+              </div>          
+            </div>
+            <div className="col-md-3"></div>
+          </div>
+        </div>
         
-//       </div>
-//     </div>
-//   )
-// }
-
-// , Step6 = ({ isNext, isCurrent, isPrev,  navigation }) => {
-//   const { previous, next } = navigation
-//   , isCurrentClass = isCurrent ? " current" : ""
-//   , isPrevClass = isPrev ? " prev" : ""
-//   , isNextClass = isNext ? " next" : ""
-
-//   return (
-//     <div className={`final step${isCurrentClass}${isPrevClass}${isNextClass}`}>
-//       <div className="inner">
-
-//         <div className="container">
-//           <div className="text-center">
-//             <img src="assets/img/success.png" alt=""/><br/>   
-//             <label className="label">
-//               <h4>Alle Unterlagen sind eingegangen.</h4>
-//               <h6>Wir werden Sie benachrichtigen, sobald wir einen den geeigneten Notar in ihrer Nähe gefunden haben.</h6>
-//             </label>       
-//           </div>
-//           <div className="ctn-submit">            
-//             {/* <div className="btn-back" onClick={previous}>
-//               <span>&nbsp;&nbsp;Zurück</span>
-//             </div> */}
-//             <button className="btn btn-lg btn-cta" onClick={next}>Ok</button>
-//           </div>
-//         </div>
-        
-//       </div>
-//     </div>
-//   )
-// }
-
-export { Step1, Step2, Step3, Step4, Step5, 
-  // Step4, Step5, Step6 
+      </div>
+    </div>
+  )
 }
+
+, Step7 = ({ indicators, formObjData, setFormObj, formTextData, setFormText, navigation, toggleMoreInfo }) => {  
+  const { fname, lname, street, postcode, place } = formTextData
+  , { previous, next } = navigation
+  , { isNext, isCurrent, isPrev } = indicators
+  , isCurrentClass = isCurrent ? " current" : ""
+  , isPrevClass = isPrev ? " prev" : ""
+  , isNextClass = isNext ? " next" : ""
+  // , [isAccept, setAccept] = useState(false)
+  , isEmailValid = emailStr => {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    return re.test(String(emailStr).toLowerCase())
+  }
+  , isFormValid = () => {
+    // return (
+    //   firstName.length > 0
+    //   && lastName.length > 0
+    //   && isEmailValid(email)
+    //   && isAccept
+    // )
+  }
+  , submitForm = e => {
+    // formData.date = date.toISOString().slice(0, 19).replace('T', ' ')
+    // // l(formData)
+    // new HttpService()
+    // .post('/process.php', { formData })
+    // .then(res => {
+    //   const { data } = res
+    //   // l(data)
+    //   if(data.result) next(e)
+    //   else alert(data.message)
+    // })
+  }
+
+  return (
+    <div className={`step step7${isCurrentClass}${isPrevClass}${isNextClass}`}>
+      <div className="inner">
+
+        <div className="container">
+          <div className="ctn-heading">
+            <h4>Beschreibung<img onClick={toggleMoreInfo} src="assets/info.png" alt=""/></h4>
+            <div className="subtitle">Schritt 7 von 7</div>
+          </div>
+          <div className="ctn-content">
+            <h5>Möchsten Sie uns noch Dokumente zusenden?</h5>
+            <div className="row">
+              <div className="form col-8">
+                <div className="row">
+                  <div className="col-12">                  
+                    <div className="input-group">
+                      <input
+                        placeholder="Vorname"
+                        className="input form-control"
+                        name="fname"
+                        type="text"
+                        value={fname} 
+                        onChange={setFormText}/>
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-12">                  
+                    <div className="input-group">
+                      <input
+                        placeholder="Nachname"
+                        className="input form-control"
+                        name="lname"
+                        type="text"
+                        value={lname} 
+                        onChange={setFormText}/>
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-12">                  
+                    <div className="input-group">
+                      <input
+                        placeholder="Straße und Hausnummer"
+                        className="input form-control"
+                        name="street"
+                        type="text"
+                        value={street} 
+                        onChange={setFormText}/>
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-6">                  
+                    <div className="input-group">
+                      <input
+                        placeholder="Postleizahl"
+                        className="input form-control"
+                        name="postcode"
+                        type="text"
+                        value={postcode} 
+                        onChange={setFormText}/>
+                    </div>
+                  </div>
+                  <div className="col-6">                  
+                    <div className="input-group">
+                      <input
+                        placeholder="Ort"
+                        className="input form-control"
+                        name="place"
+                        type="text"
+                        value={place} 
+                        onChange={setFormText}/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        
+          <div className="ctn-btn">
+            <button className="btn btn-sec mr-2" onClick={previous}>Zurück</button>
+            <button className="btn btn-acc" onClick={() => {next(); l(formTextData, formObjData)}}>Angebot erhalten</button>
+          </div>  
+        </div>
+        
+      </div>
+    </div>
+  )
+}
+
+, Step8 = ({ indicators, formObjData, formTextData, toggle, toggleMoreInfo }) => {  
+  const { isNext, isCurrent, isPrev } = indicators
+  , isCurrentClass = isCurrent ? " current" : ""
+  , isPrevClass = isPrev ? " prev" : ""
+  , isNextClass = isNext ? " next" : ""
+
+  return (
+    <div className={`step step8${isCurrentClass}${isPrevClass}${isNextClass}`}>
+      <div className="inner">
+
+      <div className="container">
+          <div className="ctn-heading">
+            <h4>Fertig<img onClick={toggleMoreInfo} src="assets/info.png" alt=""/></h4>
+            <img className="final" src="assets/final.gif" alt=""/>
+            <h4>Gratulation!</h4>
+            <div className="subtitle">
+              Unser System analysiert nun Ihre Anfrage.<br/>
+              Sie erhalten innerhalb von 48 Stunden Vorschläge 
+              über geeignete on-demand Experten.
+            </div>
+          </div>
+        
+          <div className="ctn-btn text-center">
+            <button className="btn btn-acc" onClick={toggle}>Zur Startseite</button>
+          </div>  
+        </div>
+        
+      </div>
+    </div>
+  )
+}
+
+export { Step1, Step2, Step3, Step4, Step5, Step6, Step7, Step8 }

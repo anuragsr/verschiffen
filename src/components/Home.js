@@ -250,6 +250,7 @@ export default function Main({ ref1, ref2 , ref3, ref4 }){
                   <div className="col-8"><div></div></div>
                   <div className="col-2"><div></div></div>
                 </div>
+                <div className="site-title">Verschiffen.com</div>
               </div>
               <div className="ctn-layer1">
                 <div className="bm">Best Match</div>
@@ -308,7 +309,8 @@ export default function Main({ ref1, ref2 , ref3, ref4 }){
                     Send shareable bug tests and get feedback immediately."
                   </p>
                   <div className="r-ft">
-                    Berlin<br/><span>to</span><br/>Shanghai
+                    <div>12x <img src="assets/cargo 2.png" alt=""/></div>
+                    Berlin <span>to</span> Shanghai
                   </div>
                 </div>
               </div>
@@ -328,7 +330,8 @@ export default function Main({ ref1, ref2 , ref3, ref4 }){
                     Send shareable bug tests and get feedback immediately."
                   </p>
                   <div className="r-ft">
-                    Berlin<br/><span>to</span><br/>Shanghai
+                    <div>12x <img src="assets/cargo 2.png" alt=""/></div>
+                    Berlin <span>to</span> Shanghai
                   </div>
                 </div>
               </div>
@@ -348,7 +351,8 @@ export default function Main({ ref1, ref2 , ref3, ref4 }){
                     Send shareable bug tests and get feedback immediately."
                   </p>
                   <div className="r-ft">
-                    Berlin<br/><span>to</span><br/>Shanghai
+                    <div>12x <img src="assets/cargo 2.png" alt=""/></div>
+                    Berlin <span>to</span> Shanghai
                   </div>
                 </div>
               </div>

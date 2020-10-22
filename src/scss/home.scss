@@ -208,7 +208,7 @@ main.home{
     &.section3{
       .ctn-bm-outer{
         position: relative;
-        height: 475px;
+        height: 505px;
         margin-top: 50px;
         .ctn-layer0{
           @include pa(0, 0);
@@ -304,6 +304,10 @@ main.home{
           }
         }
       }
+      .site-title{
+        font-size: 20px;
+        color: rgba($txt-pr, .5);
+      }
     }
 
     &.section4{
@@ -338,6 +342,11 @@ main.home{
           }
           .r-ft{
             font-size: 20px;
+            div{ color: $acc; }
+            img{ 
+              height: 70px;  margin-left: 10px; 
+              position: relative; top: -7px;
+            }
             span{ font-family: $ex-r; }
           }
         }
@@ -460,5 +469,4 @@ main.home{
   }
 }
 
-@import './workshop';
 @import './modal';
