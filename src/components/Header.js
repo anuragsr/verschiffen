@@ -3,12 +3,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
-const l = console.log.bind(window.console)
+import { l, cl } from '../helpers/Log'
+
 let listener = null, homeSection
 
-export default function Header({ 
-  workshopRef, ref1, ref2 , ref3, ref4 
-}){
+export default function Header({ ref0, ref1, ref2 , ref3 }){
   const history = useHistory()
   , loc = useLocation()
   , [scrollState, setScrollState] = useState("top")
@@ -54,11 +53,9 @@ export default function Header({
     (loc.pathname === '/') && 
     setTimeout(() => {
       switch(homeSection){
-        case 'vorteile': goToSection(null, ref1); break
-        case 'vorgehen': goToSection(null, ref2); break
-        case 'themen': goToSection(null, ref3); break
-        case 'kontakt': goToSection(null, ref4); break
-        case 'workshop': goToSection(null, workshopRef); break
+        case 'funktion': goToSection(null, ref1); break
+        case 'partner': goToSection(null, ref2); break
+        case 'kontakt': goToSection(null, ref3); break
         default: break
       }
     }, 500)    
@@ -82,17 +79,17 @@ export default function Header({
         <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
             <li className="nav-item">
-              <a className="nav-link" href={void(0)} onClick={e => navigate(e, ref1, "vorteile")}>Funktion</a>
+              <a className="nav-link" href={void(0)} onClick={e => navigate(e, ref1, "funktion")}>Funktion</a>
               <a className="mobile-only nav-link acc mr-2" href={void(0)}>+49 (175) 91234</a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href={void(0)} onClick={e => navigate(e, ref2, "vorgehen")}>Partner</a>
+              <a className="nav-link" href={void(0)} onClick={e => navigate(e, ref2, "partner")}>Partner</a>
             </li>
             <li className="nav-item mr-2">
-              <a className="nav-link" href={void(0)} onClick={e => navigate(e, ref4, "kontakt")}>Hilfe</a>
+              <a className="nav-link" href={void(0)} onClick={e => navigate(e, ref3, "kontakt")}>Hilfe</a>
             </li>
             <li className="nav-item mr-4">
-              <button className="btn btn-acc" onClick={e => navigate(e, workshopRef, "workshop")}>Deutschland EUR €</button>
+              <button className="btn btn-acc" onClick={e => {}}>Deutschland EUR €</button>
             </li>
             <li className="desktop-only nav-item ph">
               <a className="nav-link" href="#">+49 (175) 91234</a>

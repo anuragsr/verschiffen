@@ -6,37 +6,59 @@
   class VSShipment{
     protected $db;
     
-    function __construct($db){
-      $this->db = $db;
-    }
+    function __construct($db){ $this->db = $db; }
 
-    public function addShipment($input){
+    public function addShipment($data){
 
-      if(count($fileObj)){ $files = $fileObj["files"]; }
-      else{ $files = array(); }
-
+      $ship_id = 'S'.Common::generateRand(5);
       $err = false;
+          
+      // Add to DB
+      try {
+        $ship_type = "Packed: ";
+        if($data["isPacked"] === "true") $ship_type.= "Yes";
+        else $ship_type.= "No";
+        $ship_type.=", Type: ". $data["selOpts"];
 
-      // function ts($str){ return explode('+', $str)[0]; }
-      
-      // try {
-      //   $this->db->save("x_evt_det08441", array(
-      //     "x_fname"           => $input["firstName"],
-      //     "x_lname"           => $input["lastName"],
-      //     "x_email"           => $input["email"],
-      //     "x_phone"           => $input["phone"],
-      //     "x_workshop"        => $input["selOpts"],
-      //     "x_workshop_date"   => ts($input["currEvent"]["eventDate"]),
-      //     "x_start"           => ts($input["currEvent"]["startStr"]),
-      //     "x_end"             => ts($input["currEvent"]["endStr"]),
-      //     "x_created"         => date('Y-m-d H:i:s')
-      //   ));
-      // } catch (Exception $e) {
-      //   $err = true;
-      //   Common::respond($e, "There was an error, please try again.", false);
-      // }
+        $this->db->save("x_vs_ship79332", array(
+          "id"             => $ship_id,
+          "x_email"        => $data["email"],
+          "x_phone"        => $data["phone"],
+          "x_fname"        => $data["fname"],
+          "x_lname"        => $data["lname"],
+          "x_street"       => $data["street"],
+          "x_postcode"     => $data["postcode"],
+          "x_place"        => $data["place"],
+          "x_shp_type"     => $ship_type,
+          "x_shp_con"      => "Containers: ".$data["numCon"].", Filled: ".$data["filled"].", Container Weights: ".$data["conWeights"],
+          "x_shp_date"     => $data["date"],
+          "x_date_commit"  => $data["isDateCommit"] === "true" ? "Yes" : "No", 
+          "x_created"      => date('Y-m-d H:i:s')
+        ));
+      } catch (Exception $e) {
+        $err = true;
+        Common::respond($e, "There was an error inserting in DB, please try again.", false);
+      }
 
-      !$err && Common::respond(Common::sendEmail($input), "Event added successfully.", true);
+      // Upload files
+      try {
+        $files = $data["files"];
+          
+        if(count($files)){
+          // Create folder
+          $path = "../upload/".$ship_id." - ".$data['fname'];
+          mkdir($path, 0755, true);
+
+          foreach ($files as $file){
+            move_uploaded_file($file["tmp_name"], $path."/".Common::generateRand(6)."_".$file["name"]);          
+          }
+        }
+      } catch (Exception $e) {
+        $err = true;
+        Common::respond($e, "There was an error uploading files, please try again.", false);
+      }
+
+      !$err && Common::respond(Common::sendEmail($data), "Shipment details added successfully.", true);
     }
 
     public function sendMailToUser($input){
@@ -70,16 +92,8 @@
   }
 
   $e = new VSShipment($db);
-  $fileObj = Common::normalizeFiles($_FILES);
-
-  $type = json_decode(stripslashes($_REQUEST["type"]), true);  
-
-  switch($type){
-    // case 'addShipment': $e->addShipment(); break;
-    // case 'sendMailToUser': $e->sendMailToUser($data["formData"]); break;
-    // default: Common::respond($data["formData"], $fileObj, '');
-    default: Common::respond($data, $_REQUEST, $fileObj);
-    // case 'getEvents': $e->getEvents(); break;
-    // default: $e->addEvent($data["formData"]); break; //addEvent
+  switch($_REQUEST["type"]){
+    case 'addShipment': $e->addShipment($data); break;
+    default: $e->sendMailToUser($data, $files); break; // sendMailToUser
   }
 ?>

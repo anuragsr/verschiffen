@@ -5,7 +5,7 @@ import React, { useEffect } from 'react'
 import * as $ from 'jquery'
 import '../scss/faq.scss'
 
-const l = console.log.bind(window.console)
+import { l, cl } from '../helpers/Log'
 
 export default function FAQ(){
     

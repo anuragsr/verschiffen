@@ -15,7 +15,7 @@
     public static function sendEmail($data){
       $date = date('Y-m-d H:i:s');
       $eol = PHP_EOL;
-      $username = $data['firstName'] ." ". $data['lastName'];
+      $username = $data['fname'] ." ". $data['lname'];
       $emailObj = array();
 
       // Primary Email
@@ -33,11 +33,11 @@
       $txt.= "  <b>Name: </b>".$username."<br/>";
       $txt.= "  <b>Email: </b>".$data['email']."<br/>";
       $txt.= "  <b>Telephone: </b>".$data['phone']."<br/>";
-      $txt.= "  <b>Workshop: </b>".$data['selOpts']."<br/>";
-      $txt.= "  <b>Selected Time Slot: </b>".$data['currEvent']['eventStr']."<br/><br/>";
+      $txt.= "  <b>Shipment Type: </b>".$data['selOpts']."<br/>";
+      // $txt.= "  <b>Selected Time Slot: </b>".$data['currEvent']['eventStr']."<br/><br/>";
       $txt.= "  <b>Submission Date & Time: </b>".$date."<br/><br/>";
       $txt.= "  Thanks and Regards,<br/>";
-      $txt.= "  Cloudbasiert Team";
+      $txt.= "  Verschiffen Team";
       $txt.= "</div>";
 
       $emailObj["primary"] = array(
@@ -64,6 +64,16 @@
       }    
     }
 
+    public static function generateRand($length = 4) {
+      $characters = '0123456789';
+      $charactersLength = strlen($characters);
+      $randomString = '';
+      for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+      }
+      return $randomString;
+    }
+
     public static function normalizeFiles($files = array()) {
       $normalized_array = array();
       foreach($files as $index => $file) {
@@ -81,12 +91,15 @@
           );
         }
       }
-      return $normalized_array;
+
+      if(array_key_exists("files", $normalized_array)) return $normalized_array["files"];
+      else return $normalized_array;
     }
 
   }
 
   // Reading the input
-  $data = json_decode(stripslashes($_REQUEST["shipment"]), true);  
+  $data = $_REQUEST;
+  $data["files"] = Common::normalizeFiles($_FILES);
   // $data = json_decode(file_get_contents('php://input'), true);
 ?>

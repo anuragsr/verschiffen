@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useForm, useStep } from 'react-hooks-helper'
 import { Step1, Step2, Step3, Step4, Step5, Step6, Step7, Step8 } from "./Steps"
+import { l, cl } from '../helpers/Log'
 
-const l = console.log.bind(window.console)
-, steps = [ Step1, Step2, Step3, Step4, Step5, Step6, Step7, Step8 ]
+const steps = [ Step1, Step2, Step3, Step4, Step5, Step6, Step7, Step8 ]
 , useModal = () => {
-  const [isShowing, setIsShowing] = useState(true)
+  const [isShowing, setIsShowing] = useState(false)
   , [showMoreInfo, setShowMoreInfo] = useState(false)
   , toggle = () => { setIsShowing(!isShowing) }
   , toggleMoreInfo = () => { setShowMoreInfo(!showMoreInfo) }
@@ -44,7 +44,7 @@ const l = console.log.bind(window.console)
   }
   , [formTextData, setFormText] = useForm(textData)
   , [formObjData, setFormObj] = useState(objData)
-  , { index, navigation } = useStep({ initialStep: 6, steps })
+  , { index, navigation } = useStep({ initialStep: 0, steps })
   , props = { 
     isShowing, toggle, 
     showMoreInfo, toggleMoreInfo,

@@ -4,23 +4,20 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { useForm } from 'react-hooks-helper'
 // import { Link, NavLink } from 'react-router-dom'
-// import HttpService from '../services/HttpService'
 import Carousel from 'react-img-carousel'
 import { Modal, useModal } from './Modal'
+import { l, cl } from '../helpers/Log'
 
 import '../scss/home.scss'
 import 'react-img-carousel/lib/carousel.css'
 
-const l = console.log.bind(window.console)
-
-export default function Main({ ref1, ref2 , ref3, ref4 }){
+export default function Home({ ref0, ref1, ref2 , ref3 }){
 
   const { 
     isShowing, toggle, 
     showMoreInfo, toggleMoreInfo,
   } = useModal()
-  , initFormData = { vonStadt: 'Berlin', nachStadt: 'Shanghai' }
-  , [{ vonStadt, nachStadt }, setValue] = useForm(initFormData)
+  , [{ vonStadt, nachStadt }, setValue] = useForm({ vonStadt: 'Berlin', nachStadt: 'Shanghai' })
   , onFormSubmit = e => {
     // l("Submit")
     // l({ vonStadt, nachStadt })
@@ -36,7 +33,7 @@ export default function Main({ ref1, ref2 , ref3, ref4 }){
   return (
     <>  
       <main className="home">
-        <section className="section0">
+        <section className="section0" ref={ref0}>
           <div className="container">
             <div className="row">
               <div className="col-7">
@@ -97,7 +94,7 @@ export default function Main({ ref1, ref2 , ref3, ref4 }){
           </div>
         </section>
 
-        <section className="section1" ref={ref2}>
+        <section className="section1" ref={ref1}>
           <div className="container text-center">
             <h2 className="acc">Funktionsweise</h2>
             <h1 className="desktop-only">So funktioniert es</h1>
@@ -144,11 +141,11 @@ export default function Main({ ref1, ref2 , ref3, ref4 }){
                 </div>
               </div>
             </div>
-            <button className="btn btn-acc" onClick={e => {}}>Jetz beginnen</button>
+            <button className="btn btn-acc" onClick={e => goToSection(e, ref0)}>Jetz beginnen</button>
           </div>        
         </section>
 
-        <section className="section2" ref={ref1}>
+        <section className="section2">
           <div className="container text-center">
             <h2 className="acc">Vorteile</h2>
             <h1 className="desktop-only">Ein Paket ein Preis</h1>
@@ -192,7 +189,7 @@ export default function Main({ ref1, ref2 , ref3, ref4 }){
                 <div className="col-7">
                   <h4>Erhalte direkten Zugang zu den führenden Anbietern auf einer Plattform.</h4>
                   <p>Erhalten Sie Echtzeitpreise für verfügbare Kapazitäten und buchen Sie direkt in die Systeme der Fluggesellschaften.</p>
-                  <button className="btn btn-acc" onClick={e => {}}>Jetz beginnen</button>
+                  <button className="btn btn-acc" onClick={e => goToSection(e, ref0)}>Jetz beginnen</button>
                 </div>
                 <div className="col-5 row">
                   <div className="col-6 pr-0">
@@ -280,7 +277,7 @@ export default function Main({ ref1, ref2 , ref3, ref4 }){
           </div>
         </section>
 
-        <section className="section4" ref={ref3}>
+        <section className="section4" ref={ref2}>
           <div className="container text-center">
             <h2 className="desktop-only acc">Bewertungen</h2>
             <h1 className="desktop-only">Zufriedene Unternehmen</h1>
@@ -402,9 +399,9 @@ export default function Main({ ref1, ref2 , ref3, ref4 }){
           </div>
         </section>
 
-        <section className="section6">
+        <section className="section6" ref={ref3}>
           <div className="container text-center">
-            <div className="row" ref={ref4}>
+            <div className="row" ref={ref3}>
               <div className="desktop-only col-md-6">
                 <div className="act act1 text-left">
                   <span className="acc">Benotigst du weitere Hilfe?</span>
@@ -457,8 +454,8 @@ export default function Main({ ref1, ref2 , ref3, ref4 }){
             <img src="assets/starten.png" alt=""/>
             <p className="desktop-only">Verschiffen Sie Ihre Ware weltweit</p>
             <p className="mobile-only">Verschiffen Sie Ihre Ware weltweit</p>
-            <button className="btn btn-acc mr-3" onClick={e => {}}>Angebot ansehen</button>
-            <button className="btn btn-sec" onClick={e => {}}>Jetzt vergleichen</button>
+            <button className="btn btn-acc mr-3" onClick={e => goToSection(e, ref0)}>Angebot ansehen</button>
+            <button className="btn btn-sec" onClick={e => goToSection(e, ref0)}>Jetzt vergleichen</button>
           </div>
         </section>
 
@@ -469,6 +466,7 @@ export default function Main({ ref1, ref2 , ref3, ref4 }){
           </div>
         </section>
       </main>
+
       <Modal 
         isShowing={isShowing}
         toggle={toggle}

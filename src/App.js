@@ -15,11 +15,10 @@ import Footer from './components/Footer'
 export default function App() {
   
   const refs = {
-    workshopRef: useRef(null)
+    ref0: useRef(null)
     , ref1: useRef(null)
     , ref2: useRef(null)
     , ref3: useRef(null)
-    , ref4: useRef(null)
   }
 
   return (

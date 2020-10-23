@@ -11,12 +11,12 @@ import 'moment/locale/de'
 import Dropzone from 'react-dropzone'
 
 import HttpService from '../helpers/HttpService'
+import Dots from '../helpers/Dots'
+import { l, cl } from '../helpers/Log'
 
 import 'rsuite/dist/styles/rsuite-default.css'
 
-const l = console.log.bind(window.console)
-
-, Step1 = ({ indicators, formObjData, setFormObj, navigation, toggle, toggleMoreInfo }) => {
+const Step1 = ({ indicators, formObjData, setFormObj, navigation, toggle, toggleMoreInfo }) => {
   const { next } = navigation
   , { isNext, isCurrent, isPrev } = indicators
   , isCurrentClass = isCurrent ? " current" : ""
@@ -390,7 +390,7 @@ const l = console.log.bind(window.console)
                 <section>
                   <div {...getRootProps({className: 'dropzone'})}>
                     <input {...getInputProps()} />
-                    <p>Datei in dieses Feld ziehen oder <a href="javascript:void(0)" onClick={open}>hier clicken</a></p>
+                    <p>Datei in dieses Feld ziehen oder <a href={void(0)} onClick={open}>hier clicken</a></p>
                   </div>
                   <div className="up-info">Du kannst bis zu 5 Datein unter <b>100 MB</b> hochladen</div>
                   {
@@ -494,6 +494,7 @@ const l = console.log.bind(window.console)
   , isCurrentClass = isCurrent ? " current" : ""
   , isPrevClass = isPrev ? " prev" : ""
   , isNextClass = isNext ? " next" : ""
+  , [submitted, setSubmitted] = useState(false)
   , isFormValid = () => (
     fname.length > 0
     && lname.length > 0
@@ -501,27 +502,41 @@ const l = console.log.bind(window.console)
     && postcode.length > 0
     && place.length > 0
   )
+  , mySqlDate = function(date) {
+    const twoDigits = d => {
+      if(0 <= d && d < 10) return "0" + d.toString()
+      if(-10 < d && d < 0) return "-0" + (-1*d).toString()
+      return d.toString()
+    }
+    return date.getUTCFullYear() + "-" + twoDigits(1 + date.getUTCMonth()) + "-" + twoDigits(date.getUTCDate())
+  }
   , submitForm = e => {
+    setSubmitted(true)
     l(formObjData, formTextData)
     
-    var formData = new FormData()
-    formData.append('type', 'normal')
-    formData.append('shipment', JSON.stringify("{helo: 'world'}"))
+    const formData = new FormData()
+    formData.append("type", "addShipment")
+
+    for(const key in formTextData){ formData.append(key, formTextData[key]) }
+    for(const key in formObjData){
+      switch(key){
+        case "files": files.forEach(x => formData.append("files[]", x)); break;
+        case "filled": formData.append(key, formObjData[key]["text"]); break;
+        case "conWeights": formData.append(key, formObjData[key].map(w => w+" kg").join(", ")); break;
+        case "date": formData.append(key, mySqlDate(formObjData[key])); break;
+        default: formData.append(key, formObjData[key]);
+      }
+    }
     
-    files.forEach(x => formData.append("files[]", x))
-    
-    // formData.date = date.toISOString().slice(0, 19).replace('T', ' ')
-    new HttpService()
-    // .post('/process.php', { 
-    //   type: 'addShipment',
-    //   formData: formObjData 
-    // })
+    new HttpService()    
     .post('/process.php', formData)
     .then(res => {
       const { data } = res
       l(data)
-      // if(data.result) next(e)
-      // else alert(data.message)
+      setTimeout(() => {
+        if(data.result) next(e)
+        else alert(data.message)
+      }, 1000)
     })
   }
 
@@ -604,10 +619,20 @@ const l = console.log.bind(window.console)
               </div>
             </div>
           </div>
-        
           <div className="ctn-btn">
-            <button className="btn btn-sec mr-2" onClick={previous}>Zurück</button>
-            <button className="btn btn-acc" disabled={!isFormValid()} onClick={submitForm}>Angebot erhalten</button>
+            <button 
+              className="btn btn-sec mr-2" 
+              onClick={previous}
+              disabled={submitted}
+            >Zurück</button>
+            <button 
+              className="btn btn-acc" 
+              disabled={!isFormValid() || submitted} 
+              onClick={submitForm}
+            >
+              { !submitted && <>Angebot erhalten</> }
+              { submitted && <Dots /> }
+            </button>
           </div>  
         </div>
         

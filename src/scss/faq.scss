@@ -98,6 +98,7 @@ main.faq{
         margin-top: 50px;
         margin-bottom: 100px;
         text-align: left;
+        .tab-pane.fade.show{ opacity: 1; }
         p{ 
           color: $txt-pr; font-family: $os-r; 
           @include media("<tab"){

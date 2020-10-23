@@ -15,7 +15,7 @@ switch(env){
     break;
   
   default: // local
-    apiHost = 'http://localhost/verschiffen-be'
+    apiHost = 'http://localhost/verschiffen-be/backend'
     break; 
 }
 

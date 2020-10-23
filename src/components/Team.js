@@ -3,11 +3,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react'
 import Carousel from 'react-img-carousel'
+import { l, cl } from '../helpers/Log'
 
 import '../scss/team.scss'
 import 'react-img-carousel/lib/carousel.css'
-
-const l = console.log.bind(window.console)
 
 export default function Team(){
   // const saveFile = () => {
