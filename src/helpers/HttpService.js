@@ -2,7 +2,6 @@ import axios from 'axios'
 
 // Choose an env -> ["local", "eca", "prod"]
 const env = process.env.REACT_APP_ENV_TYPE
-// const env = 'eca'
 
 let apiHost, call
 
@@ -21,48 +20,15 @@ switch(env){
 }
 
 export default class HttpService {  
-  get(url, params, auth) {
-    let config = {
-      method: "get",
-      url: apiHost + url,
-      params,
-      auth
-    }
-
-    return this.doRequest(config)
-  }
-
-  delete(url, params, auth) {
-    let config = {
-      method: "delete",
-      url: apiHost + url,
-      params,
-      auth
-    }
-
-    return this.doRequest(config)
-  }
-  
   post(url, data, auth, onUploadProgress) {
     let config = {
       method: "post",
       url: apiHost + url,
       data,
       auth,
-      onUploadProgress
+      onUploadProgress,
     }
     
-    return this.doRequest(config)
-  }
-
-  put(url, data, auth, onUploadProgress) {
-    let config = {
-      method: "put",
-      url: apiHost + url,
-      data,
-      auth,
-      onUploadProgress
-    }
     return this.doRequest(config)
   }
   

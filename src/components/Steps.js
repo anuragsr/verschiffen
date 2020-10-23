@@ -488,6 +488,7 @@ const l = console.log.bind(window.console)
 
 , Step7 = ({ indicators, formObjData, formTextData, setFormText, navigation, toggleMoreInfo }) => {  
   const { fname, lname, street, postcode, place } = formTextData
+  , { files } = formObjData
   , { previous, next } = navigation
   , { isNext, isCurrent, isPrev } = indicators
   , isCurrentClass = isCurrent ? " current" : ""
@@ -502,16 +503,26 @@ const l = console.log.bind(window.console)
   )
   , submitForm = e => {
     l(formObjData, formTextData)
-
+    
+    var formData = new FormData()
+    formData.append('type', 'normal')
+    formData.append('shipment', JSON.stringify("{helo: 'world'}"))
+    
+    files.forEach(x => formData.append("files[]", x))
+    
     // formData.date = date.toISOString().slice(0, 19).replace('T', ' ')
-    // new HttpService()
-    // .post('/process.php', { formData })
-    // .then(res => {
-    //   const { data } = res
-    //   // l(data)
-    //   if(data.result) next(e)
-    //   else alert(data.message)
+    new HttpService()
+    // .post('/process.php', { 
+    //   type: 'addShipment',
+    //   formData: formObjData 
     // })
+    .post('/process.php', formData)
+    .then(res => {
+      const { data } = res
+      l(data)
+      // if(data.result) next(e)
+      // else alert(data.message)
+    })
   }
 
   return (

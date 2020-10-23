@@ -44,7 +44,7 @@ const l = console.log.bind(window.console)
   }
   , [formTextData, setFormText] = useForm(textData)
   , [formObjData, setFormObj] = useState(objData)
-  , { index, navigation } = useStep({ initialStep: 5, steps })
+  , { index, navigation } = useStep({ initialStep: 6, steps })
   , props = { 
     isShowing, toggle, 
     showMoreInfo, toggleMoreInfo,
