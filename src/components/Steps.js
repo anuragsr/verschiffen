@@ -6,17 +6,17 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import deLocale from '@fullcalendar/core/locales/de'
-import moment from "moment"
+import moment from 'moment'
 import 'moment/locale/de'
 import Dropzone from 'react-dropzone'
-// import Dropzone from "../helpers/Dropzone"
-import HttpService from "../helpers/HttpService"
+
+import HttpService from '../helpers/HttpService'
 
 import 'rsuite/dist/styles/rsuite-default.css'
 
 const l = console.log.bind(window.console)
 
-, Step1 = ({ indicators, setFormObj, navigation, toggle, toggleMoreInfo }) => {
+, Step1 = ({ indicators, formObjData, setFormObj, navigation, toggle, toggleMoreInfo }) => {
   const { next } = navigation
   , { isNext, isCurrent, isPrev } = indicators
   , isCurrentClass = isCurrent ? " current" : ""
@@ -42,6 +42,10 @@ const l = console.log.bind(window.console)
     opts.forEach((opt, i) => (i === idx) && (opt.selected = !opt.selected))
     
     setOpts([...opts])
+  }
+  , doNext = () => {
+    l(formObjData)
+    next()
   }
 
   useEffect(() => {
@@ -93,7 +97,7 @@ const l = console.log.bind(window.console)
           </div>
           <div className="ctn-btn">
             <button className="btn btn-sec mr-2" onClick={toggle}>Zurück</button>
-            <button className="btn btn-acc" onClick={next}>Fortfahren</button>
+            <button className="btn btn-acc" onClick={doNext}>Fortfahren</button>
           </div>
         </div>
 
@@ -126,6 +130,10 @@ const l = console.log.bind(window.console)
     { label: "5+", value: 5 },
   ]
   , [conWeights, setConWeights] = useState([])
+  , doNext = () => {
+    l(formObjData, formTextData)
+    next()
+  }
 
   useEffect(() => {
     setFormObj(prev => ({
@@ -194,7 +202,7 @@ const l = console.log.bind(window.console)
           </div>
           <div className="ctn-btn">
             <button className="btn btn-sec mr-2" onClick={previous}>Zurück</button>
-            <button className="btn btn-acc" onClick={() => {next(); l(formTextData, formObjData)}}>Fortfahren</button>
+            <button className="btn btn-acc" disabled={numCon === "0"} onClick={doNext}>Fortfahren</button>
           </div>
         </div>
       </div>
@@ -212,6 +220,10 @@ const l = console.log.bind(window.console)
   , handleChange = (e, idx) => {
     conWeights[idx] = e.target.value
     setFormObj(prev => ({ ...prev, conWeights }))
+  }
+  , doNext = () => {
+    l(formObjData, formTextData)
+    next()
   }
 
   return (
@@ -248,7 +260,7 @@ const l = console.log.bind(window.console)
           </div>
           <div className="ctn-btn">
             <button className="btn btn-sec mr-2" onClick={previous}>Zurück</button>
-            <button className="btn btn-acc" onClick={() => {next(); l(formTextData, formObjData)}}>Fortfahren</button>
+            <button className="btn btn-acc" onClick={doNext}>Fortfahren</button>
           </div>
         </div>
       </div>
@@ -264,9 +276,8 @@ const l = console.log.bind(window.console)
   , isNextClass = isNext ? " next" : ""
   , [isDateCommit, setIsDateCommit] = useState(false)
   , onDateClick = info => {
-    // l(info)
     const { date, dayEl, jsEvent } = info
-    
+
     jsEvent.preventDefault() // don't let the browser navigate
     
     document
@@ -275,6 +286,10 @@ const l = console.log.bind(window.console)
     dayEl.classList.add("active")
 
     setFormObj(prev => ({ ...prev, date }))
+  }
+  , doNext = () => {
+    l(formObjData, formTextData)
+    next()
   }
 
   useEffect(() => {
@@ -297,6 +312,7 @@ const l = console.log.bind(window.console)
                 locale={deLocale}
                 plugins={[ dayGridPlugin, interactionPlugin ]}
                 initialView="dayGridMonth"
+                selectAllow={info => !info.start.isBefore(moment())}
                 dateClick={onDateClick}
                 headerToolbar={{
                   start: null, // will normally be on the left. if RTL, will be on the right
@@ -321,7 +337,7 @@ const l = console.log.bind(window.console)
           </div>
           <div className="ctn-btn">
             <button className="btn btn-sec mr-2" onClick={previous}>Zurück</button>
-            <button className="btn btn-acc" onClick={() => {next(); l(formTextData, formObjData)}}>Fortfahren</button>
+            <button className="btn btn-acc" onClick={doNext}>Fortfahren</button>
           </div>
         </div>
 
@@ -338,6 +354,10 @@ const l = console.log.bind(window.console)
   , isCurrentClass = isCurrent ? " current" : ""
   , isPrevClass = isPrev ? " prev" : ""
   , isNextClass = isNext ? " next" : ""
+  , doNext = () => {
+    l(formObjData, formTextData)
+    next()
+  }
 
   return (
     <div className={`step step5${isCurrentClass}${isPrevClass}${isNextClass}`}>
@@ -370,24 +390,28 @@ const l = console.log.bind(window.console)
                 <section>
                   <div {...getRootProps({className: 'dropzone'})}>
                     <input {...getInputProps()} />
-                      <p>Datei in dieses Feld ziehen oder <a href="javascript:void(0)" onClick={open}>hier clicken</a></p>
+                    <p>Datei in dieses Feld ziehen oder <a href="javascript:void(0)" onClick={open}>hier clicken</a></p>
                   </div>
-                  <aside>
-                    <ul>{
-                      files && (files.length !== 0) && files.map(file => (
-                        <li key={file.path}>
-                          {file.path} - {file.size} bytes
-                        </li>
-                      ))
-                    }</ul>
-                  </aside>
+                  <div className="up-info">Du kannst bis zu 5 Datein unter <b>100 MB</b> hochladen</div>
+                  {
+                    files && (files.length !== 0) && <>
+                      <aside>Uploaded Files:</aside>
+                      <ul>{
+                        files.map(file => (
+                          <li key={file.path}>
+                            {file.path} - {Math.round(file.size/1000)} Kb
+                          </li>
+                        ))
+                      }</ul>
+                    </>
+                  }
                 </section>
               )}
             </Dropzone>
           </div>
           <div className="ctn-btn">
             <button className="btn btn-sec mr-2" onClick={previous}>Zurück</button>
-            <button className="btn btn-acc" onClick={() => {next(); l(formTextData, formObjData)}}>Fortfahren</button>
+            <button className="btn btn-acc" onClick={doNext}>Fortfahren</button>
           </div>          
         </div>
 
@@ -396,37 +420,21 @@ const l = console.log.bind(window.console)
   )
 }
 
-, Step6 = ({ indicators, formObjData, setFormObj, formTextData, setFormText, navigation, toggleMoreInfo }) => {  
+, Step6 = ({ indicators, formObjData, formTextData, setFormText, navigation, toggleMoreInfo }) => {  
   const { email, phone } = formTextData
   , { previous, next } = navigation
   , { isNext, isCurrent, isPrev } = indicators
   , isCurrentClass = isCurrent ? " current" : ""
   , isPrevClass = isPrev ? " prev" : ""
   , isNextClass = isNext ? " next" : ""
-  // , [isAccept, setAccept] = useState(false)
   , isEmailValid = emailStr => {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     return re.test(String(emailStr).toLowerCase())
   }
-  , isFormValid = () => {
-    // return (
-    //   firstName.length > 0
-    //   && lastName.length > 0
-    //   && isEmailValid(email)
-    //   && isAccept
-    // )
-  }
-  , submitForm = e => {
-    // formData.date = date.toISOString().slice(0, 19).replace('T', ' ')
-    // // l(formData)
-    // new HttpService()
-    // .post('/process.php', { formData })
-    // .then(res => {
-    //   const { data } = res
-    //   // l(data)
-    //   if(data.result) next(e)
-    //   else alert(data.message)
-    // })
+  , isFormValid = () => phone.length > 0 && isEmailValid(email)
+  , doNext = () => {
+    l(formObjData, formTextData)
+    next()
   }
 
   return (
@@ -447,7 +455,7 @@ const l = console.log.bind(window.console)
               <div className="input-group">
                 <input
                   placeholder="Tragen Sie Ihre Telfonnummer ein"
-                  className="input form-control"
+                  className="form-control"
                   name="phone"
                   type="text"
                   value={phone} 
@@ -457,7 +465,7 @@ const l = console.log.bind(window.console)
               <div className="input-group">
                 <input
                   placeholder="Tragen hier Ihre E-Mail ein "
-                  className="input form-control"
+                  className="form-control"
                   name="email"
                   type="email"
                   value={email} 
@@ -466,7 +474,7 @@ const l = console.log.bind(window.console)
               
               <div className="ctn-btn">
                 <button className="btn btn-sec mr-2" onClick={previous}>Zurück</button>
-                <button className="btn btn-acc" onClick={() => {next(); l(formTextData, formObjData)}}>Bestätigen</button>
+                <button className="btn btn-acc" disabled={!isFormValid()} onClick={doNext}>Bestätigen</button>
               </div>          
             </div>
             <div className="col-md-3"></div>
@@ -478,29 +486,24 @@ const l = console.log.bind(window.console)
   )
 }
 
-, Step7 = ({ indicators, formObjData, setFormObj, formTextData, setFormText, navigation, toggleMoreInfo }) => {  
+, Step7 = ({ indicators, formObjData, formTextData, setFormText, navigation, toggleMoreInfo }) => {  
   const { fname, lname, street, postcode, place } = formTextData
   , { previous, next } = navigation
   , { isNext, isCurrent, isPrev } = indicators
   , isCurrentClass = isCurrent ? " current" : ""
   , isPrevClass = isPrev ? " prev" : ""
   , isNextClass = isNext ? " next" : ""
-  // , [isAccept, setAccept] = useState(false)
-  , isEmailValid = emailStr => {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    return re.test(String(emailStr).toLowerCase())
-  }
-  , isFormValid = () => {
-    // return (
-    //   firstName.length > 0
-    //   && lastName.length > 0
-    //   && isEmailValid(email)
-    //   && isAccept
-    // )
-  }
+  , isFormValid = () => (
+    fname.length > 0
+    && lname.length > 0
+    && street.length > 0
+    && postcode.length > 0
+    && place.length > 0
+  )
   , submitForm = e => {
+    l(formObjData, formTextData)
+
     // formData.date = date.toISOString().slice(0, 19).replace('T', ' ')
-    // // l(formData)
     // new HttpService()
     // .post('/process.php', { formData })
     // .then(res => {
@@ -593,7 +596,7 @@ const l = console.log.bind(window.console)
         
           <div className="ctn-btn">
             <button className="btn btn-sec mr-2" onClick={previous}>Zurück</button>
-            <button className="btn btn-acc" onClick={() => {next(); l(formTextData, formObjData)}}>Angebot erhalten</button>
+            <button className="btn btn-acc" disabled={!isFormValid()} onClick={submitForm}>Angebot erhalten</button>
           </div>  
         </div>
         
@@ -602,7 +605,7 @@ const l = console.log.bind(window.console)
   )
 }
 
-, Step8 = ({ indicators, formObjData, formTextData, toggle, toggleMoreInfo }) => {  
+, Step8 = ({ indicators, toggle, toggleMoreInfo }) => {  
   const { isNext, isCurrent, isPrev } = indicators
   , isCurrentClass = isCurrent ? " current" : ""
   , isPrevClass = isPrev ? " prev" : ""

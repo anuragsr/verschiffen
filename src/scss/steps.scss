@@ -267,7 +267,11 @@
         .fc-daygrid-day-frame{ height: 35px; }
         .fc-daygrid-day{ 
           cursor: pointer; 
-          &:hover, &.active{
+          &.fc-day-past{ 
+            cursor: not-allowed; 
+            a{ color: rgba($b, .3); }
+          }
+          &:not(.fc-day-past):hover, &:not(.fc-day-past).active{
             a { background: $acc; color: $w; }
           }
         }
@@ -322,6 +326,10 @@
       font-size: 14px;
       text-align: right;
       color: rgba(37, 58, 65, 0.3);
+    }
+    ul{
+      font-size: 12px;
+      padding-left: 15px;
     }
   }
 

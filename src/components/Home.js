@@ -22,16 +22,10 @@ export default function Main({ ref1, ref2 , ref3, ref4 }){
   , initFormData = { vonStadt: 'Berlin', nachStadt: 'Shanghai' }
   , [{ vonStadt, nachStadt }, setValue] = useForm(initFormData)
   , onFormSubmit = e => {
-    l("Submit")
-    l({ vonStadt, nachStadt })
+    // l("Submit")
+    // l({ vonStadt, nachStadt })
     e.preventDefault()
     toggle()
-    // toggle({ 
-    //   eventStr: info.event.extendedProps.dateTime, 
-    //   eventDate: mySqlDate(info.event.start),
-    //   startStr: info.event.startStr, 
-    //   endStr: info.event.endStr 
-    // })
   }  
   , goToSection = (e, ref) => {
     e.preventDefault()

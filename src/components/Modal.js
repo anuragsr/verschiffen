@@ -6,7 +6,7 @@ import { Step1, Step2, Step3, Step4, Step5, Step6, Step7, Step8 } from "./Steps"
 const l = console.log.bind(window.console)
 , steps = [ Step1, Step2, Step3, Step4, Step5, Step6, Step7, Step8 ]
 , useModal = () => {
-  const [isShowing, setIsShowing] = useState(false)
+  const [isShowing, setIsShowing] = useState(true)
   , [showMoreInfo, setShowMoreInfo] = useState(false)
   , toggle = () => { setIsShowing(!isShowing) }
   , toggleMoreInfo = () => { setShowMoreInfo(!showMoreInfo) }
@@ -21,9 +21,9 @@ const l = console.log.bind(window.console)
   showMoreInfo, toggleMoreInfo
 }) => {
 
-  // Form and Navigation
+  // Form data and Navigation
   const textData = {
-    numCon: 0,
+    numCon: "0",
     details: "",
     email: "",
     phone: "",
@@ -44,7 +44,7 @@ const l = console.log.bind(window.console)
   }
   , [formTextData, setFormText] = useForm(textData)
   , [formObjData, setFormObj] = useState(objData)
-  , { index, navigation } = useStep({ initialStep: 0, steps })
+  , { index, navigation } = useStep({ initialStep: 5, steps })
   , props = { 
     isShowing, toggle, 
     showMoreInfo, toggleMoreInfo,

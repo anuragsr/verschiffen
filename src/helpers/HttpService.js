@@ -16,7 +16,7 @@ switch(env){
     break;
   
   default: // local
-    apiHost = 'http://localhost/cloudbasiert-be'
+    apiHost = 'http://localhost/verschiffen-be'
     break; 
 }
 
