@@ -22,10 +22,14 @@ main.home{
       background: url(../img/bg1.jpg) no-repeat center;
       background-size: cover;
       color: $w;
-      @include media("<tab"){
+      @include media("<=tab"){
         padding-top: 15vh;
-        height: 75vh;      
+        height: 90vh;
         overflow: hidden;
+      }
+      @include media("<mob-sm"){
+        padding-top: 25vh;
+        height: 100vh;
       }
       h1{ 
         font-size: 50px; 
@@ -38,13 +42,20 @@ main.home{
         margin-top: 25px;
         line-height: 40px;
         font-size: 25px; 
-        &.mobile-only{ font-size: 15px; }
+        &.mobile-only{ 
+          font-size: 15px; 
+          margin-top: 10px;
+          margin-bottom: 25px;
+          font-family: $ex-r;
+        }
       }
       .ctn-search{
         background: $sc;
         padding: 35px;
         .title, .subtitle{ margin-bottom: 20px; }
-        .title{ font-size: 25px; }
+        .title{ 
+          font-size: 25px; 
+        }
         .subtitle{ font-family: $ex-r; font-size: 15px; }
         .form-group{
           // height: 56px;
@@ -83,12 +94,29 @@ main.home{
       padding: 20px;
       padding-bottom: 35px;
       background: rgba(#134555, .05);
+      @include media("<=tab"){
+        padding-bottom: 20px;
+      }
       .title{
         font-size: 20px;
         margin-bottom: 15px;
-        img{ 
-          height: 20px; margin-right: 5px; 
-          position: relative; top: -4px;
+        @include media("<=tab"){
+          font-size: 15px;
+          margin-bottom: 0px;
+          line-height: 1.25;
+        }
+        .ctn-stars{
+          position: relative; 
+          top: -4px;
+          margin-left: 15px;
+          @include media("<=tab"){
+            margin-left: 0;
+            margin-top: 15px;
+            display: block;
+          }
+          img{ 
+            height: 20px; margin-right: 5px; 
+          }
         }
       }
       .subtitle{
@@ -103,15 +131,25 @@ main.home{
         margin-top: 100px;
         .ctn-point{ 
           margin-bottom: 80px;
-          @include media("<tab"){ width: 100%; }          
-          // img{ height: 60px; }
+          @include media("<=tab"){ 
+            width: 100%; 
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 30px;
+          }
           .num{ 
             line-height: 1;
             font-size: 50px; 
+            @include media("<=tab"){ 
+              font-size: 45px; 
+            }
             font-family: $os-r;
             &.dashed:after{
               content: "";
               transform: translate(-50%, 50px) scaleX(5);
+              @include media("<=tab"){ 
+                transform: translate(-50%, 15px) scaleX(5);
+              }
               height: 120px;
               width: 1px;
               position: absolute;
@@ -129,10 +167,18 @@ main.home{
           }
           h4{
             font-size: 30px;
+            @include media("<=tab"){ 
+              font-size: 25px;
+              line-height: 1.25;
+            }
           }
           p{ 
             font-family: $ex-r;
             font-size: 20px; 
+            @include media("<=tab"){ 
+              font-size: 14px;
+              line-height: 1.65;
+            }
           }
         }
       }
@@ -154,32 +200,27 @@ main.home{
           padding: 10px;
           width: 250px;
           height: 165px;
-          @include media("<tab"){
-            margin: 5px;
-            padding: 10px;
-            width: 165px;
-            height: 120px;
-            justify-content: center;
-            vertical-align: top;
+          margin-bottom: 80px; 
+          @include media("<=tab"){
+            margin: 0;
+            margin-bottom: 30px; 
+            padding: 0;
+            width: 100%;
+            height: auto;
           }
-          // &:hover{
-          //   // box-shadow: inset 0 4px 4px 0 rgba(31, 68, 84, 0.1);
-          //   border: solid 2px rgba($acc, 1);
-          // }
           img{ 
             height: 50px; 
             margin-bottom: 25px;
           }
           span{
-            font-size: 25px; 
-            @include media("<tab"){ font-size: 14px; }
+            font-size: 25px;            
           }
           p{ 
             margin-top: 20px;
             font-size: 17px;
             font-family: $ex-r; 
             line-height: 1.25; 
-            // @include media("<tab"){ display: none; }
+            @include media("<=tab"){ font-size: 14px; }
           }
         }
       }
@@ -192,15 +233,34 @@ main.home{
         padding: 70px;
         padding-right: 40px;
         border-radius: 10px;
+        @include media("<=tab"){ 
+          text-align: center;
+          width: 95%;
+          transform: none;
+          margin: 0 auto;
+          padding: 40px 15px;
+        }
         h4{ font-size: 30px; }
         p{ font-family: $ex-r; font-size: 20px; margin: 40px 0; }
+        .col-lg-5 .row .col-6{ 
+          @include media(">tab"){ padding-right: 0; }
+          &:first-of-type{
+            @include media("<=tab"){ padding-right: 5px; }
+          }
+          &:last-of-type{
+            @include media("<=tab"){ padding-left: 5px; }
+          }
+        }
         .ctn-cargo{
           @extend %j-c;
           background: #2a5b71;
           border-radius: 5px;
           height: 66px;
           margin-bottom: 20px;
-          img{ height: 25px; }
+          img{ 
+            height: 25px; 
+            @include media("<=tab"){ height: 20px; }
+          }
         }
       }
     }
@@ -209,16 +269,23 @@ main.home{
       .ctn-bm-outer{
         position: relative;
         height: 505px;
-        margin-top: 50px;
+        margin: 50px 0;
+        @include media("<=tab"){
+          height: 455px;
+        }
         .ctn-layer0{
           @include pa(0, 0);
           z-index: -1;
           @extend %fh;
-          width: 75%;          
           border-radius: 5px;
           background-color: rgba(196, 196, 196, 0.2);
+          width: 75%;          
           transform: translateX(15%);
           padding: 35px;
+          @include media("<=tab"){
+            width: 80%;
+            transform: translateX(12%);
+          }
           .row{
             padding: 15px 0;
             >div>div{ background: rgba($w, .5); padding: 10px;}
@@ -233,6 +300,9 @@ main.home{
           border-radius: 5px;
           border: solid 1px rgba(31, 68, 84, 0.2);
           background: $w;
+          @include media("<=tab"){
+            padding: 30px 5px;
+          }
           &::after{
             @include pa(0, 0);
             height: 150%;
@@ -251,15 +321,30 @@ main.home{
             color: $w;
             font-family: $ex-r;
             border-top-left-radius: 5px;
+            @include media("<=tab"){
+              font-size: 15px;
+              padding: 5px;
+            }
           }
-          img{ height: 27px; }
+          img{ 
+            height: 27px; 
+            @include media("<=tab"){ height: 12px; }
+          }
           .ctn-ship-info{
             @extend %j-s-b;
-            >div:first-of-type{ text-align: right; }
-            >div:last-of-type{ text-align: left; }
+            @include media("<=tab"){ transform: translateX(8px); }
+            >div:first-of-type{ 
+              text-align: right; 
+              transform: scale(0.8) translate(0px, 20px);
+            }
+            >div:last-of-type{ 
+              text-align: left; 
+              transform: scale(0.8) translate(0px, 20px);
+            }
             .date{
               font-family: $ex-r;
               font-size: 15px;
+              @include media("<=tab"){ display: none; }
             }
             .stadt{
               font-family: $ex-r;
@@ -268,11 +353,21 @@ main.home{
             }
             .ctn-ship-graphic{
               width: 450px;
-              margin: 0 25px;
+              margin: 0 25px;              
+              @include media("<=tab"){ 
+                width: 30vw; 
+                margin: 0 5px;
+              }
               >div:first-of-type{
                 @extend %j-s-b; 
                 padding: 0 25px;
-                img{ height: 30px; }
+                @include media("<=tab"){ padding: 0 5px; }
+                img{ 
+                  height: 30px; 
+                  &.con{
+                    @include media("<=tab"){ height: 15px; }
+                  }
+                }
               }
               .bar{ 
                 margin-top: 5px;
@@ -292,6 +387,7 @@ main.home{
             }
           }
           .ctn-price{
+            @include media("<=tab"){ transform: scale(0.7); }
             >div:first-of-type{
               font-family: $ex-r;
               font-size: 15px;
@@ -311,44 +407,69 @@ main.home{
     }
 
     &.section4{
+      @include media("<=tab"){
+        height: 100vh;
+      }
       .row{
         margin: 50px auto;
-        .box{
-          @extend %j-s-b;
-          flex-direction: column;
-          padding: 25px;
-          border-radius: 4px;
-          box-shadow: 0 4px 14px 0 rgba(33, 14, 74, 0.08);
-          @include media("<tab"){
-            margin-bottom: 50px;
-            padding: 25px;
-            height: auto;
+      }
+      
+      .box{
+        @extend %j-s-b;
+        flex-direction: column;
+        padding: 25px;
+        border-radius: 4px;
+        box-shadow: 0 4px 14px 0 rgba(33, 14, 74, 0.08);
+        @include media("<=tab"){
+          background: $w;
+          padding: 15px;
+          height: auto;
+          width: 85vw;
+        }
+        .ctn-stars{
+          img{ 
+            height: 15px; 
+            margin-right: 5px;
           }
-          .ctn-stars{
-            img{ 
-              height: 15px; 
-              margin-right: 5px;
-            }
+        }
+        .r-title{ 
+          font-size: 22px; 
+          margin: 15px 0;
+        }
+        .r-content{ 
+          font-family: $os-r; 
+          width: 80%;
+          font-size: 15px;
+          text-align: justify;
+        }
+        .r-ft{
+          font-size: 20px;
+          div{ color: $acc; }
+          img{ 
+            height: 70px;  margin-left: 10px; 
+            position: relative; top: -7px;
           }
-          .r-title{ 
-            font-size: 22px; 
-            margin: 15px 0;
-          }
-          .r-content{ 
-            font-family: $os-r; 
-            width: 80%;
-            font-size: 15px;
-            text-align: justify;
-          }
-          .r-ft{
-            font-size: 20px;
-            div{ color: $acc; }
-            img{ 
-              height: 70px;  margin-left: 10px; 
-              position: relative; top: -7px;
-            }
-            span{ font-family: $ex-r; }
-          }
+          span{ font-family: $ex-r; }
+        }
+      }
+      
+      .carousel{
+        .carousel-viewport{ overflow: visible; }
+        .carousel-slide{ 
+          position: relative;
+          top: 0;
+          vertical-align: top;
+          transition: opacity .5s ease-in-out, top .5s;
+        }
+        .carousel-slide-selected{ top: 50px; }
+        .carousel-arrow{
+          bottom: 125px;
+          border: none!important;
+          color: rgba(37, 58, 65, 0.5);
+          box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+          background-color: #fcfcfc;
+          &.carousel-left-arrow{ left: -7px; }
+          &.carousel-right-arrow{ right: -7px; }
         }
       }
     }
@@ -420,6 +541,8 @@ main.home{
           border-radius: 10px;
           background-color: #f7f7f7;
           padding: 50px 20px;
+          width: 90%;
+          margin: 0 auto;
           p{ 
             font-family: $ex-r; 
             font-size: 30px;
@@ -442,6 +565,36 @@ main.home{
         }
       }
     }
+    
+    &.section-faq{
+      .ctn-qa{
+        padding: 20px 0;
+        margin-left: 25px;
+        margin-right: 15px;
+        border-bottom: 1px solid rgba($b, .2);
+        &:last-of-type{ border: none; }
+        p{ font-family: $ex-r; }
+        .ctn-q{ 
+          @extend %j-s-b;
+          margin-bottom: 10px;
+          align-items: flex-start;
+          p{ font-size: 17px; margin-bottom: 0; }
+          .ctn-exp-icon{
+            @extend %j-c;
+            padding: 5px;
+            transform: rotate(180deg);
+            transition: transform .5s;
+            height: 30px;
+            width: 30px;
+            &.shown{ transform: rotate(0deg); }
+            img{ 
+              height: 8px; 
+              &.plus{ height: 16px; } 
+            }
+          }
+        }
+      }
+    }
 
     &.section7{
       color: $w;
@@ -456,8 +609,10 @@ main.home{
         margin-bottom: 30px;
         font-family: $os-sb;
         font-size: 30px;
-        @include media("<tab"){
-          font-size: 18px;
+        @include media("<=tab"){
+          font-family: $ex-r;
+          font-size: 25px;
+          line-height: 1.8;
         }
       }
     }

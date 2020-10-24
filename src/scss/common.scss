@@ -57,8 +57,8 @@ a.acc{
   font-family: $os-sb;
 }
 
-.desktop-only{ @include media("<tab"){ display: none!important; } }
-.mobile-only{ @include media(">=tab"){ display: none!important; } }
+.desktop-only{ @include media("<=tab"){ display: none!important; } }
+.mobile-only{ @include media(">tab"){ display: none!important; } }
 
 .form-control{
   &:focus{ 

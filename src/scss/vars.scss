@@ -6,8 +6,9 @@ $txt-pr: #1f4454;
 $tr: transparent;
 
 $breakpoints: (
+  'mob-sm': 380px,
   'mob': 500px,
-  'tab': 769px,
+  'tab': 768px,
   'ld': 1500px,
   // 'mob-ls': 850px,
   // 'sd-cust': 1000px,

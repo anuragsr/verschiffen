@@ -36,17 +36,17 @@ export default function Home({ ref0, ref1, ref2 , ref3 }){
         <section className="section0" ref={ref0}>
           <div className="container">
             <div className="row">
-              <div className="col-7">
+              <div className="col-lg-7 d-none d-lg-block">
                 <h1 className="desktop-only">Wohin wollen Sie <span className="acc">verschiffen</span>?</h1>
-                {/* <h1 className="mobile-only">AWS Kosteneinsparung</h1> */}
                 <h4 className="desktop-only">
                   In wenigen Schritten zum Angebot.<br/>
                   100% kostenfrei. Einfach. Unverbindlich.
                 </h4>
               </div>
-              <div className="col-5">
+              <div className="col-lg-5">
                 <div className="ctn-search">
-                  <div className="title">Finden Sie das beste Angebot</div>
+                  <div className="desktop-only title">Finden Sie das beste Angebot</div>
+                  <div className="mobile-only title">Wohin wollen Sie <span className="acc">verschiffen</span>?</div>
                   <div className="subtitle">Vergleichen Sie eine Vielzahl von Angeboten und finden Sie den für Sie optimalenAngebot.</div>
                   <form onSubmit={onFormSubmit}>
                     <div className="form-group">
@@ -74,14 +74,14 @@ export default function Home({ ref0, ref1, ref2 , ref3 }){
                 </div>
               </div>            
             </div>
-            {/* <h4 className="mobile-only">On-demand Experten für Sie jederzeit verfügbar.</h4> */}
+            <h4 className="mobile-only text-center">In wenigen Schritten zum Angebot.</h4>
           </div>
         </section>
         
         <section className="ctn-rating text-center">
           <div className="title">
-            <span>Kunden bewerten Verschiffen.com mit 4.8 / 5 </span>
-            <span className="ml-2">
+            <span>Kunden bewerten Verschiffen.com mit 4.8 / 5</span>
+            <span className="ctn-stars">
               <img src="assets/star.png" alt=""/>
               <img src="assets/star.png" alt=""/>
               <img src="assets/star.png" alt=""/>
@@ -89,7 +89,7 @@ export default function Home({ ref0, ref1, ref2 , ref3 }){
               <img src="assets/star.png" alt=""/>
             </span>
           </div>
-          <div className="subtitle">
+          <div className="desktop-only subtitle">
             durchschnittlich von <span className="acc">453,123 Bewertungen</span>
           </div>
         </section>
@@ -101,11 +101,11 @@ export default function Home({ ref0, ref1, ref2 , ref3 }){
             <h1 className="mobile-only">So funktioniert es</h1>
             <div className="points">
               <div className="ctn-point row">
-                <div className="col-3">
+                <div className="col-lg-3 d-none d-lg-block">
                   <img src="assets/func1.jpg" alt=""/>
                 </div>
-                <div className="col-1 num dashed">1</div>
-                <div className="col-8 text-left">
+                <div className="col-2 col-lg-1 num dashed">1</div>
+                <div className="col-10 col-lg-8 text-left">
                   <h4>Erstellen Sie einen Projektauftrag</h4>
                   <p>
                     Einfaches Einfügen nur von Schlüsselinformationen. Fordern Sie Angebote 
@@ -114,25 +114,27 @@ export default function Home({ ref0, ref1, ref2 , ref3 }){
                 </div>
               </div>
               <div className="ctn-point row">
-                <div className="col-3">
+                <div className="col-lg-3 d-none d-lg-block">
                   <img src="assets/func2.jpg" alt=""/>
                 </div>
-                <div className="col-1 num dashed">2</div>
-                <div className="col-8 text-left">
+                <div className="col-2 col-lg-1 num dashed">2</div>
+                <div className="col-10 col-lg-8 text-left">
                   <h4>Echtzeit-Kurse vergleichen</h4>
                   <p>
                     Erhalten Sie einen Überblick über alle buchbaren Kapazitäten mehrerer 
-                    Frachtgesellschaften (inkl. Hauptdeck und Frachter) Echtzeit-Preise direkt 
-                    von der Fluggesellschaft erhalten, wie am Telefon.
+                    Frachtgesellschaften (inkl. Hauptdeck und Frachter) 
+                    <span className="desktop-only">
+                      Echtzeit-Preise direkt von der Fluggesellschaft erhalten, wie am Telefon.
+                    </span>
                   </p>
                 </div>
               </div>
               <div className="ctn-point row">
-                <div className="col-3">
+                <div className="col-lg-3 d-none d-lg-block">
                   <img src="assets/func3.jpg" alt=""/>
                 </div>
-                <div className="col-1 num">3</div>
-                <div className="col-8 text-left">
+                <div className="col-2 col-lg-1 num">3</div>
+                <div className="col-10 col-lg-8 text-left">
                   <h4>Direkt über die Plattform buchen</h4>
                   <p>
                     Alle Angebote mit nur zwei Klicks buchen. Nutzen Sie Ihren vorhandenen 
@@ -151,59 +153,88 @@ export default function Home({ ref0, ref1, ref2 , ref3 }){
             <h1 className="desktop-only">Ein Paket ein Preis</h1>
             <h1 className="mobile-only">Ein Paket ein Preis</h1>
             <div className="ctn-boxes">
-              <div className="box">
-                <img src="assets/th1.png" alt=""/>
-                <span>Verzollung</span>
-                <p>Wir helfen Dir dabei die benötigten Unterlagen auszufüllem</p>
-              </div>
-              <div className="box">
-                <img src="assets/th2.png" alt=""/>
-                <span>Transport</span>
-                <p>Wir helfen Dir dabei die benötigten Unterlagen auszufüllem</p>
-              </div>
-              <div className="box">
-                <img src="assets/th3.png" alt=""/>
-                <span>Anmeldung</span>
-                <p>Wir helfen Dir dabei die benötigten Unterlagen auszufüllem</p>
-              </div>
-            </div>
-            <div className="ctn-boxes">
-              <div className="box">
-                <img src="assets/th4.png" alt=""/>
-                <span>Versicherung</span>
-                <p>Wir helfen Dir dabei die benötigten Unterlagen auszufüllem</p>
-              </div>
-              <div className="box">
-                <img src="assets/th5.png" alt=""/>
-                <span>Sicherheit </span>
-                <p>Wir helfen Dir dabei die benötigten Unterlagen auszufüllem</p>
-              </div>
-              <div className="box">
-                <img src="assets/th6.png" alt=""/>
-                <span>Support</span>
-                <p>Wir helfen Dir dabei die benötigten Unterlagen auszufüllem</p>
+              <div className="row">
+                <div className="col-6 col-lg-4">
+                  <div className="box">
+                    <img src="assets/th1.png" alt=""/>
+                    <span>Verzollung</span>
+                    <p>Wir helfen Dir dabei die benötigten Unterlagen auszufüllem</p>
+                  </div>
+                </div>
+
+                <div className="col-6 col-lg-4">
+                  <div className="box">
+                    <img src="assets/th2.png" alt=""/>
+                    <span>Transport</span>
+                    <p>Wir helfen Dir dabei die benötigten Unterlagen auszufüllem</p>
+                  </div>
+                </div>
+
+                <div className="col-6 col-lg-4">
+                  <div className="box">
+                    <img src="assets/th3.png" alt=""/>
+                    <span>Anmeldung</span>
+                    <p>Wir helfen Dir dabei die benötigten Unterlagen auszufüllem</p>
+                  </div>
+                </div>
+
+                <div className="col-6 col-lg-4">
+                  <div className="box">
+                    <img src="assets/th4.png" alt=""/>
+                    <span>Versicherung</span>
+                    <p>Wir helfen Dir dabei die benötigten Unterlagen auszufüllem</p>
+                  </div>
+                </div>
+
+                <div className="col-6 col-lg-4">
+                  <div className="box">
+                    <img src="assets/th5.png" alt=""/>
+                    <span>Sicherheit </span>
+                    <p>Wir helfen Dir dabei die benötigten Unterlagen auszufüllem</p>
+                  </div>
+                </div>
+
+                <div className="col-6 col-lg-4">
+                  <div className="box">
+                    <img src="assets/th6.png" alt=""/>
+                    <span>Support</span>
+                    <p>Wir helfen Dir dabei die benötigten Unterlagen auszufüllem</p>
+                  </div>
+                </div>
+
               </div>
             </div>
             <div className="info-box">
               <div className="row">
-                <div className="col-7">
-                  <h4>Erhalte direkten Zugang zu den führenden Anbietern auf einer Plattform.</h4>
-                  <p>Erhalten Sie Echtzeitpreise für verfügbare Kapazitäten und buchen Sie direkt in die Systeme der Fluggesellschaften.</p>
-                  <button className="btn btn-acc" onClick={e => goToSection(e, ref0)}>Jetz beginnen</button>
+                <div className="col-lg-7">
+                  <h4>
+                    Erhalte direkten Zugang zu den führenden Anbietern
+                    <span className="desktop-only"> auf einer Plattform</span>.
+                  </h4>
+                  <p>
+                    Erhalten Sie Echtzeitpreise für verfügbare Kapazitäten 
+                    <span className="desktop-only">
+                      und buchen Sie direkt in die Systeme der Fluggesellschaften
+                    </span>
+                  .</p>
+                  <button className="desktop-only btn btn-acc" onClick={e => goToSection(e, ref0)}>Jetz beginnen</button>
                 </div>
-                <div className="col-5 row">
-                  <div className="col-6 pr-0">
-                    <div className="ctn-cargo"><img src="assets/cargo.png" alt=""/></div>
-                    <div className="ctn-cargo"><img src="assets/cargo.png" alt=""/></div>
-                    <div className="ctn-cargo"><img src="assets/cargo.png" alt=""/></div>
-                  </div>
-                  <div className="col-6 pr-0 mt-4">
-                    <div className="ctn-cargo"><img src="assets/cargo.png" alt=""/></div>
-                    <div className="ctn-cargo"><img src="assets/cargo.png" alt=""/></div>
-                    <div className="ctn-cargo"><img src="assets/cargo.png" alt=""/></div>
+                <div className="col-lg-5">
+                  <div className="row">
+                    <div className="col-6">
+                      <div className="ctn-cargo"><img src="assets/cargo.png" alt=""/></div>
+                      <div className="ctn-cargo"><img src="assets/cargo.png" alt=""/></div>
+                      <div className="ctn-cargo"><img src="assets/cargo.png" alt=""/></div>
+                    </div>
+                    <div className="col-6 mt-4">
+                      <div className="ctn-cargo"><img src="assets/cargo.png" alt=""/></div>
+                      <div className="ctn-cargo"><img src="assets/cargo.png" alt=""/></div>
+                      <div className="ctn-cargo"><img src="assets/cargo.png" alt=""/></div>
+                    </div>
                   </div>
                 </div>
               </div>
+              <button className="mobile-only btn btn-acc" onClick={e => goToSection(e, ref0)}>Jetz beginnen</button>
             </div>
           </div>
         </section>
@@ -213,7 +244,7 @@ export default function Home({ ref0, ref1, ref2 , ref3 }){
             <h2 className="desktop-only acc">Angebot auswählen</h2>
             <h1 className="desktop-only">Wählen Sie ihr passendes<br/> Angebot</h1>
             <h2 className="mobile-only acc">Angebot auswählen</h2>
-            <h1 className="mobile-only">Wählen Sie ihr passendes<br/> Angebot</h1>
+            <h1 className="mobile-only">Angebote perfekt vergleichen</h1>
             <div className="ctn-bm-outer">
               <div className="ctn-layer0">
                 <div className="row">
@@ -236,7 +267,7 @@ export default function Home({ ref0, ref1, ref2 , ref3 }){
                   <div className="col-8"><div></div></div>
                   <div className="col-2"><div></div></div>
                 </div><hr/>
-                <div className="row">
+                <div className="row desktop-only">
                   <div className="col-2"><div></div></div>
                   <div className="col-8"><div></div></div>
                   <div className="col-2"><div></div></div>
@@ -254,9 +285,9 @@ export default function Home({ ref0, ref1, ref2 , ref3 }){
                   </div>
                   <div className="ctn-ship-graphic">
                     <div>
-                      <img src="assets/container.png" alt=""/>
+                      <img className="con" src="assets/container.png" alt=""/>
                       <img src="assets/ship.png" alt=""/>
-                      <img src="assets/container.png" alt=""/>
+                      <img className="con" src="assets/container.png" alt=""/>
                     </div>
                     <div className="bar"></div>
                     <span className="stadt">SHA</span>
@@ -274,6 +305,7 @@ export default function Home({ ref0, ref1, ref2 , ref3 }){
                 </div>
               </div>
             </div>
+            <button className="mobile-only btn btn-acc" onClick={e => goToSection(e, ref0)}>Jetz beginnen</button>
           </div>
         </section>
 
@@ -283,8 +315,83 @@ export default function Home({ ref0, ref1, ref2 , ref3 }){
             <h1 className="desktop-only">Zufriedene Unternehmen</h1>
             <h2 className="mobile-only acc">Bewertungen</h2>
             <h1 className="mobile-only">Zufriedene Unternehmen</h1>
-            <div className="row">
-              <div className="col-md-4">
+            <div className="desktop-only">
+              <div className="row">
+                <div className="col-md-4">
+                  <div className="box">
+                    <div className="ctn-stars">
+                      <img src="assets/star2.png" alt=""/>
+                      <img src="assets/star2.png" alt=""/>
+                      <img src="assets/star2.png" alt=""/>
+                      <img src="assets/star2.png" alt=""/>
+                      <img src="assets/star2.png" alt=""/>
+                    </div>
+                    <div className="r-title">Thank You</div>
+                    <p className="r-content">
+                      “Send shareable cloud tests and get feedback immediately.
+                      Send shareable bug tests and get feedback immediately.
+                      Send shareable bug tests and get feedback immediately."
+                    </p>
+                    <div className="r-ft">
+                      <div>12x <img src="assets/cargo 2.png" alt=""/></div>
+                      Berlin <span>to</span> Shanghai
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-4">
+                  <div className="box">
+                    <div className="ctn-stars">
+                      <img src="assets/star2.png" alt=""/>
+                      <img src="assets/star2.png" alt=""/>
+                      <img src="assets/star2.png" alt=""/>
+                      <img src="assets/star2.png" alt=""/>
+                      <img src="assets/star2.png" alt=""/>
+                    </div>
+                    <div className="r-title">All Perfect</div>
+                    <p className="r-content">
+                      “Send shareable cloud tests and get feedback immediately.
+                      Send shareable bug tests and get feedback immediately.
+                      Send shareable bug tests and get feedback immediately."
+                    </p>
+                    <div className="r-ft">
+                      <div>12x <img src="assets/cargo 2.png" alt=""/></div>
+                      Berlin <span>to</span> Shanghai
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-4">
+                  <div className="box">
+                    <div className="ctn-stars">
+                      <img src="assets/star2.png" alt=""/>
+                      <img src="assets/star2.png" alt=""/>
+                      <img src="assets/star2.png" alt=""/>
+                      <img src="assets/star2.png" alt=""/>
+                      <img src="assets/star2.png" alt=""/>
+                    </div>
+                    <div className="r-title">Best Experience</div>
+                    <p className="r-content">
+                      “Send shareable cloud tests and get feedback immediately.
+                      Send shareable bug tests and get feedback immediately.
+                      Send shareable bug tests and get feedback immediately."
+                    </p>
+                    <div className="r-ft">
+                      <div>12x <img src="assets/cargo 2.png" alt=""/></div>
+                      Berlin <span>to</span> Shanghai
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <img src="assets/trustpilot.jpg" alt=""/>
+            </div>
+            
+            <div className="mobile-only">
+              <Carousel 
+                cellPadding={-55}
+                lazyLoad={false}
+                dots={false}
+                infinite={false}
+                clickToNavigate={false}
+              >
                 <div className="box">
                   <div className="ctn-stars">
                     <img src="assets/star2.png" alt=""/>
@@ -304,8 +411,7 @@ export default function Home({ ref0, ref1, ref2 , ref3 }){
                     Berlin <span>to</span> Shanghai
                   </div>
                 </div>
-              </div>
-              <div className="col-md-4">
+              
                 <div className="box">
                   <div className="ctn-stars">
                     <img src="assets/star2.png" alt=""/>
@@ -325,8 +431,7 @@ export default function Home({ ref0, ref1, ref2 , ref3 }){
                     Berlin <span>to</span> Shanghai
                   </div>
                 </div>
-              </div>
-              <div className="col-md-4">
+              
                 <div className="box">
                   <div className="ctn-stars">
                     <img src="assets/star2.png" alt=""/>
@@ -346,13 +451,13 @@ export default function Home({ ref0, ref1, ref2 , ref3 }){
                     Berlin <span>to</span> Shanghai
                   </div>
                 </div>
-              </div>
+                
+              </Carousel>
             </div>
-            <img src="assets/trustpilot.jpg" alt=""/>
           </div>
         </section>
         
-        <section className="section5">
+        <section className="section5 desktop-only">
           <div className="container">
             <div className="ctn-carousel">
               <Carousel 
@@ -424,7 +529,7 @@ export default function Home({ ref0, ref1, ref2 , ref3 }){
                 </div>
                 <div className="block">
                   <span className="acc">Email</span><br/>
-                  info@cloudbasiert.com
+                  info@verschiffen.com
                 </div>
                 <div className="block">
                   <span className="acc">Chat</span><br/>
@@ -449,13 +554,100 @@ export default function Home({ ref0, ref1, ref2 , ref3 }){
           </div>
         </section>
         
+        <section className="section-faq mobile-only">
+          <div className="container">
+
+            <div className="ctn-qa">
+              <div className="ctn-q">
+                <p>
+                  What to observe in case of illness?
+                </p>
+                <a className="ctn-exp-icon" data-toggle="collapse" href="#s-q1">
+                  <img className="plus" src="assets/plus.png" alt=""/>
+                </a>
+              </div>
+              <div className="collapse multi-collapse" id="s-q1">
+                <p>
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                </p>
+              </div>       
+            </div>
+
+            <div className="ctn-qa">
+              <div className="ctn-q">
+                <p>
+                  What to observe in case of illness?
+                </p>
+                <a className="ctn-exp-icon" data-toggle="collapse" href="#s-q2">
+                  <img className="plus" src="assets/plus.png" alt=""/>
+                </a>
+              </div>
+              <div className="collapse multi-collapse" id="s-q2">
+                <p>
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                </p>
+              </div>       
+            </div>
+
+            <div className="ctn-qa">
+              <div className="ctn-q">
+                <p>
+                  What to observe in case of illness?
+                </p>
+                <a className="ctn-exp-icon" data-toggle="collapse" href="#s-q3">
+                  <img className="plus" src="assets/plus.png" alt=""/>
+                </a>
+              </div>
+              <div className="collapse multi-collapse" id="s-q3">
+                <p>
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                </p>
+              </div>       
+            </div>
+
+            <div className="ctn-qa">
+              <div className="ctn-q">
+                <p>
+                  What to observe in case of illness?
+                </p>
+                <a className="ctn-exp-icon" data-toggle="collapse" href="#s-q4">
+                  <img className="plus" src="assets/plus.png" alt=""/>
+                </a>
+              </div>
+              <div className="collapse multi-collapse" id="s-q4">
+                <p>
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                </p>
+              </div>       
+            </div>
+
+            <div className="ctn-qa">
+              <div className="ctn-q">
+                <p>
+                  What to observe in case of illness?
+                </p>
+                <a className="ctn-exp-icon" data-toggle="collapse" href="#s-q5">
+                  <img className="plus" src="assets/plus.png" alt=""/>
+                </a>
+              </div>
+              <div className="collapse multi-collapse" id="s-q5">
+                <p>
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                </p>
+              </div>       
+            </div>
+
+          </div>
+        </section>
+
         <section className="section7">
           <div className="container text-center">
-            <img src="assets/starten.png" alt=""/>
+            <img className="desktop-only" src="assets/starten.png" alt=""/>
             <p className="desktop-only">Verschiffen Sie Ihre Ware weltweit</p>
-            <p className="mobile-only">Verschiffen Sie Ihre Ware weltweit</p>
-            <button className="btn btn-acc mr-3" onClick={e => goToSection(e, ref0)}>Angebot ansehen</button>
-            <button className="btn btn-sec" onClick={e => goToSection(e, ref0)}>Jetzt vergleichen</button>
+            <p className="mobile-only">Verschiffen Sie Ihre<br/> Ware weltweit</p>
+            <button className="desktop-only btn btn-acc mr-3" onClick={e => goToSection(e, ref0)}>Angebot ansehen</button>
+            <button className="desktop-only btn btn-sec" onClick={e => goToSection(e, ref0)}>Jetzt vergleichen</button>
+            <button className="mobile-only btn btn-acc" onClick={e => goToSection(e, ref0)}>Jetzt starten</button>
           </div>
         </section>
 

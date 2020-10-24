@@ -74,7 +74,7 @@ export default function Footer(){
         </div>
         <div className="logo text-center">
           <NavLink to="/">          
-            <span className="acc">Cloud</span>basiert.com
+            <span className="acc">Verschiffen</span>.com
           </NavLink>
         </div>
         <div className="ctn-icons text-center">
