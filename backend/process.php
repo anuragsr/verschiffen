@@ -3,6 +3,9 @@
   include('db.php');
   include('emails.php');
 
+  // $ship_id = '';
+  // $currentPath = '';
+
   class VSShipment{
     protected $db;
     
@@ -44,56 +47,31 @@
       try {
         $files = $data["files"];
           
-        if(count($files)){
-          // Create folder
-          $path = "../upload/".$ship_id." - ".$data['fname'];
-          mkdir($path, 0755, true);
+        // Create folder
+        $currentPath = "../upload/".$ship_id." - ".$data['fname'];
+        mkdir($currentPath, 0755, true);
+        
+        $data["path"] = $currentPath;
+        $data["ship_id"] = $ship_id;
 
+        if(count($files)){
           foreach ($files as $file){
-            move_uploaded_file($file["tmp_name"], $path."/".Common::generateRand(6)."_".$file["name"]);          
-          }
+            move_uploaded_file($file["tmp_name"], $currentPath."/".Common::generateRand(6)."_".$file["name"]);          
+          }      
         }
       } catch (Exception $e) {
         $err = true;
         Common::respond($e, "There was an error uploading files, please try again.", false);
       }
 
-      !$err && Common::respond(Common::sendEmail($data), "Shipment details added successfully.", true);
+      !$err && Common::respond(Common::sendEmail($data, "company"), "Shipment details added successfully.", true);
     }
 
-    public function sendMailToUser($input){
-      $eol = PHP_EOL;
-
-      $username = $input['firstName'] ." ". $input['lastName'];
-      $headers = "MIME-Version: 1.0". $eol;
-      $headers.= "Content-type:text/html;charset=UTF-8". $eol;
-      $headers.= "From: Paul from Cloudbasiert <paul@cloudbasiert.com>";
-
-      $to = $input['email'];
-      $subject = $username." | Email from Cloudbasiert.com";
-
-      $txt = "<div style='font-size: 1rem;'>";
-      $txt.= "  Hi ".$username.",<br/><br/>";
-      $txt.= "  Thanks for booking the appointment.<br/>Below are your details:<br/><br/>";
-      $txt.= "  <b>Chosen Workshop: </b>".$input['selOpts']."<br/>";
-      $txt.= "  <b>Selected Time Slot: </b>".$input['currEvent']['eventStr']."<br/><br/>";
-      $txt.= "  <b>Your Email: </b>".$input['email']."<br/>";
-      $txt.= "  <b>Your Telephone: </b>".$input['phone']."<br/><br/>";
-      $txt.= "  Thanks and Regards,<br/>";
-      $txt.= "  Paul from Cloudbasiert";
-      $txt.= "</div>";
-
-      if($GLOBALS['env'] === "local"){
-        Common::respond($input, "Attempted to send email.", 'mail($to, $subject, $txt, $headers)');
-      } else{
-        Common::respond($input, "Attempted to send email.", mail($to, $subject, $txt, $headers));
-      }
-    }
   }
 
   $e = new VSShipment($db);
   switch($_REQUEST["type"]){
     case 'addShipment': $e->addShipment($data); break;
-    default: $e->sendMailToUser($data, $files); break; // sendMailToUser
+    default: Common::respond("", "Attempted to send email to user.", Common::sendEmail($data, "user"));
   }
 ?>

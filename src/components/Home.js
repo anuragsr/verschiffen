@@ -115,7 +115,7 @@ export default function Home({ ref0, ref1, ref2 , ref3 }){
               </div>
               <div className="ctn-point row">
                 <div className="col-lg-3 d-none d-lg-block">
-                  <img src="assets/func2.jpg" alt=""/>
+                  <img src="assets/func2.png" alt=""/>
                 </div>
                 <div className="col-2 col-lg-1 num dashed">2</div>
                 <div className="col-10 col-lg-8 text-left">

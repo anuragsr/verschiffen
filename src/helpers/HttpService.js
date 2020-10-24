@@ -11,7 +11,7 @@ switch(env){
     break;
   
   case "prod": 
-    apiHost = 'http://cloudbasiert.com/backend'
+    apiHost = 'https://cloudbasiert.com/vs/backend'
     break;
   
   default: // local

@@ -22,6 +22,10 @@
   .inner{
     width: 40vw;
     margin: 0 auto;
+    @include media("<=tab"){ 
+      width: 100%; 
+      padding-bottom: 15vh;
+    }
   }
 
   .ctn-heading{
@@ -32,7 +36,7 @@
       display: inline-block;
       margin: 5px auto;
       font-size: 27px;
-      @include media("<tab"){
+      @include media("<=tab"){
         font-size: 24px;
       }
       img{
@@ -50,6 +54,8 @@
   .ctn-content{
     max-height: 55vh;
     margin-bottom: 35px;
+    @include media("<=tab"){ max-height: unset; }
+
     h5{ 
       font-size: 16px;
       margin-bottom: 35px;
@@ -86,6 +92,7 @@
       @extend %j-c;
       flex-wrap: wrap;
       justify-content: flex-start;
+      margin-bottom: 20px;
       .box{
         @extend %j-c;
         display: inline-flex;
@@ -103,7 +110,7 @@
         img{ height: 40px; margin-bottom: 10px; }
         span{ font-size: 15px; }
         opacity: .5;
-        @include media("<tab"){
+        @include media("<=tab"){
           width: 46%;
           margin: 5px;
         }
@@ -133,6 +140,7 @@
   &.step2{
     .ctn-content{
       width: 25vw;
+      @include media("<=tab"){ width: 100%; }
     }
     .ctn-cargo-ind{
       position: relative;
@@ -243,6 +251,7 @@
     .ctn-calendar{
       margin-bottom: 20px;
       width: 25vw;
+      @include media("<=tab"){ width: 100%; }
       .fc{
         .fc-toolbar-chunk:not(:empty){
           @extend %j-c;
@@ -319,7 +328,7 @@
       transition: border .24s ease-in-out;
       font-family: $ex-r;
       p{ margin-bottom: 0; }
-      a{ color: $acc; text-decoration: none; }
+      a{ color: $acc; text-decoration: none; cursor: pointer; }
     }
     .up-info{
       font-family: $ex-r;
@@ -334,10 +343,14 @@
   }
 
   &.step6{
-    .subtitle{
-      width: 400px;
-      color: $b; font-size: 14px;
-      margin: 0 auto;
+    .ctn-heading{
+      @include media("<=tab"){ margin-bottom: 20px; }          
+      .subtitle{
+        color: $b; font-size: 14px;
+        margin: 0 auto;
+        width: 400px;
+        @include media("<=tab"){ width: 100%; }
+      }
     }
     .form{
       input{

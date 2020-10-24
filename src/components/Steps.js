@@ -16,7 +16,37 @@ import { l, cl } from '../helpers/Log'
 
 import 'rsuite/dist/styles/rsuite-default.css'
 
-const Step1 = ({ indicators, formObjData, setFormObj, navigation, toggle, toggleMoreInfo }) => {
+const createFormData = (type, formObjData, formTextData) => {
+  l(formObjData, formTextData)
+
+  const formData = new FormData()
+  , { files } = formObjData
+  , mySqlDate = function(date) {
+    const twoDigits = d => {
+      if(0 <= d && d < 10) return "0" + d.toString()
+      if(-10 < d && d < 0) return "-0" + (-1*d).toString()
+      return d.toString()
+    }
+    return date.getUTCFullYear() + "-" + twoDigits(1 + date.getUTCMonth()) + "-" + twoDigits(date.getUTCDate())
+  }
+  
+  formData.append("type", type)
+
+  for(const key in formTextData){ formData.append(key, formTextData[key]) }
+  for(const key in formObjData){
+    switch(key){
+      case "files": files.forEach(x => formData.append("files[]", x)); break;
+      case "filled": formData.append(key, formObjData[key]["text"]); break;
+      case "conWeights": formData.append(key, formObjData[key].map(w => w+" kg").join(", ")); break;
+      case "date": formData.append(key, mySqlDate(formObjData[key])); break;
+      default: formData.append(key, formObjData[key]);
+    }
+  }
+
+  return formData
+}
+
+, Step1 = ({ indicators, formObjData, setFormObj, navigation, toggle, toggleMoreInfo }) => {
   const { next } = navigation
   , { isNext, isCurrent, isPrev } = indicators
   , isCurrentClass = isCurrent ? " current" : ""
@@ -488,7 +518,6 @@ const Step1 = ({ indicators, formObjData, setFormObj, navigation, toggle, toggle
 
 , Step7 = ({ indicators, formObjData, formTextData, setFormText, navigation, toggleMoreInfo }) => {  
   const { fname, lname, street, postcode, place } = formTextData
-  , { files } = formObjData
   , { previous, next } = navigation
   , { isNext, isCurrent, isPrev } = indicators
   , isCurrentClass = isCurrent ? " current" : ""
@@ -502,41 +531,18 @@ const Step1 = ({ indicators, formObjData, setFormObj, navigation, toggle, toggle
     && postcode.length > 0
     && place.length > 0
   )
-  , mySqlDate = function(date) {
-    const twoDigits = d => {
-      if(0 <= d && d < 10) return "0" + d.toString()
-      if(-10 < d && d < 0) return "-0" + (-1*d).toString()
-      return d.toString()
-    }
-    return date.getUTCFullYear() + "-" + twoDigits(1 + date.getUTCMonth()) + "-" + twoDigits(date.getUTCDate())
-  }
   , submitForm = e => {
     setSubmitted(true)
-    l(formObjData, formTextData)
-    
-    const formData = new FormData()
-    formData.append("type", "addShipment")
-
-    for(const key in formTextData){ formData.append(key, formTextData[key]) }
-    for(const key in formObjData){
-      switch(key){
-        case "files": files.forEach(x => formData.append("files[]", x)); break;
-        case "filled": formData.append(key, formObjData[key]["text"]); break;
-        case "conWeights": formData.append(key, formObjData[key].map(w => w+" kg").join(", ")); break;
-        case "date": formData.append(key, mySqlDate(formObjData[key])); break;
-        default: formData.append(key, formObjData[key]);
-      }
-    }
     
     new HttpService()    
-    .post('/process.php', formData)
+    .post('/process.php', createFormData("addShipment", formObjData, formTextData))
     .then(res => {
       const { data } = res
       l(data)
-      setTimeout(() => {
-        if(data.result) next(e)
-        else alert(data.message)
-      }, 1000)
+      if(data.result) next(e)
+      else alert(data.message)
+      // setTimeout(() => {
+      // }, 1000)
     })
   }
 
@@ -552,7 +558,7 @@ const Step1 = ({ indicators, formObjData, setFormObj, navigation, toggle, toggle
           <div className="ctn-content">
             <h5>Möchsten Sie uns noch Dokumente zusenden?</h5>
             <div className="row">
-              <div className="form col-8">
+              <div className="form col-md-8">
                 <div className="row">
                   <div className="col-12">                  
                     <div className="input-group">
@@ -641,11 +647,20 @@ const Step1 = ({ indicators, formObjData, setFormObj, navigation, toggle, toggle
   )
 }
 
-, Step8 = ({ indicators, toggle, toggleMoreInfo }) => {  
+, Step8 = ({ indicators, toggle, formObjData, formTextData, toggleMoreInfo }) => {  
   const { isNext, isCurrent, isPrev } = indicators
   , isCurrentClass = isCurrent ? " current" : ""
   , isPrevClass = isPrev ? " prev" : ""
   , isNextClass = isNext ? " next" : ""
+  , closeQuestionnaire = () => {
+    toggle()
+    new HttpService()    
+    .post('/process.php', createFormData("sendMailToUser", formObjData, formTextData))
+    .then(res => {
+      const { data } = res
+      l(data)
+    })
+  }
 
   return (
     <div className={`step step8${isCurrentClass}${isPrevClass}${isNextClass}`}>
@@ -664,7 +679,7 @@ const Step1 = ({ indicators, formObjData, setFormObj, navigation, toggle, toggle
           </div>
         
           <div className="ctn-btn text-center">
-            <button className="btn btn-acc" onClick={toggle}>Zur Startseite</button>
+            <button className="btn btn-acc" onClick={closeQuestionnaire}>Zur Startseite</button>
           </div>  
         </div>
         

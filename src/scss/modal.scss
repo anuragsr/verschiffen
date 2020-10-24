@@ -78,10 +78,13 @@
       position: relative;
       height: 60vh;
       margin-top: 5vh;
+      @include media("<=tab"){ height: 100vh; }
     }
     .modal-footer-custom{ 
-      @include pa("", 0, 0, "");
       @extend %fw;
+      @include pa("", 0, 0, "");
+      z-index: 1;
+      background: $w;
       .progress{
         @extend %fw;
         height: 3px;
@@ -94,11 +97,15 @@
           transition: width .3s;
         }
       }
-      .content{ padding: 50px; }
+      .content{ 
+        padding: 50px; 
+        @include media("<=tab"){ padding: 20px; }
+      }
       .footer-text{
         @include pa(0, 0);
         @extend %fhw;
         @extend %j-c;
+        @include media("<=tab"){ display: none; }
         font-family: $ex-r;
         z-index: -1;
         img{

@@ -22,7 +22,7 @@ export default function App() {
   }
 
   return (
-    <BrowserRouter basename="/">
+    <BrowserRouter basename="/vs">
       <div className="ctn-link">
         <Link to="/">Home</Link>
         <Link to="/team">Team</Link>
