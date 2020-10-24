@@ -24,5 +24,6 @@ yarn-debug.log*
 yarn-error.log*
 
 /backend/extra
+/backend/SyncToy_*
 /extra
 vs.code-workspace
