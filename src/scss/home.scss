@@ -336,11 +336,15 @@ main.home{
             @include media("<=tab"){ transform: translateX(8px); }
             >div:first-of-type{ 
               text-align: right; 
-              transform: scale(0.8) translate(0px, 20px);
+              @include media("<=tab"){ 
+                transform: scale(0.8) translate(0px, 20px);
+              }
             }
             >div:last-of-type{ 
               text-align: left; 
-              transform: scale(0.8) translate(0px, 20px);
+              @include media("<=tab"){ 
+                transform: scale(0.8) translate(0px, 20px);
+              }
             }
             .date{
               font-family: $ex-r;

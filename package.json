@@ -19,7 +19,6 @@
     "patch-package": "^6.2.2",
     "popper.js": "^1.16.1",
     "react": "^16.13.1",
-    "react-datetime": "^3.0.4",
     "react-dom": "^16.13.1",
     "react-dropzone": "^11.2.0",
     "react-hooks-helper": "^1.6.0",
