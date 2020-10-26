@@ -23,14 +23,17 @@ nav.navbar{
     background: rgba($sc, 1);
   }
   a{ cursor: pointer; }
-  .navbar-toggler-icon{
-    padding-top: 5px;
-    div{ 
-      background: $w;
-      height: 2px;
-      width: 100%;
-      margin-bottom: 8px;
-      border-radius: 5px;
+  .navbar-toggler{
+    &:focus{ outline: none; }
+    .navbar-toggler-icon{
+      padding-top: 5px;
+      div{ 
+        background: $w;
+        height: 2px;
+        width: 100%;
+        margin-bottom: 8px;
+        border-radius: 5px;
+      }
     }
   }
   ul.navbar-nav{

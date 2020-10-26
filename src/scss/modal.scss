@@ -151,5 +151,49 @@
   }
 }
 
+.modal-file{
+  .modal-overlay {
+    background: rgba(0, 0, 0, .25);
+  }
+  .modal-wrapper {
+    @extend %j-c;
+    .modal-inner{
+      height: 45vh;
+      width: 40vw;
+      padding: 1.5vw 2vw;
+      @include media("<=vsd"){
+        width: 80%;
+        padding: 5vw 4vw;
+      }
+      @include media("<=tab"){
+        width: 90%;
+        padding: 5vw 4vw;
+      }
+      box-shadow: 0 0 10px 5px rgba($b ,.2);
+      .modal-header .logo{
+        visibility: visible;
+      }
+      .ctn-file-dl{
+        margin-top: 25px;
+        a{
+          cursor: pointer;
+          display: block;
+          color: $acc;
+          margin: 10px 0;
+        }
+      }
+      .ctn-btn{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        height: 200px;
+        @include media("<=vsd"){
+          height: 150px;
+        }
+        .btn{ align-self:flex-start; }
+      }
+    } 
+  }
+}
 
 

@@ -301,6 +301,7 @@ main.team{
             h4{ font-family: $ex-b; font-size: 20px; }
           }
           .reaction{
+            white-space: nowrap;
             img{ height: 22px; }
             span{ 
               background: rgba($b, .3); 

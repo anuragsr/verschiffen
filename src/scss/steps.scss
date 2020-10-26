@@ -142,6 +142,7 @@
     .ctn-content{
       width: 25vw;
       @include media("<=tab"){ width: 100%; }
+      h5{ margin-bottom: 15px; }
     }
     .ctn-cargo-ind{
       position: relative;
@@ -171,6 +172,7 @@
       }
     }
     .rangeslider-horizontal{
+      margin: 0;
       .rangeslider__fill{
         background: $acc;
       }

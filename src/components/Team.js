@@ -2,21 +2,18 @@
 /* eslint-disable no-script-url */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react'
-import Carousel from 'react-img-carousel'
+import Carousel from "react-img-carousel"
+import { FileModal, useModal } from './FileModal'
 import { l, cl } from '../helpers/Log'
 
 import '../scss/team.scss'
 import 'react-img-carousel/lib/carousel.css'
 
 export default function Team(){
-  // const saveFile = () => {
-  //   saveAs("/files/Doc1.pdf", "Doc1.pdf")
-  //   // saveAs("/files/Doc2.pdf", "Doc2.pdf")
-  //   // saveAs("/files/Doc3.pdf", "Doc3.pdf")
-  // }
-  const [activeSlide, setActiveSlide] = useState(0)
+  const { isShowing, toggle } = useModal()
   
   return (
+    <>
     <main className="team">
       <section className="section0">
         <div className="container text-center">
@@ -370,7 +367,7 @@ export default function Team(){
             </div>
             <div className="col-md-7 right">
               <p>Melde dich unter press@cloudbase.com und erfahre mehr über Cloudbase. Oder lade dir hier unser Media Kit herunter</p>
-              <button className="btn btn-acc">Mediakit runterladen</button>
+                <button className="btn btn-acc" onClick={toggle}>Mediakit runterladen</button>
             </div>
           </div>
         </div>
@@ -428,5 +425,7 @@ export default function Team(){
         </div>
       </section>
     </main>
+      <FileModal isShowing={isShowing} toggle={toggle} />
+    </>
   )
 }
