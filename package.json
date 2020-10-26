@@ -23,9 +23,9 @@
     "react-dropzone": "^11.2.0",
     "react-hooks-helper": "^1.6.0",
     "react-img-carousel": "^1.7.0",
+    "react-rangeslider": "^2.2.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.3",
-    "rsuite": "^4.8.4"
+    "react-scripts": "3.4.3"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -10,7 +10,6 @@ nav.navbar{
     }
     li.nav-item a{
       color: rgba(31, 68, 84, 0.7);
-      transition: color .5s;
     }
   }
   &.scrolled{
@@ -61,7 +60,11 @@ nav.navbar{
     }
     a{
       color: rgba($w, .7);
-      &:hover{ color: rgba($w, 1); }
+      transition: color .3s;      
+      &:hover{ 
+        color: rgba($acc, 1); 
+        font-family: $os-b;
+      }
     }
     button{
       background: $tr;

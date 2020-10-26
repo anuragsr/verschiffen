@@ -11,6 +11,7 @@ export default function Header({ ref0, ref1, ref2 , ref3 }){
   const history = useHistory()
   , loc = useLocation()
   , [scrollState, setScrollState] = useState("top")
+  , [isNavToggled, setIsNavToggled] = useState(false)
   , navigate = (e, ref, section) => {
     switch (loc.pathname) {
       case '/': homeSection = null; goToSection(e, ref); break
@@ -27,7 +28,7 @@ export default function Header({ ref0, ref1, ref2 , ref3 }){
     history.push('/')
   }
   , setNavClass = path => {
-    let className = `navbar navbar-expand-lg fixed-top ${scrollState === "scrolled" ? "scrolled":""}`
+    let className = `navbar navbar-expand-lg fixed-top ${(scrollState === "scrolled" || isNavToggled)? "scrolled":""}`
     if(path === "/faq" || path === "/impressum") className = `${className} nav-light`
     return className
   }
@@ -68,7 +69,16 @@ export default function Header({ ref0, ref1, ref2 , ref3 }){
           <span className="acc">Verschiffen</span>.com
         </a>
 
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <button 
+          onClick={() => setIsNavToggled(!isNavToggled)}
+          className="navbar-toggler" 
+          type="button" 
+          data-toggle="collapse" 
+          data-target="#navbarTogglerDemo02" 
+          aria-controls="navbarTogglerDemo02" 
+          aria-expanded="false" 
+          aria-label="Toggle navigation"
+          >
           <div className="navbar-toggler-icon">
             <div></div>
             <div></div>

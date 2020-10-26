@@ -49,9 +49,13 @@ main.home{
           font-family: $ex-r;
         }
       }
+      .col-lg-7{
+        padding-top: 5vh;
+      }
       .ctn-search{
         background: $sc;
         padding: 35px;
+        border-radius: 10px;
         .title, .subtitle{ margin-bottom: 20px; }
         .title{ 
           font-size: 25px; 
@@ -183,8 +187,9 @@ main.home{
           }
         }
       }
-      p.tnc{ 
-        margin-top: 50px;
+      div.foot-link{ 
+        margin-top: 25px;
+        font-family: $ex-r;
         font-size: 15px; 
       }
     }
@@ -425,11 +430,16 @@ main.home{
         padding: 25px;
         border-radius: 4px;
         box-shadow: 0 4px 14px 0 rgba(33, 14, 74, 0.08);
+        border: 1px solid $tr;
+        transition: border .3s;
         @include media("<=tab"){
           background: $w;
           padding: 15px;
           height: auto;
           width: 85vw;
+        }
+        &:hover{
+          border: 1px solid $acc;
         }
         .ctn-stars{
           img{ 
@@ -565,7 +575,13 @@ main.home{
             margin-top: 100px;
             img{ height: 25px; margin: 10px; }
           }
-          p{ margin: 25px 0; }      
+          p{ 
+            margin: 25px 0; 
+            img{ 
+              height: 15px; 
+              position: relative; top: -2px;
+            }
+          }
           p:not(:nth-of-type(2)){ font-family: $os-r; }
         }
       }
@@ -573,6 +589,7 @@ main.home{
     
     &.section-faq{
       .ctn-qa{
+        text-align: left;
         padding: 20px 0;
         margin-left: 25px;
         margin-right: 15px;

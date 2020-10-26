@@ -98,7 +98,7 @@
         }
       }
       .content{ 
-        padding: 50px; 
+        padding: 25px; 
         @include media("<=tab"){ padding: 20px; }
       }
       .footer-text{

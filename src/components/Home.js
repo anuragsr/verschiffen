@@ -144,6 +144,10 @@ export default function Home({ ref0, ref1, ref2 , ref3 }){
               </div>
             </div>
             <button className="btn btn-acc" onClick={e => goToSection(e, ref0)}>Jetz beginnen</button>
+            <div className="mobile-only foot-link">
+              Sie finden nicht wonach Sie suchen?
+              <div><a href={void(0)} className="acc">Alle Vorteile finden Sie hier</a></div>
+            </div>
           </div>        
         </section>
 
@@ -545,7 +549,7 @@ export default function Home({ ref0, ref1, ref2 , ref3 }){
               </div>
               <h1>Sie benötigen Unterstützung bei <br/>der Reisebuchung?</h1>
               <p>Unser Experten unterstützen Sie bei der Flugbuchung</p>
-              <p className="acc"><img height="20" src="assets/phone.png" alt=""/>&nbsp;+49 (175) 91234</p>
+              <p className="acc"><img src="assets/phone.png" alt=""/>&nbsp;+49 (175) 91234</p>
               <p>
                 Telefonisch erreichbar Montag bis Freitag von 8:00 bis 20:00 Uhr (UTC -5). 
                 Sie können auch einen <a href="#" className="acc">Rückruf anfordern.</a>
@@ -555,7 +559,9 @@ export default function Home({ ref0, ref1, ref2 , ref3 }){
         </section>
         
         <section className="section-faq mobile-only">
-          <div className="container">
+          <div className="container text-center">
+            <h2 className="acc">FAQ</h2>
+            <h1>Häufig gestellte<br/> Fragen</h1>
 
             <div className="ctn-qa">
               <div className="ctn-q">

@@ -42,6 +42,7 @@
       img{
         @include pa(0, "", "", -25);
         cursor: pointer;
+        height: 18px;
       }
     }          
     .subtitle{
@@ -90,9 +91,9 @@
   &.step1{
     .ctn-box{ 
       @extend %j-c;
-      flex-wrap: wrap;
       justify-content: flex-start;
-      margin-bottom: 20px;
+      &.mobile-only{ flex-wrap: wrap; margin-bottom: 20px; }
+      &.desktop-only:last-of-type{ margin-bottom: 20px; }
       .box{
         @extend %j-c;
         display: inline-flex;
@@ -169,6 +170,19 @@
         margin-top: 10px;
       }
     }
+    .rangeslider-horizontal{
+      .rangeslider__fill{
+        background: $acc;
+      }
+      .rangeslider__handle{
+        &::after{ display: none; }
+        &:focus{ outline: none; }
+      }
+      .rangeslider__handle-tooltip{
+        background: $acc;
+        &::after{ border-top-color: $acc; }
+      }
+    } 
     .rs-slider-bar{
       border-radius: 14px;
       height: 14px;
@@ -389,7 +403,8 @@
       align-items: center;
       img.final{ 
         height: auto;
-        width: 360px;
+        width: 180px;
+        margin: 50px 0;
       }
       .subtitle{
         font-size: 16px;

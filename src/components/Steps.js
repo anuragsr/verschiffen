@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
-import { Slider } from 'rsuite'
+import Slider from 'react-rangeslider'
+
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
@@ -14,7 +15,7 @@ import HttpService from '../helpers/HttpService'
 import Dots from '../helpers/Dots'
 import { l, cl } from '../helpers/Log'
 
-import 'rsuite/dist/styles/rsuite-default.css'
+import 'react-rangeslider/lib/index.css'
 
 const createFormData = (type, formObjData, formTextData) => {
   l(formObjData, formTextData)
@@ -101,7 +102,35 @@ const createFormData = (type, formObjData, formTextData) => {
           </div>
           <div className="ctn-content">
             <h5>Welche Art von Ware wollen Sie verschiffen?</h5>
-            <div className="ctn-box">{
+            <div className="ctn-box desktop-only">{
+              opts.slice(0, opts.length / 2).map((opt, idx) => (
+                <div key={idx}
+                  className={`box text-center${opt.selected ? " selected":""}`}
+                  onClick={() => {setOpt(idx)}}
+                >
+                  <img src={opt.img} alt=""/>
+                  <span dangerouslySetInnerHTML={{__html: opt.name}}/>
+                  <div className="check-ind">
+                    <div className="check-ind-inner"></div>
+                  </div>
+                </div>
+              ))
+            }</div>
+            <div className="ctn-box desktop-only">{
+              opts.slice(opts.length / 2, opts.length).map((opt, idx) => (
+                <div key={idx}
+                  className={`box text-center${opt.selected ? " selected":""}`}
+                  onClick={() => {setOpt(idx + opts.length / 2)}}
+                >
+                  <img src={opt.img} alt=""/>
+                  <span dangerouslySetInnerHTML={{__html: opt.name}}/>
+                  <div className="check-ind">
+                    <div className="check-ind-inner"></div>
+                  </div>
+                </div>
+              ))
+            }</div>
+            <div className="ctn-box mobile-only">{
               opts.map((opt, idx) => (
                 <div key={idx}
                   className={`box text-center${opt.selected ? " selected":""}`}
@@ -173,7 +202,7 @@ const createFormData = (type, formObjData, formTextData) => {
   }, [sliderValue])
 
   useEffect(() => {
-    setConWeights([...[...Array(parseInt(numCon)).keys()].map(el => "0.00")])
+    setConWeights([...[...Array(parseInt(numCon)).keys()].map(el => "")])
   }, [numCon])
   
   useEffect(() => {
@@ -201,14 +230,13 @@ const createFormData = (type, formObjData, formTextData) => {
                 />
             </div>
             <div className="ctn-slider">
-              <Slider 
+              <Slider
                 min={0}
                 max={labels.length - 1}
                 step={1}
                 value={sliderValue}
-                renderTooltip={() => labels[sliderValue].text }
+                format={() => labels[sliderValue].text}
                 onChange={setSliderValue}
-                progress
               />
               <div className="ctn-label">
                 <span>leer</span>
