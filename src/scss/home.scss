@@ -77,6 +77,8 @@ main.home{
             height: 35px;
             padding-left: 0;
             border: none;
+            color: $b;
+            @include plh(rgba($b, .4));
           }
         }
         button{ 
@@ -263,6 +265,12 @@ main.home{
           border-radius: 5px;
           height: 66px;
           margin-bottom: 20px;
+          border: 1px solid $tr;
+          transition: all .3s;
+          &:hover{
+            transform: translateY(-5px);
+            border: 1px solid $acc;
+          }
           img{ 
             height: 25px; 
             @include media("<=tab"){ height: 20px; }
@@ -374,6 +382,14 @@ main.home{
                 @include media("<=tab"){ padding: 0 5px; }
                 img{ 
                   height: 30px; 
+                  margin-bottom: -10px;
+                  &.ship{ 
+                    height: 60px; 
+                    @include media("<=tab"){ 
+                      height: 35px;
+                      margin-bottom: 0;
+                    }
+                  }
                   &.con{
                     @include media("<=tab"){ height: 15px; }
                   }
@@ -411,14 +427,16 @@ main.home{
         }
       }
       .site-title{
-        font-size: 20px;
+        font-size: 16px;
+        transform: translateY(25px);
         color: rgba($txt-pr, .5);
       }
     }
 
     &.section4{
       @include media("<=tab"){
-        height: 100vh;
+        height: 88vh;
+        padding-bottom: 0;
       }
       .row{
         margin: 50px auto;
@@ -438,9 +456,7 @@ main.home{
           height: auto;
           width: 85vw;
         }
-        &:hover{
-          border: 1px solid $acc;
-        }
+        &:hover{ border: 1px solid $acc; }
         .ctn-stars{
           img{ 
             height: 15px; 
@@ -600,11 +616,14 @@ main.home{
           @extend %j-s-b;
           margin-bottom: 10px;
           align-items: flex-start;
-          p{ font-size: 17px; margin-bottom: 0; }
+          p{ 
+            font-size: 17px; margin-bottom: 0;
+            &.shown{ font-family: $ex-b; }
+          }
           .ctn-exp-icon{
             @extend %j-c;
             padding: 5px;
-            transform: rotate(180deg);
+            transform: rotate(-90deg);
             transition: transform .5s;
             height: 30px;
             width: 30px;

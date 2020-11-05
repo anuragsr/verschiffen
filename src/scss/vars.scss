@@ -81,6 +81,23 @@ $breakpoints: (
   }
 }
 
+// Position fixed mixin
+@mixin pf($top:"", $left:"", $bottom:"", $right:"", $unit: "px") {
+  position: fixed;
+  @if $top != ""{
+    top: #{$top}#{$unit};
+  }
+  @if $left != ""{
+    left: #{$left}#{$unit};
+  }
+  @if $bottom != ""{
+    bottom: #{$bottom}#{$unit};
+  }
+  @if $right != ""{
+    right: #{$right}#{$unit};
+  }
+}
+
 // Mixin for height-width
 @mixin hw($h:"", $w:"", $unit: "px") {  
   @if $h != ""{
@@ -116,5 +133,25 @@ $breakpoints: (
   }
   @keyframes #{$name} {
     @content;
+  }
+}
+
+// Placeholder color mixin
+@mixin plh($color) {
+  &::-webkit-input-placeholder { 
+    color: #{$color}!important; 
+    opacity: 1!important; 
+  }
+  &:-moz-placeholder { 
+    color: #{$color}!important; 
+    opacity: 1!important; 
+  }
+  &::-moz-placeholder { 
+    color: #{$color}!important; 
+    opacity: 1!important; 
+  }
+  &:-ms-input-placeholder { 
+    color: #{$color}!important; 
+    opacity: 1!important; 
   }
 }

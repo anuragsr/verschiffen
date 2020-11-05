@@ -17,8 +17,8 @@ import { l, cl } from '../helpers/Log'
 
 import 'react-rangeslider/lib/index.css'
 
-const createFormData = (type, formObjData, formTextData) => {
-  l(formObjData, formTextData)
+const createFormData = (type, formObjData, formTextData, vonStadt, nachStadt) => {
+  l(formObjData, formTextData, vonStadt, nachStadt)
 
   const formData = new FormData()
   , { files } = formObjData
@@ -32,6 +32,8 @@ const createFormData = (type, formObjData, formTextData) => {
   }
   
   formData.append("type", type)
+  formData.append("vonStadt", vonStadt)
+  formData.append("nachStadt", nachStadt)
 
   for(const key in formTextData){ formData.append(key, formTextData[key]) }
   for(const key in formObjData){
@@ -544,7 +546,7 @@ const createFormData = (type, formObjData, formTextData) => {
   )
 }
 
-, Step7 = ({ indicators, formObjData, formTextData, setFormText, navigation, toggleMoreInfo }) => {  
+, Step7 = ({ indicators, formObjData, formTextData, setFormText, navigation, toggleMoreInfo, vonStadt, nachStadt }) => {  
   const { fname, lname, street, postcode, place } = formTextData
   , { previous, next } = navigation
   , { isNext, isCurrent, isPrev } = indicators
@@ -560,10 +562,13 @@ const createFormData = (type, formObjData, formTextData) => {
     && place.length > 0
   )
   , submitForm = e => {
-    setSubmitted(true)
-    
+    setSubmitted(true)    
+
     new HttpService()    
-    .post('/process.php', createFormData("addShipment", formObjData, formTextData))
+    .post('/process.php', createFormData(
+      "addShipment", formObjData, formTextData,
+      vonStadt, nachStadt
+    ))
     .then(res => {
       const { data } = res
       l(data)
@@ -675,15 +680,20 @@ const createFormData = (type, formObjData, formTextData) => {
   )
 }
 
-, Step8 = ({ indicators, toggle, formObjData, formTextData, toggleMoreInfo }) => {  
+, Step8 = ({ indicators, navigation, toggle, formObjData, formTextData, toggleMoreInfo, vonStadt, nachStadt }) => {  
   const { isNext, isCurrent, isPrev } = indicators
   , isCurrentClass = isCurrent ? " current" : ""
   , isPrevClass = isPrev ? " prev" : ""
   , isNextClass = isNext ? " next" : ""
   , closeQuestionnaire = () => {
     toggle()
+    navigation.next()
+
     new HttpService()    
-    .post('/process.php', createFormData("sendMailToUser", formObjData, formTextData))
+    .post('/process.php', createFormData(
+      "sendMailToUser", formObjData, formTextData,
+      vonStadt, nachStadt
+    ))
     .then(res => {
       const { data } = res
       l(data)

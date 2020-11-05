@@ -6,12 +6,8 @@ const env = process.env.REACT_APP_ENV_TYPE
 let apiHost, call
 
 switch(env){
-  case "eca": 
-    apiHost = 'http://envisagecyberart.in/projects/cloudbasiert/v4/backend'
-    break;
-  
   case "prod": 
-    apiHost = 'https://verschiffen.com/backend'
+    apiHost = `${window.location.protocol}//verschiffen.com/backend`
     break;
   
   default: // local
@@ -32,7 +28,7 @@ export default class HttpService {
     return this.doRequest(config)
   }
   
-  doRequest = config => {
+  doRequest(config) {
     // l(config)
     if (config.params && config.params.series){
       delete config.params.series

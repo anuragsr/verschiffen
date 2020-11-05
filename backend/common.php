@@ -42,6 +42,7 @@
           $txt.= "  Hi ".$username.",<br/><br/>";
           $txt.= "  Thanks for booking the shipment.<br/>Below are your details:<br/><br/>";
           $txt.= "  <b>Shipment details: </b><br/>";
+          $txt.= "  <b>From: </b>".$data["vonStadt"].", <b>To: </b>".$data["nachStadt"]."<br/>";
           $txt.= "  ".$ship_type."<br/>";
           $txt.= "  Containers: ".$data["numCon"].", Filled: ".$data["filled"].", Container Weights: ".$data["conWeights"]."<br/>";
           $txt.= "  <b>Shipment Address: </b>".$data['street'].", ".$data['postcode'].", ".$data['place']."<br/>";
@@ -69,15 +70,21 @@
           $ship_id = $data['ship_id'];
           $path = $data['path'];
 
-          // Create Zip file with contents of folder
-          $arr = array();
-          $attName = "attachments_".$ship_id." - ".$username.".zip";
-          $zipFile  = $path."/".$attName;
-          Common::zipData($path, $zipFile, $arr);
+          // if folder is empty
+          $iterator = new \FilesystemIterator($path);
+          $isDirEmpty = !$iterator->valid();
 
-          // Preparing attachments
-          $content = file_get_contents($zipFile);
-          $content = chunk_split(base64_encode($content));
+          if(!$isDirEmpty){
+            // Create Zip file with contents of folder
+            $arr = array();
+            $attName = "attachments_".$ship_id." - ".$username.".zip";
+            $zipFile  = $path."/".$attName;
+            Common::zipData($path, $zipFile, $arr);
+
+            // Preparing attachments
+            $content = file_get_contents($zipFile);
+            $content = chunk_split(base64_encode($content));
+          }
 
           // a random hash will be necessary to send mixed content
           $separator = md5(time());
@@ -105,6 +112,7 @@
           $txt.= "  <b>Email: </b>".$data['email']."<br/>";
           $txt.= "  <b>Telephone: </b>".$data['phone']."<br/>";
           $txt.= "  <b>Shipment details: </b><br/>";
+          $txt.= "  <b>From: </b>".$data["vonStadt"].", <b>To: </b>".$data["nachStadt"]."<br/>";        
           $txt.= "  ".$ship_type."<br/>";
           $txt.= "  Containers: ".$data["numCon"].", Filled: ".$data["filled"].", Container Weights: ".$data["conWeights"]."<br/>";
           $txt.= "  <b>Shipment Address: </b>".$data['street'].", ".$data['postcode'].", ".$data['place']."<br/>";          
@@ -119,12 +127,14 @@
           $body .= "Content-Transfer-Encoding: 8bit" . $eol. $eol;
           $body .= $txt . $eol;
 
-          // Email Attachment
-          $body .= "--" . $separator . $eol;
-          $body .= "Content-Type: application/octet-stream; name=\"" . $attName . "\"" . $eol;
-          $body .= "Content-Transfer-Encoding: base64" . $eol;
-          $body .= "Content-Disposition: attachment" . $eol. $eol;
-          $body .= $content . $eol;
+          if(!$isDirEmpty){
+            // Email Attachment
+            $body .= "--" . $separator . $eol;
+            $body .= "Content-Type: application/octet-stream; name=\"" . $attName . "\"" . $eol;
+            $body .= "Content-Transfer-Encoding: base64" . $eol;
+            $body .= "Content-Disposition: attachment" . $eol. $eol;
+            $body .= $content . $eol;
+          }
 
           $body .= "--" . $separator . "--";
 

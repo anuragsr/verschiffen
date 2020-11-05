@@ -82,7 +82,7 @@
     }
     .modal-footer-custom{ 
       @extend %fw;
-      @include pa("", 0, 0, "");
+      @include pf("", 0, 0, "");
       z-index: 1;
       background: $w;
       .progress{

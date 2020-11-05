@@ -3,7 +3,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useRef, useState, useEffect } from 'react'
 import { useForm } from 'react-hooks-helper'
-// import { Link, NavLink } from 'react-router-dom'
+import * as $ from 'jquery'
+
 import Carousel from 'react-img-carousel'
 import { Modal, useModal } from './Modal'
 import { l, cl } from '../helpers/Log'
@@ -11,13 +12,13 @@ import { l, cl } from '../helpers/Log'
 import '../scss/home.scss'
 import 'react-img-carousel/lib/carousel.css'
 
-export default function Home({ ref0, ref1, ref2 , ref3 }){
+export default function Home({ ref0, ref1, ref2, ref3 }){
 
   const { 
     isShowing, toggle, 
-    showMoreInfo, toggleMoreInfo,
+    showMoreInfo, toggleMoreInfo
   } = useModal()
-  , [{ vonStadt, nachStadt }, setValue] = useForm({ vonStadt: 'Berlin', nachStadt: 'Shanghai' })
+  , [{ vonStadt, nachStadt }, setValue] = useForm({ vonStadt: '', nachStadt: '' })
   , onFormSubmit = e => {
     // l("Submit")
     // l({ vonStadt, nachStadt })
@@ -29,6 +30,19 @@ export default function Home({ ref0, ref1, ref2 , ref3 }){
     const scrollTop = window.pageYOffset + ref.current.getBoundingClientRect().top - 60
     window.scrollTo({ top: scrollTop, behavior: 'smooth' })
   }
+
+  useEffect(() => {
+    $('.collapse').on('show.bs.collapse', function (e) {
+      const el = $(`a[href="#${this.id}"]`)
+      el.addClass("shown")
+      el.siblings().addClass("shown")
+    })
+    $('.collapse').on('hide.bs.collapse', function (e) {
+      const el = $(`a[href="#${this.id}"]`)
+      el.removeClass("shown")
+      el.siblings().removeClass("shown")
+    })
+  }, [])
 
   return (
     <>  
@@ -57,7 +71,7 @@ export default function Home({ ref0, ref1, ref2 , ref3 }){
                         value={vonStadt}
                         onChange={setValue}
                         name="vonStadt"
-                        placeholder="von Stadt"/>
+                        placeholder="Berlin"/>
                     </div>
                     <div className="form-group">
                       <label htmlFor="">NACH</label>
@@ -67,7 +81,7 @@ export default function Home({ ref0, ref1, ref2 , ref3 }){
                         value={nachStadt}
                         onChange={setValue}
                         name="nachStadt"
-                        placeholder="nach Stadt"/>
+                        placeholder="Shanghai"/>
                     </div>
                     <button className="btn btn-acc btn-block" type="submit">Suche</button>
                   </form>
@@ -290,7 +304,7 @@ export default function Home({ ref0, ref1, ref2 , ref3 }){
                   <div className="ctn-ship-graphic">
                     <div>
                       <img className="con" src="assets/container.png" alt=""/>
-                      <img src="assets/ship.png" alt=""/>
+                      <img className="ship" src="assets/ship.gif" alt=""/>
                       <img className="con" src="assets/container.png" alt=""/>
                     </div>
                     <div className="bar"></div>
@@ -395,7 +409,7 @@ export default function Home({ ref0, ref1, ref2 , ref3 }){
                 dots={false}
                 infinite={false}
                 clickToNavigate={false}
-              >
+                >
                 <div className="box">
                   <div className="ctn-stars">
                     <img src="assets/star2.png" alt=""/>
@@ -460,7 +474,14 @@ export default function Home({ ref0, ref1, ref2 , ref3 }){
             </div>
           </div>
         </section>
-        
+
+        <section className="mobile-only p0">
+          <div className="container text-center">
+            <img src="assets/trustpilot.jpg" alt=""/>
+            <button className="btn btn-acc mt-4" onClick={toggle}>Jetzt starten</button>
+          </div>
+        </section>
+
         <section className="section5 desktop-only">
           <div className="container">
             <div className="ctn-carousel">
@@ -651,9 +672,9 @@ export default function Home({ ref0, ref1, ref2 , ref3 }){
             <img className="desktop-only" src="assets/starten.png" alt=""/>
             <p className="desktop-only">Verschiffen Sie Ihre Ware weltweit</p>
             <p className="mobile-only">Verschiffen Sie Ihre<br/> Ware weltweit</p>
-            <button className="desktop-only btn btn-acc mr-3" onClick={e => goToSection(e, ref0)}>Angebot ansehen</button>
+            <button className="desktop-only btn btn-acc mr-3" onClick={toggle}>Angebot ansehen</button>
             <button className="desktop-only btn btn-sec" onClick={e => goToSection(e, ref0)}>Jetzt vergleichen</button>
-            <button className="mobile-only btn btn-acc" onClick={e => goToSection(e, ref0)}>Jetzt starten</button>
+            <button className="mobile-only btn btn-acc" onClick={toggle}>Jetzt starten</button>
           </div>
         </section>
 
@@ -670,6 +691,8 @@ export default function Home({ ref0, ref1, ref2 , ref3 }){
         toggle={toggle}
         showMoreInfo={showMoreInfo}
         toggleMoreInfo={toggleMoreInfo}
+        vonStadt={vonStadt}
+        nachStadt={nachStadt}
       />
     </>
   )

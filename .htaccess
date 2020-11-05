@@ -1,8 +1,4 @@
 Options -MultiViews
 RewriteEngine On
-
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^ index.html [QSA,NC]
-
-RewriteCond %{SERVER_PORT} ^80$
-RewriteRule ^(.*)$ https://%{SERVER_NAME}%{REQUEST_URI} [L,R]
+RewriteRule ^ index.html [QSA,L]

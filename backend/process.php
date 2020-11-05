@@ -25,10 +25,12 @@
 
         $this->db->save("x_vs_ship79332", array(
           "id"             => $ship_id,
-          "x_email"        => $data["email"],
-          "x_phone"        => $data["phone"],
+          "x_from"         => $data["vonStadt"],
+          "x_to"           => $data["nachStadt"],
           "x_fname"        => $data["fname"],
           "x_lname"        => $data["lname"],
+          "x_email"        => $data["email"],
+          "x_phone"        => $data["phone"],
           "x_street"       => $data["street"],
           "x_postcode"     => $data["postcode"],
           "x_place"        => $data["place"],

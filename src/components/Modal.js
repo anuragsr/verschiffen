@@ -18,7 +18,8 @@ const steps = [ Step1, Step2, Step3, Step4, Step5, Step6, Step7, Step8 ]
 }
 , Modal = ({ 
   isShowing, toggle, 
-  showMoreInfo, toggleMoreInfo
+  showMoreInfo, toggleMoreInfo,
+  vonStadt, nachStadt
 }) => {
 
   // Form data and Navigation
@@ -29,9 +30,9 @@ const steps = [ Step1, Step2, Step3, Step4, Step5, Step6, Step7, Step8 ]
     phone: "",
     fname: "",
     lname: "",
-    street:"",
-    postcode:"",
-    place: "",
+    street: "",
+    postcode: "",
+    place: ""
   }
   , objData = {
     selOpts: "",
@@ -48,10 +49,12 @@ const steps = [ Step1, Step2, Step3, Step4, Step5, Step6, Step7, Step8 ]
   , props = { 
     isShowing, toggle, 
     showMoreInfo, toggleMoreInfo,
+    vonStadt, nachStadt,
     formTextData, setFormText, 
     formObjData, setFormObj, 
     navigation
   }
+  , goBack = () => index === 0 ? toggle() : navigation.previous()
 
   return createPortal(
     <>
@@ -73,27 +76,25 @@ const steps = [ Step1, Step2, Step3, Step4, Step5, Step6, Step7, Step8 ]
                 <span className="acc" aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div className="modal-body-custom">
-              {
-                steps.map((Component, idx) => (
-                  <Component // Eg. Step1
-                    key={idx}
-                    indicators={{
-                      isPrev: index === idx + 1 // 2
-                      , isCurrent: index === idx  // 1
-                      , isNext: index === idx - 1 // 0
-                    }}
-                    {...props}
-                  />
-                ))
-              } 
-            </div>
+            <div className="modal-body-custom">{
+              steps.map((Component, idx) => (
+                <Component // Eg. Step1
+                  key={idx}
+                  indicators={{
+                    isPrev: index === idx + 1 // 2
+                    , isCurrent: index === idx  // 1
+                    , isNext: index === idx - 1 // 0
+                  }}
+                  {...props}
+                />
+              ))
+            }</div>
             <div className="modal-footer-custom">
               <div className="progress">
                 <div className="bar" style={{ width: `${12.5*(index + 1)}%` }}></div>
               </div>
               <div className="content">
-                <div className="btn-back" onClick={toggle}>
+                <div className="btn-back" onClick={goBack}>              
                   <img src="assets/arr-left-tr.png" alt=""/>
                   <span>Zurück</span>
                 </div>
