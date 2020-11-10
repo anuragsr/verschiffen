@@ -10,6 +10,7 @@ nav.navbar{
     }
     li.nav-item a{
       color: rgba(31, 68, 84, 0.7);
+      transition: color .5s;
     }
   }
   &.scrolled{
@@ -50,7 +51,12 @@ nav.navbar{
   }
   li.nav-item{
     font-family: $os-sb;
-    margin: 0 20px;
+    // margin: 0 20px;
+    @include media(">tab") {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
     &:first-of-type{
       @extend %j-s-b;
     }
@@ -63,7 +69,11 @@ nav.navbar{
     }
     a{
       color: rgba($w, .7);
-      transition: color .3s;      
+      @include media(">tab") {
+        width: 120px;
+        text-align: center;
+        padding: 0!important;
+      }
       &:hover{ 
         color: rgba($acc, 1); 
         font-family: $os-b;

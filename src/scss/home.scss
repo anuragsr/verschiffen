@@ -448,15 +448,18 @@ main.home{
         padding: 25px;
         border-radius: 4px;
         box-shadow: 0 4px 14px 0 rgba(33, 14, 74, 0.08);
+        transition: all .3s;
         border: 1px solid $tr;
-        transition: border .3s;
         @include media("<=tab"){
           background: $w;
           padding: 15px;
           height: auto;
           width: 85vw;
         }
-        &:hover{ border: 1px solid $acc; }
+        &:hover{ 
+          border: 1px solid $acc; 
+          transform: translateY(-5px);
+        }
         .ctn-stars{
           img{ 
             height: 15px; 
