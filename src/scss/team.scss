@@ -12,12 +12,18 @@ main.team{
       &.mobile-only{ font-size: 35px; } 
     }
     h2.acc.mobile-only{ font-size: 25px; }
+    transform: translateY(100px); opacity: 0;
+    transition: transform .85s, opacity .85s;
+    &.visible{
+      transform: translateY(0px); opacity: 1;
+    }
     &.section0{
       @extend %j-c;
       height: 65vh;
       background: url(../img/bg2.jpg) no-repeat center;
       background-size: cover;
       color: $w;
+      transform: translateY(0px); opacity: 1;
       @include media("<tab"){
         padding-top: 15vh;
         height: 75vh;      
@@ -47,6 +53,17 @@ main.team{
         .subtitle{ font-size: 15px; }
         button {
           margin-top: 80px; 
+        }
+      }
+      .container{
+        transform: translateY(100px); opacity: 0;
+        transition: all .5s;
+        transition-delay: 1s;
+        background: $tr;
+      }
+      &.visible-content{
+        .container{
+          transform: translateY(0px); opacity: 1;
         }
       }
     }
@@ -301,6 +318,7 @@ main.team{
             h4{ font-family: $ex-b; font-size: 20px; }
           }
           .reaction{
+            white-space: nowrap;
             img{ height: 22px; }
             span{ 
               background: rgba($b, .3); 

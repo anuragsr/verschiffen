@@ -24,14 +24,17 @@ nav.navbar{
     background: rgba($sc, 1);
   }
   a{ cursor: pointer; }
-  .navbar-toggler-icon{
-    padding-top: 5px;
-    div{ 
-      background: $w;
-      height: 2px;
-      width: 100%;
-      margin-bottom: 8px;
-      border-radius: 5px;
+  .navbar-toggler{
+    &:focus{ outline: none; }
+    .navbar-toggler-icon{
+      padding-top: 5px;
+      div{ 
+        background: $w;
+        height: 2px;
+        width: 100%;
+        margin-bottom: 8px;
+        border-radius: 5px;
+      }
     }
   }
   ul.navbar-nav{
@@ -48,7 +51,12 @@ nav.navbar{
   }
   li.nav-item{
     font-family: $os-sb;
-    margin: 0 20px;
+    // margin: 0 20px;
+    @include media(">tab") {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
     &:first-of-type{
       @extend %j-s-b;
     }
@@ -61,7 +69,15 @@ nav.navbar{
     }
     a{
       color: rgba($w, .7);
-      &:hover{ color: rgba($w, 1); }
+      @include media(">tab") {
+        width: 120px;
+        text-align: center;
+        padding: 0!important;
+      }
+      &:hover{ 
+        color: rgba($acc, 1); 
+        font-family: $os-b;
+      }
     }
     button{
       background: $tr;

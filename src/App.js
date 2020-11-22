@@ -2,24 +2,23 @@ import React, { useRef } from 'react'
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom"
 import 'bootstrap/dist/js/bootstrap.bundle.min'
 
-import Home from './components/Home'
-import Team from './components/Team'
-import FAQ from './components/FAQ'
-import Impressum from './components/Impressum'
-import ScrollToTop from './components/ScrollToTop'
+import Home from './components/pages/Home'
+import Team from './components/pages/Team'
+import FAQ from './components/pages/FAQ'
+import Impressum from './components/pages/Impressum'
+import ScrollToTop from './components/helpers/ScrollToTop'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Header from './components/Header'
-import Footer from './components/Footer'
+import Header from './components/common/Header'
+import Footer from './components/common/Footer'
 
 export default function App() {
   
   const refs = {
-    workshopRef: useRef(null)
+    ref0: useRef(null)
     , ref1: useRef(null)
     , ref2: useRef(null)
     , ref3: useRef(null)
-    , ref4: useRef(null)
   }
 
   return (

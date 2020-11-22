@@ -12,6 +12,11 @@ main.faq{
       &.mobile-only{ font-size: 35px; } 
     }
     h2.acc.mobile-only{ font-size: 25px; }
+    transform: translateY(100px); opacity: 0;
+    transition: transform .85s, opacity .85s;
+    &.visible{
+      transform: translateY(0px); opacity: 1;
+    }
     &.section0{
       @extend %j-f-s;
       height: 55vh;
@@ -20,9 +25,19 @@ main.faq{
       background-repeat: no-repeat;
       background-position: calc(50% + 400px) 100%;
       background-size: 300px;
+      transform: translateY(0px); opacity: 1;
       .container{ 
         @include media("<tab"){
           text-align: center;           
+        }
+        transform: translateY(100px); opacity: 0;
+        transition: all .5s;
+        transition-delay: 1s;
+        background: $tr;
+      }
+      &.visible-content{
+        .container{
+          transform: translateY(0px); opacity: 1;
         }
       }
       @include media("<tab"){
@@ -98,6 +113,7 @@ main.faq{
         margin-top: 50px;
         margin-bottom: 100px;
         text-align: left;
+        .tab-pane.fade.show{ opacity: 1; }
         p{ 
           color: $txt-pr; font-family: $os-r; 
           @include media("<tab"){

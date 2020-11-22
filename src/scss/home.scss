@@ -9,40 +9,63 @@ main.home{
     position: relative;
     padding: 5vh 0;
     color: $txt-pr;
+    transform: translateY(100px); opacity: 0;
+    transition: transform .85s, opacity .85s;
+    &.visible{
+      transform: translateY(0px); opacity: 1;
+    }
     h1{ 
       font-size: 40px; 
       &.mobile-only{ font-size: 35px; } 
     }
     h2.acc.mobile-only{ font-size: 25px; }
+
+    // Page Sections
     &.section0{
       @extend %j-c;
       height: 75vh;
       background: url(../img/bg1.jpg) no-repeat center;
       background-size: cover;
       color: $w;
-      @include media("<tab"){
+      transform: translateY(0px); opacity: 1;
+      @include media("<=tab"){
         padding-top: 15vh;
-        height: 75vh;      
+        height: 90vh;
         overflow: hidden;
       }
-      h1{ 
-        font-size: 50px; 
-        &.mobile-only{ 
-          font-size: 35px; 
+      @include media("<mob-sm"){
+        padding-top: 25vh;
+        height: 100vh;
+      }
+      h1{
+        font-size: 50px;
+        &.mobile-only{
+          font-size: 35px;
           margin: 20px 0;
         }
       }
-      h4{ 
+      h4{
         margin-top: 25px;
         line-height: 40px;
-        font-size: 25px; 
-        &.mobile-only{ font-size: 15px; }
+        font-size: 25px;
+        &.mobile-only{
+          font-size: 15px;
+          margin-top: 10px;
+          margin-bottom: 25px;
+          font-family: $ex-r;
+        }
+      }
+      .col-lg-7{
+        padding-top: 5vh;
       }
       .ctn-search{
         background: $sc;
         padding: 35px;
+        border-radius: 10px;
         .title, .subtitle{ margin-bottom: 20px; }
-        .title{ font-size: 25px; }
+        .title{
+          font-size: 25px;
+        }
         .subtitle{ font-family: $ex-r; font-size: 15px; }
         .form-group{
           // height: 56px;
@@ -60,9 +83,11 @@ main.home{
             height: 35px;
             padding-left: 0;
             border: none;
+            color: $b;
+            @include plh(rgba($b, .4));
           }
         }
-        button{ 
+        button{
           height: 56px;
           margin-top: 20px;
           font-family: $ex-b;
@@ -75,18 +100,47 @@ main.home{
           // margin-top: 40px; 
         }
       }
+      .container{
+        transform: translateY(100px); opacity: 0;
+        transition: all .5s;
+        transition-delay: 1s;
+        background: $tr;
+      }
+      &.visible-content{
+        .container{
+          transform: translateY(0px); opacity: 1;
+        }
+      }
     }
     
     &.ctn-rating{
       padding: 20px;
       padding-bottom: 35px;
       background: rgba(#134555, .05);
+      transition-delay: 1s;
+      @include media("<=tab"){
+        padding-bottom: 20px;
+      }
       .title{
         font-size: 20px;
         margin-bottom: 15px;
-        img{ 
-          height: 20px; margin-right: 5px; 
-          position: relative; top: -4px;
+        @include media("<=tab"){
+          font-size: 15px;
+          margin-bottom: 0px;
+          line-height: 1.25;
+        }
+        .ctn-stars{
+          position: relative; 
+          top: -4px;
+          margin-left: 15px;
+          @include media("<=tab"){
+            margin-left: 0;
+            margin-top: 15px;
+            display: block;
+          }
+          img{ 
+            height: 20px; margin-right: 5px; 
+          }
         }
       }
       .subtitle{
@@ -97,373 +151,424 @@ main.home{
     }
 
     &.section1{
-      p{ font-family: $os-r; }
       .points{
         margin-top: 100px;
         .ctn-point{ 
-          @include media("<tab"){ width: 100%; }          
-          // img{ height: 60px; }
+          margin-bottom: 80px;
+          @include media("<=tab"){ 
+            width: 100%; 
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 30px;
+          }
+          img{ width: 195px; }
           .num{ 
             line-height: 1;
-            font-size: 36px; 
+            font-size: 50px; 
+            @include media("<=tab"){ 
+              font-size: 45px; 
+            }
             font-family: $os-r;
             &.dashed:after{
-              transform: translate(-50%, -10%);
               content: "";
-              height: 65%;
+              transform: translate(-50%, 50px) scaleX(5);
+              @include media("<=tab"){ 
+                transform: translate(-50%, 15px) scaleX(5);
+              }
+              height: 120px;
               width: 1px;
               position: absolute;
               bottom: 0;
               left: 50%;
               background-image: 
-                linear-gradient(to right, rgba(56, 87, 111, .45) 50%, transparent 50%), 
-                linear-gradient(to right, rgba(56, 87, 111, .45) 50%, transparent 50%), 
-                linear-gradient(to bottom, rgba(56, 87, 111, .45) 50%, transparent 50%), 
-                linear-gradient(to bottom, rgba(56, 87, 111, .45) 50%, transparent 50%);
+                linear-gradient(to right, rgba(56, 87, 111, .15) 50%, transparent 50%), 
+                linear-gradient(to right, rgba(56, 87, 111, .15) 50%, transparent 50%), 
+                linear-gradient(to bottom, rgba(56, 87, 111, .15) 50%, transparent 50%), 
+                linear-gradient(to bottom, rgba(56, 87, 111, .15) 50%, transparent 50%);
               background-position: left top, left bottom, left top, right top;
               background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
               background-size: 20px 3px, 20px 0px, 3px 20px, 3px 20px;
             }
           }
-          p{ 
-            width: 100%; 
-            font-size: 14px; 
-            margin-bottom: 85px;
-          }
-          // h4{ 
-          //   margin-top: 25px; 
-          //   margin-bottom: 35px; 
-          //   font-size: 25px;
-          //   @include media("<tab"){
-          //     font-size: 20px;
-          //     margin: 0;
-          //   }
-          // }
-          // p{ width: 16vw; margin: 0 auto; }
-          // .mobile-only{
-            
-          // }
-        }
-      }
-      p.tnc{ 
-        margin-top: 50px;
-        font-size: 15px; 
-      }
-    }
-
-    &.section1-1{
-      h2{ font-size: 25px; }
-      .points{
-        @extend %j-s-b;
-        align-items: flex-start;
-        @include media("<tab"){
-          flex-direction: column;
-          align-items: center;
-        }
-        padding: 0 2vw;
-        margin-top: 50px;
-        .ctn-point{
-          @include media("<tab"){
-            padding: 25px;
-            border-radius: 4px;
-            box-shadow: 0 4px 14px 0 rgba(33, 14, 74, 0.08);
-            margin-bottom: 28px;
-          }
-          h1{ 
-            font-size: 50px; 
-            @include media("<tab"){ font-size: 40px; }
-          }
-          .line{
-            margin: 50px auto;
-            @include media("<tab"){ margin: 25px auto; }
-            width: 80px;
-            height: 1px;
-            object-fit: contain;
-            opacity: .5;
-            background-color: rgba(31, 68, 84, .5);
+          h4{
+            font-size: 30px;
+            @include media("<=tab"){ 
+              font-size: 25px;
+              line-height: 1.25;
+            }
           }
           p{ 
-            color: $txt-pr;
-            font-family: $os-r; 
-            font-size: 17px;
-            width: 15vw; 
-            margin: 0 auto;
-            @include media("<tab"){ 
-              width: 80%; 
+            font-family: $ex-r;
+            font-size: 20px; 
+            @include media("<=tab"){ 
+              font-size: 14px;
+              line-height: 1.65;
             }
           }
         }
       }
+      div.foot-link{ 
+        margin-top: 25px;
+        font-family: $ex-r;
+        font-size: 15px; 
+      }
     }
 
     &.section2{
-      @include media(">=tab"){
-        padding-top: 12vh;
-        padding-bottom: 10vh;
-      }
-      background-color: $sc;
-      .cloud{ 
-        position: absolute; 
-        &.cloud1{ left: -1vw; top: 14vh; }
-        &.cloud2{ right: 7vw; top: 14vh; }
-        &.cloud3{ right: -.5vw; top: 12vh; }
-        &.cloud4{ left: -1.5vw; bottom: 42vh; }
-        &.cloud5{ right: 12vw; bottom: 37vh; }
-      }
-      // color: $w;
-      // height: 100vh;
-    }
-
-    &.section4{
-      padding-bottom: 100px;
-      p{ 
-        margin: 60px auto; 
-        font-family: $os-r; 
-        width: 90%;
-      }
-    }
-
-    &.section5{
       .ctn-boxes{ 
-        margin-top: 40px; 
+        &:first-of-type{ margin-top: 50px; }
+        margin: 100px 0; 
         .box{ 
           @extend %j-s-b;
-          cursor: pointer;
           display: inline-flex;
           flex-direction: column;
           margin: 10px;
           padding: 10px;
           width: 250px;
           height: 165px;
-          border-radius: 10px;
-          border: solid 2px rgba(31, 68, 84, .05);
-          transition: border .3s;
-          @include media("<tab"){
-            margin: 5px;
-            padding: 10px;
-            width: 165px;
-            height: 120px;
-            justify-content: center;
-            vertical-align: top;
-          }
-          &:hover{
-            // box-shadow: inset 0 4px 4px 0 rgba(31, 68, 84, 0.1);
-            border: solid 2px rgba($acc, 1);
+          margin-bottom: 80px; 
+          @include media("<=tab"){
+            margin: 0;
+            margin-bottom: 30px; 
+            padding: 0;
+            width: 100%;
+            height: auto;
           }
           img{ 
-            height: 40px; 
-            margin-bottom: 5px;
+            height: 50px; 
+            margin-bottom: 25px;
           }
           span{
-            @include media("<tab"){ font-size: 14px; }
+            font-size: 25px;            
           }
           p{ 
-            margin-top: 5px;
-            font-family: $os-r; 
-            font-size: 14px; 
-            @include media("<tab"){ display: none; }
-          }
-        }
-      }
-      button{ margin-top: 50px; }
-    }
-
-    &.section6{
-      @include media(">=tab"){          
-        background-color: rgba(19, 69, 85, .1);
-      }
-      .ctn-table{
-        width: 90%;
-        border-radius: 10px;
-        border: solid 1px rgba(31, 68, 84, .25);
-        margin: 0 auto;
-        margin-top: 50px;
-        padding: 50px;        
-        height: 480px;
-        position: relative;
-        .ctn-table-inner{
-          position: absolute;
-          top: -20px;
-          left: 5%;
-          width: 90%;
-          height: 100%;
-        }
-        .row:first-of-type, .row:last-of-type{
-          height: 50px;
-          div{ border: none !important; }
-        }
-        .row:not(:nth-of-type(2)){
-          font-family: $os-r;
-        }
-        .row{
-          div{
-            @extend %j-c;
-            padding-top: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid rgba(31, 68, 84, 0.25);
-            &:last-of-type{ 
-              border: none; 
-              background: $txt-pr;
-              color: $w;
-            }
-            &:not(:last-of-type){
-              border-right: 1px solid rgba(31, 68, 84, 0.25);
-            }
-          }
-          img{
-            height: 15px;
-          }
-        }
-      }
-      .ctn-vor-outer{
-        border-radius: 10px;
-        border: solid 1px rgba(31, 68, 84, 0.2); 
-        .block{
-          padding: 15px;
-          border-bottom: solid 1px rgba(31, 68, 84, 0.2);
-          &:first-of-type{
-            color: $w;
-            background: $sc;
-            border-top-right-radius: 10px;
-            border-top-left-radius: 10px;
-            padding: 25px 0;
-            font-size: 25px;
-          }
-          &:last-of-type{
-            padding: 25px 0;
-            border-bottom-right-radius: 10px;
-            border-bottom-left-radius: 10px;
-          }
-          h4{ font-size: 25px; margin: 35px 0; }
-          &.reg{
-            font-family: $ex-r;
+            margin-top: 20px;
             font-size: 17px;
-            img{ height: 20px; margin-bottom: 10px; }
-            p{ margin: 0; }
-          }
-        }       
-      }
-    }
-    
-    &.section7{
-      @include media("<tab"){
-        background-color: rgba(19, 69, 85, .1);
-      }
-      .row{
-        &.usp{
-          font-size: 17px;
-          width: 80%;
-          margin: 0 auto;
-          margin-top: 50px;
-          &.last{
-            @include media("<tab"){
-              margin-top: 0;
-            }
-          }
-          div{
-            @extend %j-s-b;
-            flex-direction: column;
-            justify-content: flex-start;
-            height: 240px;
-            @include media("<tab"){
-              height: auto;
-              margin-bottom: 25px;
-            }
-            img{ 
-              height: 60px; 
-              margin-bottom: 15px;
-              @include media("<tab"){
-                margin-bottom: 25px;
-              }
-            }
-            p{ 
-              font-family: $os-r; 
-              width: 80%;              
-              margin-top: 10px;
-              @include media("<tab"){              
-                margin-top: 25px;
-              }
-            }
+            font-family: $ex-r; 
+            line-height: 1.25; 
+            @include media("<=tab"){ font-size: 14px; }
           }
         }
       }
       .info-box{
-        margin-top: 100px;
-        border: solid 1px rgba(31, 68, 84, 0.1);
-        @include media("<tab"){
-          background: $w;
-          margin-top: 25px;
+        width: calc(100% + 70px);
+        transform: translateX(-35px);
+        text-align: left;
+        color: $w;
+        background: $sc;
+        padding: 70px;
+        padding-right: 40px;
+        border-radius: 10px;
+        @include media("<=tab"){ 
+          text-align: center;
+          width: 95%;
+          transform: none;
+          margin: 0 auto;
+          padding: 40px 15px;
         }
-        &>div:first-child{ 
-          @include media(">=tab"){
-            text-align: left; 
+        h4{ font-size: 30px; }
+        p{ font-family: $ex-r; font-size: 20px; margin: 40px 0; }
+        .col-lg-5 .row .col-6{ 
+          @include media(">tab"){ padding-right: 0; }
+          &:first-of-type{
+            @include media("<=tab"){ padding-right: 5px; }
+          }
+          &:last-of-type{
+            @include media("<=tab"){ padding-left: 5px; }
           }
         }
-        div{ 
-          padding: 50px; 
-          font-size: 17px;
-          p{ font-family: $os-r; }
-          span.acc{ font-family: $os-b; }
-        }
-        h2{
-          margin-bottom: 50px;
-          font-size: 25px; 
-        }
-        .bg{ 
-          background-color: $txt-pr; 
-          color: $w;
-          h1{ font-size: 30px; }
-          p{ margin-bottom: 50px; }
+        .ctn-cargo{
+          @extend %j-c;
+          background: #2a5b71;
+          border-radius: 5px;
+          height: 66px;
+          margin-bottom: 20px;
+          border: 1px solid $tr;
+          transition: all .3s;
+          &:hover{
+            transform: translateY(-5px);
+            border: 1px solid $acc;
+          }
+          img{ 
+            height: 25px; 
+            @include media("<=tab"){ height: 20px; }
+          }
         }
       }
     }
 
-    &.section8{
-      .row{
-        margin: 0 auto;
-        @include media(">=tab"){
-          margin-top: 100px;
+    &.section3{
+      .ctn-bm-outer{
+        position: relative;
+        height: 505px;
+        margin: 50px 0;
+        @include media("<=tab"){
+          height: 455px;
         }
-        &:first-of-type{
-          margin-top: 50px;
-          width: 95%;
-        }
-        .box{
-          @extend %j-s-b;
-          padding: 25px;
-          flex-direction: column;
-          height: 220px;
-          border-radius: 10px;
-          box-shadow: 0 4px 4px 0 rgba(31, 68, 84, 0.1);
-          border: solid 2px rgba(31, 68, 84, 0.05);
-          transition: border .3s, transform .3s;
-          @include media("<tab"){
-            margin-bottom: 50px;
-            padding: 25px;
-            height: auto;
+        .ctn-layer0{
+          @include pa(0, 0);
+          z-index: -1;
+          @extend %fh;
+          border-radius: 5px;
+          background-color: rgba(196, 196, 196, 0.2);
+          width: 75%;          
+          transform: translateX(15%);
+          padding: 35px;
+          @include media("<=tab"){
+            width: 80%;
+            transform: translateX(12%);
           }
-          &:hover{
-            // box-shadow: inset 0 4px 4px 0 rgba(31, 68, 84, 0.1);
-            border: solid 2px rgba($acc, 1);
-            transform: translateY(-10px);
+          .row{
+            padding: 15px 0;
+            >div>div{ background: rgba($w, .5); padding: 10px;}
+          }
+          hr{ width: 75%; margin: 20px auto; }
+        }
+        .ctn-layer1{
+          @extend %j-s-b;
+          position: relative;
+          top: 95px;
+          padding: 30px 40px;
+          border-radius: 5px;
+          border: solid 1px rgba(31, 68, 84, 0.2);
+          background: $w;
+          @include media("<=tab"){
+            padding: 30px 5px;
+          }
+          &::after{
+            @include pa(0, 0);
+            height: 150%;
+            width: 90%;
+            z-index: -1;
+            content: "";
+            background: inherit;
+            border: inherit;
+            border-radius: inherit;
+            transform: translate(5%, -15%);
+          }
+          .bm{
+            @include pa(0, 0);
+            background: $acc;
+            padding: 5px 30px;
+            color: $w;
+            font-family: $ex-r;
+            border-top-left-radius: 5px;
+            @include media("<=tab"){
+              font-size: 15px;
+              padding: 5px;
+            }
           }
           img{ 
-            height: 60px; 
-            margin-bottom: 15px;
-            // &.gcp{ height: 80px; }
-            // @include media("<tab"){
-            // }
+            height: 27px; 
+            @include media("<=tab"){ height: 12px; }
           }
-          span{ font-size: 17px; }
-          p{ 
-            font-family: $os-r; 
-            width: 80%;
-            font-size: 25px;
-            @include media("<tab"){
-              margin-bottom: 0;
+          .ctn-ship-info{
+            @extend %j-s-b;
+            @include media("<=tab"){ transform: translateX(8px); }
+            >div:first-of-type{ 
+              text-align: right; 
+              @include media("<=tab"){ 
+                transform: scale(0.8) translate(0px, 20px);
+              }
+            }
+            >div:last-of-type{ 
+              text-align: left; 
+              @include media("<=tab"){ 
+                transform: scale(0.8) translate(0px, 20px);
+              }
+            }
+            .date{
+              font-family: $ex-r;
+              font-size: 15px;
+              @include media("<=tab"){ display: none; }
+            }
+            .stadt{
+              font-family: $ex-r;
+              font-size: 15px;
+              color: rgba($txt-pr, .5);
+            }
+            .ctn-ship-graphic{
+              width: 450px;
+              margin: 0 25px;              
+              @include media("<=tab"){ 
+                width: 30vw; 
+                margin: 0 5px;
+              }
+              >div:first-of-type{
+                @extend %j-s-b; 
+                padding: 0 25px;
+                @include media("<=tab"){ padding: 0 5px; }
+                img{ 
+                  height: 30px; 
+                  margin-bottom: -10px;
+                  &.ship{ 
+                    height: 60px; 
+                    @include media("<=tab"){ 
+                      height: 35px;
+                      margin-bottom: 0;
+                    }
+                  }
+                  &.con{
+                    @include media("<=tab"){ height: 15px; }
+                  }
+                }
+              }
+              .bar{ 
+                margin-top: 5px;
+                height: 20px; 
+                background: #c4c4c4; 
+                border-radius: 10px;
+                position: relative;
+                &::after{
+                  @include pa(0, 0);
+                  @extend %fh;
+                  width: 60%;
+                  content: "";
+                  background: $acc;
+                  transform: translateX(35%);
+                }
+              }
+            }
+          }
+          .ctn-price{
+            @include media("<=tab"){ transform: scale(0.7); }
+            >div:first-of-type{
+              font-family: $ex-r;
+              font-size: 15px;
+            }
+            button{
+              padding: 2px 15px;
+              height: auto;
+              margin-top: 5px;
             }
           }
         }
+      }
+      .site-title{
+        font-size: 16px;
+        transform: translateY(25px);
+        color: rgba($txt-pr, .5);
+      }
+    }
+
+    &.section4{
+      @include media("<=tab"){
+        height: 88vh;
+        padding-bottom: 0;
+      }
+      .row{
+        margin: 50px auto;
+      }
+      
+      .box{
+        @extend %j-s-b;
+        flex-direction: column;
+        padding: 25px;
+        border-radius: 4px;
+        box-shadow: 0 4px 14px 0 rgba(33, 14, 74, 0.08);
+        transition: all .3s;
+        border: 1px solid $tr;
+        @include media("<=tab"){
+          background: $w;
+          padding: 15px;
+          height: auto;
+          width: 85vw;
+        }
+        &:hover{ 
+          border: 1px solid $acc; 
+          transform: translateY(-5px);
+        }
+        .ctn-stars{
+          img{ 
+            height: 15px; 
+            margin-right: 5px;
+          }
+        }
+        .r-title{ 
+          font-size: 22px; 
+          margin: 15px 0;
+        }
+        .r-content{ 
+          font-family: $os-r; 
+          width: 80%;
+          font-size: 15px;
+          text-align: justify;
+        }
+        .r-ft{
+          font-size: 20px;
+          div{ color: $acc; }
+          img{ 
+            height: 70px;  margin-left: 10px; 
+            position: relative; top: -7px;
+          }
+          span{ font-family: $ex-r; }
+        }
+      }
+      
+      .carousel{
+        .carousel-viewport{ overflow: visible; }
+        .carousel-slide{ 
+          position: relative;
+          top: 0;
+          vertical-align: top;
+          transition: opacity .5s ease-in-out, top .5s;
+        }
+        .carousel-slide-selected{ top: 50px; }
+        .carousel-arrow{
+          bottom: 125px;
+          border: none!important;
+          color: rgba(37, 58, 65, 0.5);
+          box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+          background-color: #fcfcfc;
+          &.carousel-left-arrow{ left: -7px; }
+          &.carousel-right-arrow{ right: -7px; }
+        }
+      }
+    }
+
+    &.section5{
+      .carousel{
+        .carousel-track{ @extend %fw; }
+        .carousel-slide{ @extend %fw; }
+        .carousel-arrow{
+          bottom: unset;
+          top: calc(50% - 14px);
+          border: none!important;
+          color: rgba(37, 58, 65, 0.5);
+          box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+          background-color: #fcfcfc;
+          &.carousel-left-arrow{ left: -12px; }
+          &.carousel-right-arrow{ right: -12px; }
+        }
+        .ctn-carousel-single{
+          @extend %fw;
+          padding: 20px;
+          .row{
+            border-radius: 4px;
+            box-shadow: 0 4px 4px 0 rgba($b, 0.1);
+            height: 350px;
+            overflow: hidden;
+          }
+          .ctn-video{
+            background: url(../img/video-ol.jpg) no-repeat center;
+            background-size: cover;
+          }
+          .ctn-testi{
+            @extend %j-c;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 35px;
+            font-family: $os-r;
+            p:first-of-type{ font-size: 17px; }
+            p:last-of-type{ font-size: 15px; margin-top: 25px; }
+            img{ height: 35px; margin-top: 25px;}
+          }
+        }
+      }
+    }
+
+    &.section6{
+      .row{
         .act{
           padding: 30px;
           box-shadow: 0 4px 4px 0 rgba(37, 58, 65, 0.05);
@@ -488,6 +593,8 @@ main.home{
           border-radius: 10px;
           background-color: #f7f7f7;
           padding: 50px 20px;
+          width: 90%;
+          margin: 0 auto;
           p{ 
             font-family: $ex-r; 
             font-size: 30px;
@@ -501,28 +608,82 @@ main.home{
         }
         &.info{
           flex-direction: column;
-          .ctn-img img{ width: 60px; margin: 10px; }
-          p{ margin: 25px 0; }      
+          .ctn-img {
+            margin-top: 100px;
+            img{ height: 25px; margin: 10px; }
+          }
+          p{ 
+            margin: 25px 0; 
+            img{ 
+              height: 15px; 
+              position: relative; top: -2px;
+            }
+          }
           p:not(:nth-of-type(2)){ font-family: $os-r; }
         }
       }
     }
+    
+    &.section-faq{
+      .ctn-qa{
+        text-align: left;
+        padding: 20px 0;
+        margin-left: 25px;
+        margin-right: 15px;
+        border-bottom: 1px solid rgba($b, .2);
+        &:last-of-type{ border: none; }
+        p{ font-family: $ex-r; }
+        .ctn-q{ 
+          @extend %j-s-b;
+          margin-bottom: 10px;
+          align-items: flex-start;
+          p{ 
+            font-size: 17px; margin-bottom: 0;
+            &.shown{ font-family: $ex-b; }
+          }
+          .ctn-exp-icon{
+            @extend %j-c;
+            padding: 5px;
+            transform: rotate(-90deg);
+            transition: transform .5s;
+            height: 30px;
+            width: 30px;
+            &.shown{ transform: rotate(0deg); }
+            img{ 
+              height: 8px; 
+              &.plus{ height: 16px; } 
+            }
+          }
+        }
+      }
+    }
 
-    &.section9{
+    &.section7{
       color: $w;
       background: url(../img/mesh.png);
       background-size: cover;
+      .container{ position: relative; }
+      img{ 
+        @include pa(0, "", "", 50);
+        height: 100px;
+      }
       p{ 
         margin-bottom: 30px;
         font-family: $os-sb;
         font-size: 30px;
-        @include media("<tab"){
-          font-size: 18px;
+        @include media("<=tab"){
+          font-family: $ex-r;
+          font-size: 25px;
+          line-height: 1.8;
         }
       }
+    }
+
+    &.prefooter{
+      color: $w;
+      font-family: $os-r;
     }
   }
 }
 
-@import './workshop';
 @import './modal';
