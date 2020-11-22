@@ -9,6 +9,11 @@ main.home{
     position: relative;
     padding: 5vh 0;
     color: $txt-pr;
+    transform: translateY(100px); opacity: 0;
+    transition: transform .85s, opacity .85s;
+    &.visible{
+      transform: translateY(0px); opacity: 1;
+    }
     h1{ 
       font-size: 40px; 
       &.mobile-only{ font-size: 35px; } 
@@ -22,6 +27,7 @@ main.home{
       background: url(../img/bg1.jpg) no-repeat center;
       background-size: cover;
       color: $w;
+      transform: translateY(0px); opacity: 1;
       @include media("<=tab"){
         padding-top: 15vh;
         height: 90vh;
@@ -31,19 +37,19 @@ main.home{
         padding-top: 25vh;
         height: 100vh;
       }
-      h1{ 
-        font-size: 50px; 
-        &.mobile-only{ 
-          font-size: 35px; 
+      h1{
+        font-size: 50px;
+        &.mobile-only{
+          font-size: 35px;
           margin: 20px 0;
         }
       }
-      h4{ 
+      h4{
         margin-top: 25px;
         line-height: 40px;
-        font-size: 25px; 
-        &.mobile-only{ 
-          font-size: 15px; 
+        font-size: 25px;
+        &.mobile-only{
+          font-size: 15px;
           margin-top: 10px;
           margin-bottom: 25px;
           font-family: $ex-r;
@@ -57,8 +63,8 @@ main.home{
         padding: 35px;
         border-radius: 10px;
         .title, .subtitle{ margin-bottom: 20px; }
-        .title{ 
-          font-size: 25px; 
+        .title{
+          font-size: 25px;
         }
         .subtitle{ font-family: $ex-r; font-size: 15px; }
         .form-group{
@@ -81,7 +87,7 @@ main.home{
             @include plh(rgba($b, .4));
           }
         }
-        button{ 
+        button{
           height: 56px;
           margin-top: 20px;
           font-family: $ex-b;
@@ -94,12 +100,24 @@ main.home{
           // margin-top: 40px; 
         }
       }
+      .container{
+        transform: translateY(100px); opacity: 0;
+        transition: all .5s;
+        transition-delay: 1s;
+        background: $tr;
+      }
+      &.visible-content{
+        .container{
+          transform: translateY(0px); opacity: 1;
+        }
+      }
     }
     
     &.ctn-rating{
       padding: 20px;
       padding-bottom: 35px;
       background: rgba(#134555, .05);
+      transition-delay: 1s;
       @include media("<=tab"){
         padding-bottom: 20px;
       }

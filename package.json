@@ -26,7 +26,8 @@
     "react-img-carousel": "^1.7.0",
     "react-rangeslider": "^2.2.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "react-scrollmagic": "^2.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

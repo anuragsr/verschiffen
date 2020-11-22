@@ -41,6 +41,7 @@ button.btn-sec{
   // box-shadow: 0 2px 6px 2px rgba(10, 49, 78, 0.15);
   height: 40px;
   background-color: $w;
+  border: 1px solid $acc;
   &:hover{ 
     color: $acc;
     cursor: not-allowed;

@@ -4,7 +4,7 @@
 import React from 'react'
 import { l, cl } from '../helpers/Log'
 
-import '../scss/impressum.scss'
+import '../../scss/impressum.scss'
 
 export default function Impressum(){
 
