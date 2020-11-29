@@ -31,11 +31,12 @@ export default function FAQ(){
 
         <div id="trigger0" />
         <Scene
-          classToggle="visible-content"
-          triggerElement="#trigger0"
-          reverse={reverseAnims}
-          indicators={showIndicators}>
-          <section className="section0">
+          // classToggle="visible-content"
+          // triggerElement="#trigger0"
+          // reverse={reverseAnims}
+          // indicators={showIndicators}
+          >
+          <section className="section0 visible-content">
             <div className="container">
               <h1 className="desktop-only">Häufig gestellte Fragen</h1>
               <h1 className="mobile-only">Häufig gestellte Fragen</h1>
@@ -633,12 +634,13 @@ export default function FAQ(){
 
         <div id="trigger-foot" />
         <Scene
-          classToggle="visible"
-          triggerElement="#trigger-foot"
-          triggerHook={getTriggerHook()}
-          reverse={reverseAnims}
-          indicators={showIndicators}>
-          <section className="section2">
+          // classToggle="visible"
+          // triggerElement="#trigger-foot"
+          // triggerHook={getTriggerHook()}
+          // reverse={reverseAnims}
+          // indicators={showIndicators}
+          >
+          <section className="section2 visible">
             <div className="container text-center">
               <p className="desktop-only">Zugang zu spezialisierten Talenten für deine Anforderungen</p>
               <p className="mobile-only">Zugang zu spezialisierten Talenten für deine Anforderungen</p>
@@ -649,12 +651,13 @@ export default function FAQ(){
         </Scene>
 
         <Scene
-          classToggle="visible"
-          triggerElement="#trigger-foot"
-          triggerHook={getTriggerHook()}
-          reverse={reverseAnims}
-          indicators={showIndicators}>
-          <section className="prefooter">
+          // classToggle="visible"
+          // triggerElement="#trigger-foot"
+          // triggerHook={getTriggerHook()}
+          // reverse={reverseAnims}
+          // indicators={showIndicators}
+          >
+          <section className="prefooter visible">
             <div className="container text-center">
               Sie suchen nach Hilfe für längere Projekte oder festen Mitarbeitern? Cloubase hilft Ihnen auch hierbei. Nehmen Sie einfach Kontakt mit uns auf.
               <hr/>
