@@ -21,11 +21,12 @@ export default function Team(){
 
         <div id="trigger0" />
         <Scene
-          classToggle="visible-content"
-          triggerElement="#trigger0"
-          reverse={reverseAnims}
-          indicators={showIndicators}>
-          <section className="section0">
+          // classToggle="visible-content"
+          // triggerElement="#trigger0"
+          // reverse={reverseAnims}
+          // indicators={showIndicators}
+          >
+          <section className="section0 visible-content">
             <div className="container text-center">
               <h1 className="desktop-only">Das sind wir <span className="acc">Cloud</span>base.</h1>
               <h1 className="mobile-only">Das sind wir<br/><span className="acc">Cloud</span>base.</h1>
@@ -46,12 +47,13 @@ export default function Team(){
 
         <div id="trigger1" />
         <Scene
-          classToggle="visible"
-          triggerElement="#trigger1"
-          triggerHook={getTriggerHook()}
-          reverse={reverseAnims}
-          indicators={showIndicators}>
-          <section className="section1">
+          // classToggle="visible"
+          // triggerElement="#trigger1"
+          // triggerHook={getTriggerHook()}
+          // reverse={reverseAnims}
+          // indicators={showIndicators}
+          >
+          <section className="section1 visible">
             <div className="container text-center">
               <h2 className="acc">Statement</h2>
               <h1 className="desktop-only">Unsere Mission</h1>
@@ -453,7 +455,9 @@ export default function Team(){
                   <div className="act act2 text-left">
                     <span className="acc">Benotigst du sofortige Hilfe?</span>
                     <p>Frag nach Antworten</p>
-                    <button className="btn btn-acc">Chat starten</button>
+                    <a href="/faq">
+                      <button className="btn btn-acc">FAQ´s öffnen</button>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -478,12 +482,13 @@ export default function Team(){
 
         <div id="trigger-foot" />
         <Scene
-          classToggle="visible"
-          triggerElement="#trigger-foot"
-          triggerHook={getTriggerHook()}
-          reverse={reverseAnims}
-          indicators={showIndicators}>
-          <section className="section8">
+          // classToggle="visible"
+          // triggerElement="#trigger-foot"
+          // triggerHook={getTriggerHook()}
+          // reverse={reverseAnims}
+          // indicators={showIndicators}
+          >
+          <section className="section8 visible">
             <div className="container text-center">
               <p className="desktop-only">Zugang zu spezialisierten Talenten für deine Anforderungen</p>
               <p className="mobile-only">Zugang zu spezialisierten Talenten für deine Anforderungen</p>
@@ -494,12 +499,13 @@ export default function Team(){
         </Scene>
 
         <Scene
-          classToggle="visible"
-          triggerElement="#trigger-foot"
-          triggerHook={getTriggerHook()}
-          reverse={reverseAnims}
-          indicators={showIndicators}>
-          <section className="prefooter">
+          // classToggle="visible"
+          // triggerElement="#trigger-foot"
+          // triggerHook={getTriggerHook()}
+          // reverse={reverseAnims}
+          // indicators={showIndicators}
+          >
+          <section className="prefooter visible">
             <div className="container text-center">
               Looking to hire for long-term or full-time assignments? See how Cloudbase Payroll simplifies admin.
               <hr/>

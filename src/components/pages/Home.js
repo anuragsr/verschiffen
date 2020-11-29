@@ -54,11 +54,12 @@ export default function Home({ ref0, ref1, ref2, ref3 }){
 
           <div id="trigger0" />
           <Scene
-            classToggle="visible-content"
-            triggerElement="#trigger0"
-            reverse={reverseAnims}
-            indicators={showIndicators}>
-            <section className="section0" ref={ref0}>
+            // classToggle="visible-content"
+            // triggerElement="#trigger0"
+            // reverse={reverseAnims}
+            // indicators={showIndicators}
+            >
+            <section className="section0 visible-content" ref={ref0}>
               <div className="container">
                 <div className="row">
                   <div className="col-lg-7 d-none d-lg-block">
@@ -106,11 +107,12 @@ export default function Home({ ref0, ref1, ref2, ref3 }){
 
           <Scene
             classToggle="visible"
-            triggerElement="#trigger0"
-            triggerHook={getTriggerHook()}
-            reverse={reverseAnims}
-            indicators={showIndicators}>
-            <section className="ctn-rating text-center">
+            // triggerElement="#trigger0"
+            // triggerHook={getTriggerHook()}
+            // reverse={reverseAnims}
+            // indicators={showIndicators}
+            >
+            <section className="ctn-rating text-center visible">
               <div className="title">
                 <span>Kunden bewerten Verschiffen.com mit 4.8 / 5</span>
                 <span className="ctn-stars">
@@ -617,7 +619,9 @@ export default function Home({ ref0, ref1, ref2, ref3 }){
                     <div className="act act2 text-left">
                       <span className="acc">Benötigst du sofortige Hilfe?</span>
                       <p>Frag nach Antworten</p>
-                      <button className="btn btn-acc">Chat starten</button>
+                      <a href="/faq">
+                        <button className="btn btn-acc">FAQ´s öffnen</button>
+                      </a>
                     </div>
                   </div>
                   <div className="mobile-only col-md-12 kontakt">
@@ -752,12 +756,13 @@ export default function Home({ ref0, ref1, ref2, ref3 }){
 
           <div id="trigger-foot" />
           <Scene
-            classToggle="visible"
-            triggerElement="#trigger-foot"
-            triggerHook={getTriggerHook()}
-            reverse={reverseAnims}
-            indicators={showIndicators}>
-            <section className="section7">
+            // classToggle="visible"
+            // triggerElement="#trigger-foot"
+            // triggerHook={getTriggerHook()}
+            // reverse={reverseAnims}
+            // indicators={showIndicators}
+            >
+            <section className="section7 visible">
               <div className="container text-center">
                 <img className="desktop-only" src="assets/starten.png" alt=""/>
                 <p className="desktop-only">Verschiffen Sie Ihre Ware weltweit</p>
@@ -770,12 +775,13 @@ export default function Home({ ref0, ref1, ref2, ref3 }){
           </Scene>
 
           <Scene
-            classToggle="visible"
-            triggerElement="#trigger-foot"
-            triggerHook={getTriggerHook()}
-            reverse={reverseAnims}
-            indicators={showIndicators}>
-            <section className="prefooter">
+            // classToggle="visible"
+            // triggerElement="#trigger-foot"
+            // triggerHook={getTriggerHook()}
+            // reverse={reverseAnims}
+            // indicators={showIndicators}
+            >
+            <section className="prefooter visible">
               <div className="container text-center">
                 Sie suchen nach Hilfe für die Planung  einer Reise mit einer größeren Gruppe an Personen? Schreiben Sie uns einfach an.
                 <hr/>
