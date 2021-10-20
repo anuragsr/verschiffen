@@ -155,7 +155,6 @@
         break;
 
       }
-
     }
 
     public static function generateRand($length = 4) {

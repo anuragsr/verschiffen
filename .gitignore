@@ -27,5 +27,4 @@ yarn-error.log*
 /backend/extra
 /backend/*.dat
 /extra
-vs.code-workspace
-ws.sublime-workspace
+/upload
