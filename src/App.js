@@ -11,6 +11,7 @@ import ScrollToTop from './components/helpers/ScrollToTop'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Header from './components/common/Header'
 import Footer from './components/common/Footer'
+import { l } from './components/helpers/Log'
 
 export default function App() {
   
@@ -20,16 +21,11 @@ export default function App() {
     , ref2: useRef(null)
     , ref3: useRef(null)
   };
-
-  const { REACT_APP_ENV_TYPE } = process.env; 
-  let basename = "/";
-
-  if (REACT_APP_ENV_TYPE === "prod") {
-    basename = "/projects/verschiffen/";
-  }
+  
+  const { REACT_APP_PROJECT_PATH } = process.env;
 
   return (
-    <BrowserRouter basename={basename}>
+    <BrowserRouter basename={REACT_APP_PROJECT_PATH}>
       <div className="ctn-link">
         <Link to="/">Home</Link>
         <Link to="/team">Team</Link>
