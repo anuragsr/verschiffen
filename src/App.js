@@ -19,10 +19,17 @@ export default function App() {
     , ref1: useRef(null)
     , ref2: useRef(null)
     , ref3: useRef(null)
+  };
+
+  const { REACT_APP_ENV_TYPE } = process.env; 
+  let basename = "/";
+
+  if (REACT_APP_ENV_TYPE === "prod") {
+    basename = "/projects/verschiffen/";
   }
 
   return (
-    <BrowserRouter basename="/">
+    <BrowserRouter basename={basename}>
       <div className="ctn-link">
         <Link to="/">Home</Link>
         <Link to="/team">Team</Link>

@@ -105,29 +105,21 @@ export default function Home({ ref0, ref1, ref2, ref3 }){
             </section>
           </Scene>
 
-          <Scene
-            classToggle="visible"
-            // triggerElement="#trigger0"
-            // triggerHook={getTriggerHook()}
-            // reverse={reverseAnims}
-            // indicators={showIndicators}
-            >
-            <section className="ctn-rating text-center visible">
-              <div className="title">
-                <span>Kunden bewerten Verschiffen.com mit 4.8 / 5</span>
-                <span className="ctn-stars">
-                  <img src="assets/star.png" alt=""/>
-                  <img src="assets/star.png" alt=""/>
-                  <img src="assets/star.png" alt=""/>
-                  <img src="assets/star.png" alt=""/>
-                  <img src="assets/star.png" alt=""/>
-                </span>
-              </div>
-              <div className="desktop-only subtitle">
-                durchschnittlich von <span className="acc">453,123 Bewertungen</span>
-              </div>
-            </section>
-          </Scene>
+          <section className="ctn-rating text-center visible">
+            <div className="title">
+              <span>Kunden bewerten Verschiffen.com mit 4.8 / 5</span>
+              <span className="ctn-stars">
+                <img src="assets/star.png" alt=""/>
+                <img src="assets/star.png" alt=""/>
+                <img src="assets/star.png" alt=""/>
+                <img src="assets/star.png" alt=""/>
+                <img src="assets/star.png" alt=""/>
+              </span>
+            </div>
+            <div className="desktop-only subtitle">
+              durchschnittlich von <span className="acc">453,123 Bewertungen</span>
+            </div>
+          </section>
 
           <div id="trigger1" ref={ref1}/>
           <Scene
